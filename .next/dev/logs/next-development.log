@@ -1,0 +1,2130 @@
+[00:00:01.639] Server  LOG     
+[00:00:01.639] Server  LOG       We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
+[00:00:01.640] Server  LOG       The following mandatory changes were made to your tsconfig.json:
+
+[00:00:01.640] Server  LOG       	- jsx was set to react-jsx (next.js uses the React automatic runtime)
+[00:00:01.641] Server  LOG     
+[00:00:02.004] Server  LOG     ✓ Ready in 1339ms
+[00:00:03.992] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:04.709] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:04.850] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" suppressHydrationWarning={true}>
+                          <body className="bg-backgro..." suppressHydrationWarning={true}>
+                            <div>
+                            <div>
+                            <div>
+                            <div>
+                            <div>
+                            <LayoutShell>
+                              <Cursor>
+                              <div className="relative f...">
+                                <Navbar>
+                                  <motion.header initial={{opacity:0,y:-20}} animate={{opacity:1,y:0}} ...>
+                                    <header className="sticky top..." data-cursor="nav" style={{opacity:0, ...}} ...>
+                                      <div className="mx-auto fl...">
+                                        <LinkComponent>
+                                        <nav className="hidden ite...">
+                                          ...
+                                            <a className="relative p..." data-cursor="link" ref={function} ...>
+                                              <motion.span layoutId="nav-underline" className="absolute i...">
+                                                <MeasureLayout>
+                                                <span
+                                                  className="absolute inset-x-0 -bottom-1 h-px bg-gradient-to-r from-e..."
+                                                  style={{}}
+                                                  ref={function useMotionRef.useCallback}
+-                                                 data-cursor-element-id="cursor-el-18"
+                                                >
+                                          <LinkComponent href="/engineering" className="relative p..." data-cursor="link">
+                                            <a
+                                              className="relative py-1 text-[0.78rem] tracking-wide transition-colors ..."
+                                              data-cursor="link"
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/engineering"
+-                                             data-cursor-element-id="cursor-el-19"
+                                            >
+                                          <LinkComponent href="/research" className="relative p..." data-cursor="link">
+                                            <a
+                                              className="relative py-1 text-[0.78rem] tracking-wide transition-colors ..."
+                                              data-cursor="link"
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/research"
+-                                             data-cursor-element-id="cursor-el-20"
+                                            >
+                                          <LinkComponent href="/creative" className="relative p..." data-cursor="link">
+                                            <a
+                                              className="relative py-1 text-[0.78rem] tracking-wide transition-colors ..."
+                                              data-cursor="link"
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/creative"
+-                                             data-cursor-element-id="cursor-el-21"
+                                            >
+                                          <LinkComponent href="/leadership" className="relative p..." data-cursor="link">
+                                            <a
+                                              className="relative py-1 text-[0.78rem] tracking-wide transition-colors ..."
+                                              data-cursor="link"
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/leadership"
+-                                             data-cursor-element-id="cursor-el-22"
+                                            >
+                                          <LinkComponent href="/contact" className="relative p..." data-cursor="link">
+                                            <a
+                                              className="relative py-1 text-[0.78rem] tracking-wide transition-colors ..."
+                                              data-cursor="link"
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/contact"
+-                                             data-cursor-element-id="cursor-el-23"
+                                            >
+                                        <div
+                                          className="flex items-center gap-3"
+-                                         data-cursor-element-id="cursor-el-24"
+                                        >
+                                          <LinkComponent href="/cv" className="hidden tex..." data-cursor="button">
+                                            <a
+                                              className="hidden text-[0.78rem] font-medium text-slate-200 md:inline-flex"
+                                              data-cursor="button"
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/cv"
+-                                             data-cursor-element-id="cursor-el-25"
+                                            >
+                                              <span
+                                                className="btn-muted"
+-                                               data-cursor-element-id="cursor-el-26"
+                                              >
+                                                <span
+-                                                 data-cursor-element-id="cursor-el-27"
+                                                >
++                                                 Download Resume
+                                          <button
+                                            type="button"
+                                            className="inline-flex h-9 w-9 items-center justify-center rounded-full bo..."
+                                            onClick={function onClick}
+                                            aria-label="Toggle navigation"
+                                            data-cursor="button"
+-                                           data-cursor-element-id="cursor-el-28"
+                                          >
+                                            <span
+                                              className="relative block h-3.5 w-4"
+-                                             data-cursor-element-id="cursor-el-29"
+                                            >
+                                              <span
+                                                className={"absolute left-0 top-0 h-[1px] w-full bg-slate-300 transit..."}
+-                                               data-cursor-element-id="cursor-el-30"
+                                              >
+                                              <span
+                                                className={"absolute left-0 top-1.5 h-[1px] w-3/4 bg-slate-400 transi..."}
+-                                               data-cursor-element-id="cursor-el-31"
+                                              >
+                                              <span
+                                                className={"absolute left-0 top-3 h-[1px] w-full bg-slate-300 transit..."}
+-                                               data-cursor-element-id="cursor-el-32"
+                                              >
+                                  <motion.div initial={false} animate="closed" variants={{...}} ...>
+                                    <div
+                                      className="fixed inset-x-0 top-16 z-30 md:hidden"
+                                      style={{opacity:0,pointerEvents:"none",transform:"translateY..."}}
+                                      ref={function useMotionRef.useCallback}
+-                                     data-cursor-element-id="cursor-el-33"
+                                    >
+                                      <div
+                                        className="mx-4 overflow-hidden rounded-2xl border border-slate-800/90 bg-slat..."
+-                                       data-cursor-element-id="cursor-el-34"
+                                      >
+                                        <nav
+                                          className="flex flex-col gap-5 text-sm font-medium text-slate-200"
+-                                         data-cursor-element-id="cursor-el-35"
+                                        >
+                                          <LinkComponent href="/" className="flex items..." data-cursor="link">
+                                            <a
+                                              className="flex items-center justify-between"
+                                              data-cursor="link"
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/"
+-                                             data-cursor-element-id="cursor-el-36"
+                                            >
+                                              <span
+-                                               data-cursor-element-id="cursor-el-37"
+                                              >
++                                               Home
+                                              <span
+                                                className="h-1 w-1 rounded-full bg-emerald-400"
+-                                               data-cursor-element-id="cursor-el-38"
+                                              >
+                                          <LinkComponent href="/engineering" className="flex items..." data-cursor="link">
+                                            <a
+                                              className="flex items-center justify-between"
+                                              data-cursor="link"
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/engineering"
+-                                             data-cursor-element-id="cursor-el-39"
+                                            >
+                                              <span
+-                                               data-cursor-element-id="cursor-el-40"
+                                              >
++                                               Engineering
+                                          <LinkComponent href="/research" className="flex items..." data-cursor="link">
+                                            <a
+                                              className="flex items-center justify-between"
+                                              data-cursor="link"
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/research"
+-                                             data-cursor-element-id="cursor-el-41"
+                                            >
+                                              <span
+-                                               data-cursor-element-id="cursor-el-42"
+                                              >
++                                               Research
+                                          <LinkComponent href="/creative" className="flex items..." data-cursor="link">
+                                            <a
+                                              className="flex items-center justify-between"
+                                              data-cursor="link"
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/creative"
+-                                             data-cursor-element-id="cursor-el-43"
+                                            >
+                                              <span
+-                                               data-cursor-element-id="cursor-el-44"
+                                              >
++                                               Creative Studio
+                                          <LinkComponent href="/leadership" className="flex items..." data-cursor="link">
+                                            <a
+                                              className="flex items-center justify-between"
+                                              data-cursor="link"
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/leadership"
+-                                             data-cursor-element-id="cursor-el-45"
+                                            >
+                                              <span
+-                                               data-cursor-element-id="cursor-el-46"
+                                              >
++                                               Leadership
+                                          <LinkComponent href="/contact" className="flex items..." data-cursor="link">
+                                            <a
+                                              className="flex items-center justify-between"
+                                              data-cursor="link"
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/contact"
+-                                             data-cursor-element-id="cursor-el-47"
+                                            >
+                                              <span
+-                                               data-cursor-element-id="cursor-el-48"
+                                              >
++                                               Contact
+                                        <div
+                                          className="mt-6"
+-                                         data-cursor-element-id="cursor-el-49"
+                                        >
+                                          <LinkComponent href="/cv" className="block" data-cursor="button">
+                                            <a
+                                              className="block"
+                                              data-cursor="button"
+                                              ref={function}
+                                              onClick={function onClick}
+                                              onMouseEnter={function onMouseEnter}
+                                              onTouchStart={function onTouchStart}
+                                              href="/cv"
+-                                             data-cursor-element-id="cursor-el-50"
+                                            >
+                                              <button
+                                                className="btn-primary w-full text-xs"
+-                                               data-cursor-element-id="cursor-el-51"
+                                              >
+                                                <span
+-                                                 data-cursor-element-id="cursor-el-52"
+                                                >
++                                                 Download Resume
+                                ...
+                                  <motion.main initial={{opacity:0,y:12}} animate={{opacity:1,y:0}} ...>
+                                    <main
+                                      className="flex-1"
+                                      style={{opacity:0,transform:"translateY..."}}
+                                      ref={function useMotionRef.useCallback}
+-                                     data-cursor-element-id="cursor-el-53"
+                                    >
+                                      ...
+                                        <SegmentViewNode type="page" pagePath="page.tsx">
+                                          <SegmentTrieNode>
+                                          <HomePage>
+                                            <div
+                                              className="mx-auto max-w-[1200px]"
+-                                             data-cursor-element-id="cursor-el-54"
+                                            >
+                                              <HeroSection>
+                                                <section
+                                                  className="px-4 pb-6 pt-12 sm:px-6 sm:pt-16 lg:flex lg:items-center ..."
+-                                                 data-cursor-element-id="cursor-el-55"
+                                                >
+                                                  <div
+                                                    className="flex-1"
+-                                                   data-cursor-element-id="cursor-el-56"
+                                                  >
+                                                    <motion.div initial={{opacity:0,y:10, ...}} ...>
+                                                      <div
+                                                        className="inline-flex items-center gap-2 rounded-full border ..."
+                                                        data-cursor="card"
+                                                        style={{opacity:0,transform:"translateY..."}}
+                                                        ref={function useMotionRef.useCallback}
+-                                                       data-cursor-element-id="cursor-el-57"
+                                                      >
+                                                        <span
+                                                          className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-so..."
+-                                                         data-cursor-element-id="cursor-el-58"
+                                                        >
+                                                        <span
+-                                                         data-cursor-element-id="cursor-el-59"
+                                                        >
++                                                         {"Available for AI & Full Stack Work"}
+                                                    <motion.div className="mt-6 space..." initial="hidden" ...>
+                                                      <div
+                                                        className="mt-6 space-y-5"
+                                                        style={{}}
+                                                        ref={function useMotionRef.useCallback}
+-                                                       data-cursor-element-id="cursor-el-60"
+                                                      >
+                                                        <motion.h1 className="text-balan...">
+                                                          <h1
+                                                            className="text-balance text-3xl font-semibold leading-tig..."
+                                                            style={{}}
+                                                            ref={function useMotionRef.useCallback}
+-                                                           data-cursor-element-id="cursor-el-61"
+                                                          >
+                                                            <motion.span variants={{hidden:{...}, ...}} ...>
+                                                              <span
+                                                                className={"inline-block pr-1 "}
+                                                                style={{opacity:0,letterSpacing:"0.12em",transform:"translateY..."}}
+                                                                ref={function useMotionRef.useCallback}
+-                                                               data-cursor-element-id="cursor-el-62"
+                                                              >
++                                                               Full
+                                                            <motion.span variants={{hidden:{...}, ...}} ...>
+                                                              <span
+                                                                className={"inline-block pr-1 "}
+                                                                style={{opacity:0,letterSpacing:"0.12em",transform:"translateY..."}}
+                                                                ref={function useMotionRef.useCallback}
+-                                                               data-cursor-element-id="cursor-el-63"
+                                                              >
++                                                               Stack
+                                                            <motion.span variants={{hidden:{...}, ...}} ...>
+                                                              <span
+                                                                className={"inline-block pr-1 "}
+                                                                style={{opacity:0,letterSpacing:"0.12em",transform:"translateY..."}}
+                                                                ref={function useMotionRef.useCallback}
+-                                                               data-cursor-element-id="cursor-el-64"
+                                                              >
++                                                               Engineer
+                                                            <motion.span variants={{hidden:{...}, ...}} ...>
+                                                              <span
+                                                                className={"inline-block pr-1 "}
+                                                                style={{opacity:0,letterSpacing:"0.12em",transform:"translateY..."}}
+                                                                ref={function useMotionRef.useCallback}
+-                                                               data-cursor-element-id="cursor-el-65"
+                                                              >
++                                                               for
+                                                            <motion.span variants={{hidden:{...}, ...}} ...>
+                                                              <span
+                                                                className="inline-block pr-1 bg-gradient-to-r from-eme..."
+                                                                style={{opacity:0,letterSpacing:"0.12em",transform:"translateY..."}}
+                                                                ref={function useMotionRef.useCallback}
+-                                                               data-cursor-element-id="cursor-el-66"
+                                                              >
++                                                               Intelligent
+                                                            <motion.span variants={{hidden:{...}, ...}} ...>
+                                                              <span
+                                                                className={"inline-block pr-1 "}
+                                                                style={{opacity:0,letterSpacing:"0.12em",transform:"translateY..."}}
+                                                                ref={function useMotionRef.useCallback}
+-                                                               data-cursor-element-id="cursor-el-67"
+                                                              >
++                                                               Systems.
+                                                        <motion.p initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} ...>
+                                                          <p
+                                                            className="text-sm text-slate-300 sm:text-base"
+                                                            style={{opacity:0,transform:"translateY..."}}
+                                                            ref={function useMotionRef.useCallback}
+-                                                           data-cursor-element-id="cursor-el-68"
+                                                          >
++                                                           I architect scalable web systems, integrate AI where it mat...
+                                                    <motion.div initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} ...>
+                                                      <div
+                                                        className="mt-6 text-xs text-slate-400 sm:text-sm"
+                                                        style={{opacity:0,transform:"translateY..."}}
+                                                        ref={function useMotionRef.useCallback}
+-                                                       data-cursor-element-id="cursor-el-69"
+                                                      >
+                                                        <TypingText text={"Full Sta..."}>
+                                                          <span
+                                                            className="inline-flex items-center"
+-                                                           data-cursor-element-id="cursor-el-70"
+                                                          >
+                                                            <span
+-                                                             data-cursor-element-id="cursor-el-71"
+                                                            >
++                                                             
+                                                            <span
+                                                              className="typing-caret h-4"
+-                                                             data-cursor-element-id="cursor-el-72"
+                                                            >
+                                                    <motion.div initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} ...>
+                                                      <div
+                                                        className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
+                                                        style={{opacity:0,transform:"translateY..."}}
+                                                        ref={function useMotionRef.useCallback}
+-                                                       data-cursor-element-id="cursor-el-73"
+                                                      >
+                                                        <MagneticButton>
+                                                          <div
+                                                            ref={{current:null}}
+                                                            onMouseMove={function handleMouseMove}
+                                                            onMouseLeave={function handleMouseLeave}
+                                                            className="transition-transform duration-250 ease-lab-ease"
+                                                            data-cursor="button"
+-                                                           data-cursor-element-id="cursor-el-74"
+                                                          >
+                                                            <button
+                                                              className="btn-primary group"
+                                                              data-cursor="button"
+-                                                             data-cursor-element-id="cursor-el-75"
+                                                            >
+                                                              <span
+-                                                               data-cursor-element-id="cursor-el-76"
+                                                              >
++                                                               View Engineering Systems
+                                                              <span
+                                                                className="inline-flex h-5 w-5 items-center justify-ce..."
+-                                                               data-cursor-element-id="cursor-el-77"
+                                                              >
++                                                               →
+                                                        <button
+                                                          className="btn-muted"
+                                                          data-cursor="button"
+-                                                         data-cursor-element-id="cursor-el-78"
+                                                        >
++                                                         Download Resume
+                                                  <motion.div initial={{opacity:0,y:20, ...}} ...>
+                                                    <div
+                                                      className="mt-12 flex flex-1 justify-center lg:mt-0"
+                                                      style={{opacity:0,transform:"translateY..."}}
+                                                      ref={function useMotionRef.useCallback}
+-                                                     data-cursor-element-id="cursor-el-79"
+                                                    >
+                                                      <motion.div className="relative h..." data-cursor="card" ...>
+                                                        <div
+                                                          className="relative h-56 w-56 overflow-hidden rounded-full b..."
+                                                          data-cursor="card"
+                                                          style={{}}
+                                                          ref={function useMotionRef.useCallback}
+-                                                         data-cursor-element-id="cursor-el-80"
+                                                        >
+                                                          <img
+                                                            alt="Anant Rai"
+                                                            fetchPriority={undefined}
+                                                            loading={undefined}
+                                                            width={undefined}
+                                                            height={undefined}
+                                                            decoding="async"
+                                                            data-nimg="fill"
+                                                            className="object-cover"
+                                                            style={{position:"absolute",height:"100%",width:"100%",left:0,top:0,right:0,bottom:0, ...}}
+                                                            sizes="100vw"
+                                                            srcSet={"/_next/image?url=%2Fprofile.jpeg&w=640&q=75 640w..."}
+                                                            src={"/_next/image?url=%2Fprofile.jpeg&w=3840&q=75"}
+                                                            ref={function}
+                                                            onLoad={function onLoad}
+                                                            onError={function onError}
+-                                                           data-cursor-element-id="cursor-el-81"
+                                                          >
+                                                          ...
+                                                          <div
+                                                            className="absolute inset-0 bg-gradient-to-b from-transpar..."
+-                                                           data-cursor-element-id="cursor-el-82"
+                                                          >
+                                                          <div
+                                                            className="absolute inset-x-6 bottom-8 flex flex-col gap-1..."
+-                                                           data-cursor-element-id="cursor-el-83"
+                                                          >
+                                                            <span
+                                                              className="text-[0.65rem] uppercase tracking-[0.2em] tex..."
+-                                                             data-cursor-element-id="cursor-el-84"
+                                                            >
++                                                             Systems Profile
+                                                            <span
+                                                              className="text-sm font-medium text-emerald-50"
+-                                                             data-cursor-element-id="cursor-el-85"
+                                                            >
++                                                             AI-Integrated Full Stack Engineer
+                                                            <span
+                                                              className="text-[0.7rem] text-slate-300"
+-                                                             data-cursor-element-id="cursor-el-86"
+                                                            >
++                                                             Scalable architectures, research-backed decisions, and pr...
+                                              <MetricStrip>
+                                                <Section className="pt-6 md:pt-4">
+                                                  <motion.section id={undefined} initial={{opacity:0,y:30}} ...>
+                                                    <section
+                                                      id={undefined}
+                                                      className="px-4 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-28 pt-6 md:..."
+                                                      style={{opacity:0,transform:"translateY..."}}
+                                                      ref={function useMotionRef.useCallback}
+-                                                     data-cursor-element-id="cursor-el-87"
+                                                    >
+                                                      <div
+                                                        className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4"
+-                                                       data-cursor-element-id="cursor-el-88"
+                                                      >
+                                                        <MetricCard metric={{id:"projects", ...}} index={0}>
+                                                          <motion.div ref={{current:null}} initial={{opacity:0,y:20}} ...>
+                                                            <div
+                                                              className="card-hover glass-surface relative flex flex-c..."
+                                                              data-cursor="card"
+                                                              style={{opacity:0,transform:"translateY..."}}
+                                                              ref={function useMotionRef.useCallback}
+-                                                             data-cursor-element-id="cursor-el-89"
+                                                            >
+                                                              <div
+                                                                className="flex items-baseline gap-1.5 text-2xl font-s..."
+-                                                               data-cursor-element-id="cursor-el-90"
+                                                              >
+                                                                <span
+-                                                                 data-cursor-element-id="cursor-el-91"
+                                                                >
++                                                                 0
+                                                                <span
+                                                                  className="text-base font-medium text-emerald-300/80"
+-                                                                 data-cursor-element-id="cursor-el-92"
+                                                                >
++                                                                 +
+                                                              <div
+                                                                className="mt-3 text-xs font-medium uppercase tracking..."
+-                                                               data-cursor-element-id="cursor-el-93"
+                                                              >
++                                                               Production-Level Projects
+                                                              <p
+                                                                className="mt-2 text-[0.74rem] leading-5 text-slate-400"
+-                                                               data-cursor-element-id="cursor-el-94"
+                                                              >
++                                                               Deployed systems across full stack, not demo apps.
+                                                        <MetricCard metric={{id:"research", ...}} index={1}>
+                                                          <motion.div ref={{current:null}} initial={{opacity:0,y:20}} ...>
+                                                            <div
+                                                              className="card-hover glass-surface relative flex flex-c..."
+                                                              data-cursor="card"
+                                                              style={{opacity:0,transform:"translateY..."}}
+                                                              ref={function useMotionRef.useCallback}
+-                                                             data-cursor-element-id="cursor-el-95"
+                                                            >
+                                                              <div
+                                                                className="flex items-baseline gap-1.5 text-2xl font-s..."
+-                                                               data-cursor-element-id="cursor-el-96"
+                                                              >
+                                                                <span
+-                                                                 data-cursor-element-id="cursor-el-97"
+                                                                >
++                                                                 0
+                                                                <span
+                                                                  className="text-base font-medium text-emerald-300/80"
+-                                                                 data-cursor-element-id="cursor-el-98"
+                                                                >
++                                                                 st
+                                                              <div
+                                                                className="mt-3 text-xs font-medium uppercase tracking..."
+-                                                               data-cursor-element-id="cursor-el-99"
+                                                              >
++                                                               Research Award
+                                                              <p
+                                                                className="mt-2 text-[0.74rem] leading-5 text-slate-400"
+-                                                               data-cursor-element-id="cursor-el-100"
+                                                              >
++                                                               Prize for applied optimization in healthcare systems.
+                                                        <MetricCard metric={{id:"hackat...", ...}} index={2}>
+                                                          <motion.div ref={{current:null}} initial={{opacity:0,y:20}} ...>
+                                                            <div
+                                                              className="card-hover glass-surface relative flex flex-c..."
+                                                              data-cursor="card"
+                                                              style={{opacity:0,transform:"translateY..."}}
+                                                              ref={function useMotionRef.useCallback}
+-                                                             data-cursor-element-id="cursor-el-101"
+                                                            >
+                                                              <div
+                                                                className="flex items-baseline gap-1.5 text-2xl font-s..."
+-                                                               data-cursor-element-id="cursor-el-102"
+                                                              >
+                                                                <span
+-                                                                 data-cursor-element-id="cursor-el-103"
+                                                                >
++                                                                 0
+                                                                <span
+                                                                  className="text-base font-medium text-emerald-300/80"
+-                                                                 data-cursor-element-id="cursor-el-104"
+                                                                >
++                                                                 +
+                                                              <div
+                                                                className="mt-3 text-xs font-medium uppercase tracking..."
+-                                                               data-cursor-element-id="cursor-el-105"
+                                                              >
++                                                               Hackathons
+                                                              <p
+                                                                className="mt-2 text-[0.74rem] leading-5 text-slate-400"
+-                                                               data-cursor-element-id="cursor-el-106"
+                                                              >
++                                                               AI, space-tech and systems-focused builds under pressure.
+                                                        <MetricCard metric={{id:"intern...", ...}} index={3}>
+                                                          <motion.div ref={{current:null}} initial={{opacity:0,y:20}} ...>
+                                                            <div
+                                                              className="card-hover glass-surface relative flex flex-c..."
+                                                              data-cursor="card"
+                                                              style={{opacity:0,transform:"translateY..."}}
+                                                              ref={function useMotionRef.useCallback}
+-                                                             data-cursor-element-id="cursor-el-107"
+                                                            >
+                                                              <div
+                                                                className="flex items-baseline gap-1.5 text-2xl font-s..."
+-                                                               data-cursor-element-id="cursor-el-108"
+                                                              >
+                                                                <span
+-                                                                 data-cursor-element-id="cursor-el-109"
+                                                                >
++                                                                 0
+                                                                <span
+                                                                  className="text-base font-medium text-emerald-300/80"
+-                                                                 data-cursor-element-id="cursor-el-110"
+                                                                >
++                                                                 +
+                                                              <div
+                                                                className="mt-3 text-xs font-medium uppercase tracking..."
+-                                                               data-cursor-element-id="cursor-el-111"
+                                                              >
++                                                               Internship Months
+                                                              <p
+                                                                className="mt-2 text-[0.74rem] leading-5 text-slate-400"
+-                                                               data-cursor-element-id="cursor-el-112"
+                                                              >
++                                                               Real-world engineering experience shipping production w...
+                                              <FeaturedWorkSection>
+                                                <Section className="pt-4">
+                                                  <motion.section id={undefined} initial={{opacity:0,y:30}} ...>
+                                                    <section
+                                                      id={undefined}
+                                                      className="px-4 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-28 pt-4"
+                                                      style={{opacity:0,transform:"translateY..."}}
+                                                      ref={function useMotionRef.useCallback}
+-                                                     data-cursor-element-id="cursor-el-113"
+                                                    >
+                                                      <div
+                                                        className="mx-auto max-w-[1200px]"
+-                                                       data-cursor-element-id="cursor-el-114"
+                                                      >
+                                                        <div
+                                                          className="mb-6 flex items-center gap-3"
+-                                                         data-cursor-element-id="cursor-el-115"
+                                                        >
+                                                          <div
+                                                            className="flex h-11 w-11 items-center justify-center roun..."
+-                                                           data-cursor-element-id="cursor-el-116"
+                                                          >
+                                                            <span
+                                                              className="text-sm font-semibold"
+-                                                             data-cursor-element-id="cursor-el-117"
+                                                            >
++                                                             ▦
+                                                          <h2
+                                                            className="text-2xl font-semibold tracking-tight text-slat..."
+-                                                           data-cursor-element-id="cursor-el-118"
+                                                          >
++                                                           Featured Work
+                                                        <div
+                                                          className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"
+-                                                         data-cursor-element-id="cursor-el-119"
+                                                        >
+                                                          <FeaturedTile icon="▤" title="Thumbnail ...">
+                                                            <div
+                                                              className="glass-surface card-hover glow-border group cu..."
+                                                              data-cursor="card"
+-                                                             data-cursor-element-id="cursor-el-120"
+                                                            >
+                                                              <div
+                                                                className="relative flex h-40 w-full items-center just..."
+-                                                               data-cursor-element-id="cursor-el-121"
+                                                              >
+                                                                <div
+                                                                  className="absolute inset-0 bg-gradient-to-t from-sl..."
+-                                                                 data-cursor-element-id="cursor-el-122"
+                                                                >
+                                                                <div
+                                                                  className="relative text-5xl text-emerald-300/50 tra..."
+-                                                                 data-cursor-element-id="cursor-el-123"
+                                                                >
++                                                                 ▤
+                                                                <div
+                                                                  className="absolute bottom-3 left-4 text-sm font-sem..."
+-                                                                 data-cursor-element-id="cursor-el-124"
+                                                                >
++                                                                 Thumbnail Design
+                                                          <FeaturedTile icon="⌬" title="Web Dev Work">
+                                                            <div
+                                                              className="glass-surface card-hover glow-border group cu..."
+                                                              data-cursor="card"
+-                                                             data-cursor-element-id="cursor-el-125"
+                                                            >
+                                                              <div
+                                                                className="relative flex h-40 w-full items-center just..."
+-                                                               data-cursor-element-id="cursor-el-126"
+                                                              >
+                                                                <div
+                                                                  className="absolute inset-0 bg-gradient-to-t from-sl..."
+-                                                                 data-cursor-element-id="cursor-el-127"
+                                                                >
+                                                                <div
+                                                                  className="relative text-5xl text-emerald-300/50 tra..."
+-                                                                 data-cursor-element-id="cursor-el-128"
+                                                                >
++                                                                 ⌬
+                                                                <div
+                                                                  className="absolute bottom-3 left-4 text-sm font-sem..."
+-                                                                 data-cursor-element-id="cursor-el-129"
+                                                                >
++                                                                 Web Dev Work
+                                                          <FeaturedTile icon="⌁" title="Android Apps">
+                                                            <div
+                                                              className="glass-surface card-hover glow-border group cu..."
+                                                              data-cursor="card"
+-                                                             data-cursor-element-id="cursor-el-130"
+                                                            >
+                                                              <div
+                                                                className="relative flex h-40 w-full items-center just..."
+-                                                               data-cursor-element-id="cursor-el-131"
+                                                              >
+                                                                <div
+                                                                  className="absolute inset-0 bg-gradient-to-t from-sl..."
+-                                                                 data-cursor-element-id="cursor-el-132"
+                                                                >
+                                                                <div
+                                                                  className="relative text-5xl text-emerald-300/50 tra..."
+-                                                                 data-cursor-element-id="cursor-el-133"
+                                                                >
++                                                                 ⌁
+                                                                <div
+                                                                  className="absolute bottom-3 left-4 text-sm font-sem..."
+-                                                                 data-cursor-element-id="cursor-el-134"
+                                                                >
++                                                                 Android Apps
+                                                          <FeaturedTile icon="⟡" title="Research Pubs">
+                                                            <div
+                                                              className="glass-surface card-hover glow-border group cu..."
+                                                              data-cursor="card"
+-                                                             data-cursor-element-id="cursor-el-135"
+                                                            >
+                                                              <div
+                                                                className="relative flex h-40 w-full items-center just..."
+-                                                               data-cursor-element-id="cursor-el-136"
+                                                              >
+                                                                <div
+                                                                  className="absolute inset-0 bg-gradient-to-t from-sl..."
+-                                                                 data-cursor-element-id="cursor-el-137"
+                                                                >
+                                                                <div
+                                                                  className="relative text-5xl text-emerald-300/50 tra..."
+-                                                                 data-cursor-element-id="cursor-el-138"
+                                                                >
++                                                                 ⟡
+                                                                <div
+                                                                  className="absolute bottom-3 left-4 text-sm font-sem..."
+-                                                                 data-cursor-element-id="cursor-el-139"
+                                                                >
++                                                                 Research Pubs
+                                              <ToolsExperienceSection>
+                                                <Section className="pt-4 pb-24">
+                                                  <motion.section id={undefined} initial={{opacity:0,y:30}} ...>
+                                                    <section
+                                                      id={undefined}
+                                                      className="px-4 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-28 pt-4 pb-24"
+                                                      style={{opacity:0,transform:"translateY..."}}
+                                                      ref={function useMotionRef.useCallback}
+-                                                     data-cursor-element-id="cursor-el-140"
+                                                    >
+                                                      <div
+                                                        className="mx-auto grid max-w-[1200px] grid-cols-1 gap-8 lg:gr..."
+-                                                       data-cursor-element-id="cursor-el-141"
+                                                      >
+                                                        <div
+                                                          className="flex flex-col gap-6 lg:col-span-4"
+-                                                         data-cursor-element-id="cursor-el-142"
+                                                        >
+                                                          <ToolGrid title="Tech Tools" items={[...]}>
+                                                            <div
+                                                              className="glass-surface card-hover glow-border rounded-..."
+-                                                             data-cursor-element-id="cursor-el-143"
+                                                            >
+                                                              <h3
+                                                                className="text-base font-semibold text-slate-50"
+-                                                               data-cursor-element-id="cursor-el-144"
+                                                              >
++                                                               Tech Tools
+                                                              <div
+                                                                className="mt-4 grid grid-cols-3 gap-3"
+-                                                               data-cursor-element-id="cursor-el-145"
+                                                              >
+                                                                <div
+                                                                  className="flex aspect-square items-center justify-c..."
+                                                                  data-cursor="card"
+-                                                                 data-cursor-element-id="cursor-el-146"
+                                                                >
++                                                                 VS Code
+                                                                <div
+                                                                  className="flex aspect-square items-center justify-c..."
+                                                                  data-cursor="card"
+-                                                                 data-cursor-element-id="cursor-el-147"
+                                                                >
++                                                                 Git
+                                                                <div
+                                                                  className="flex aspect-square items-center justify-c..."
+                                                                  data-cursor="card"
+-                                                                 data-cursor-element-id="cursor-el-148"
+                                                                >
++                                                                 Docker
+                                                                <div
+                                                                  className="flex aspect-square items-center justify-c..."
+                                                                  data-cursor="card"
+-                                                                 data-cursor-element-id="cursor-el-149"
+                                                                >
++                                                                 Figma
+                                                                <div
+                                                                  className="flex aspect-square items-center justify-c..."
+                                                                  data-cursor="card"
+-                                                                 data-cursor-element-id="cursor-el-150"
+                                                                >
++                                                                 Postman
+                                                                <div
+                                                                  className="flex aspect-square items-center justify-c..."
+                                                                  data-cursor="card"
+-                                                                 data-cursor-element-id="cursor-el-151"
+                                                                >
++                                                                 Linux
+                                                          <div
+                                                            className="glass-surface card-hover glow-border rounded-2x..."
+-                                                           data-cursor-element-id="cursor-el-152"
+                                                          >
+                                                            <h3
+                                                              className="text-base font-semibold text-slate-50"
+-                                                             data-cursor-element-id="cursor-el-153"
+                                                            >
++                                                             Dev Stack
+                                                            <div
+                                                              className="mt-4 flex flex-wrap gap-2"
+-                                                             data-cursor-element-id="cursor-el-154"
+                                                            >
+                                                              <Pill text="React">
+                                                                <span
+                                                                  className="rounded-full border border-slate-800/70 b..."
+-                                                                 data-cursor-element-id="cursor-el-155"
+                                                                >
++                                                                 React
+                                                              <Pill text="Next.js">
+                                                                <span
+                                                                  className="rounded-full border border-slate-800/70 b..."
+-                                                                 data-cursor-element-id="cursor-el-156"
+                                                                >
++                                                                 Next.js
+                                                              <Pill text="Node.js">
+                                                                <span
+                                                                  className="rounded-full border border-slate-800/70 b..."
+-                                                                 data-cursor-element-id="cursor-el-157"
+                                                                >
++                                                                 Node.js
+                                                              <Pill text="Python">
+                                                                <span
+                                                                  className="rounded-full border border-slate-800/70 b..."
+-                                                                 data-cursor-element-id="cursor-el-158"
+                                                                >
++                                                                 Python
+                                                              <Pill text="TypeScript">
+                                                                <span
+                                                                  className="rounded-full border border-slate-800/70 b..."
+-                                                                 data-cursor-element-id="cursor-el-159"
+                                                                >
++                                                                 TypeScript
+                                                              <Pill text="Tailwind">
+                                                                <span
+                                                                  className="rounded-full border border-slate-800/70 b..."
+-                                                                 data-cursor-element-id="cursor-el-160"
+                                                                >
++                                                                 Tailwind
+                                                              <Pill text="PostgreSQL">
+                                                                <span
+                                                                  className="rounded-full border border-slate-800/70 b..."
+-                                                                 data-cursor-element-id="cursor-el-161"
+                                                                >
++                                                                 PostgreSQL
+                                                          <div
+                                                            className="glass-surface card-hover glow-border rounded-2x..."
+-                                                           data-cursor-element-id="cursor-el-162"
+                                                          >
+                                                            <h3
+                                                              className="text-base font-semibold text-slate-50"
+-                                                             data-cursor-element-id="cursor-el-163"
+                                                            >
++                                                             Design Tools
+                                                            <div
+                                                              className="mt-4 flex h-20 items-center justify-center ro..."
+-                                                             data-cursor-element-id="cursor-el-164"
+                                                            >
++                                                             Illustrative Graphic
+                                                        <div
+                                                          className="glass-surface relative overflow-hidden rounded-2x..."
+-                                                         data-cursor-element-id="cursor-el-165"
+                                                        >
+                                                          <div
+                                                            className="pointer-events-none absolute right-0 top-0 h-64..."
+-                                                           data-cursor-element-id="cursor-el-166"
+                                                          >
+                                                          <div
+                                                            className="mb-8 flex items-center justify-between"
+-                                                           data-cursor-element-id="cursor-el-167"
+                                                          >
+                                                            <h2
+                                                              className="text-3xl font-semibold tracking-tight text-sl..."
+-                                                             data-cursor-element-id="cursor-el-168"
+                                                            >
++                                                             Experience
+                                                            <button
+                                                              className="text-sm font-medium text-emerald-200 transiti..."
+                                                              data-cursor="link"
+-                                                             data-cursor-element-id="cursor-el-169"
+                                                            >
+                                                              <span
+                                                                className="ml-1"
+-                                                               data-cursor-element-id="cursor-el-170"
+                                                              >
++                                                               ↗
+                                                          <div
+                                                            className="relative space-y-8"
+-                                                           data-cursor-element-id="cursor-el-171"
+                                                          >
+                                                            <div
+                                                              className="absolute left-5 top-0 hidden h-full w-px bg-g..."
+-                                                             data-cursor-element-id="cursor-el-172"
+                                                            >
+                                                            <ExperienceItem title="Senior Ful..." org="TechCorp Inc." ...>
+                                                              <div
+                                                                className="relative flex items-start gap-4 is-active"
+-                                                               data-cursor-element-id="cursor-el-173"
+                                                              >
+                                                                <div
+                                                                  className="z-10 mt-1 flex h-10 w-10 items-center jus..."
+-                                                                 data-cursor-element-id="cursor-el-174"
+                                                                >
+                                                                  <span
+                                                                    className="text-sm text-emerald-100"
+-                                                                   data-cursor-element-id="cursor-el-175"
+                                                                  >
++                                                                   ◆
+                                                                <div
+                                                                  className="glass-surface card-hover glow-border flex..."
+-                                                                 data-cursor-element-id="cursor-el-176"
+                                                                >
+                                                                  <div
+                                                                    className="flex flex-col gap-1 sm:flex-row sm:item..."
+-                                                                   data-cursor-element-id="cursor-el-177"
+                                                                  >
+                                                                    <p
+                                                                      className="font-semibold text-slate-50"
+-                                                                     data-cursor-element-id="cursor-el-178"
+                                                                    >
++                                                                     Senior Full Stack Engineer
+                                                                    <time
+                                                                      className="text-xs text-slate-500"
+-                                                                     data-cursor-element-id="cursor-el-179"
+                                                                    >
++                                                                     2023 – Present
+                                                                  <p
+                                                                    className="mt-1 text-sm font-medium text-emerald-200"
+-                                                                   data-cursor-element-id="cursor-el-180"
+                                                                  >
++                                                                   TechCorp Inc.
+                                                                  <p
+                                                                    className="mt-2 text-sm leading-relaxed text-slate..."
+-                                                                   data-cursor-element-id="cursor-el-181"
+                                                                  >
++                                                                   Leading scalable architectures and AI-integrated se...
+                                                            <ExperienceItem title="Research A..." org="AI Innovat..." ...>
+                                                              <div
+                                                                className={"relative flex items-start gap-4 "}
+-                                                               data-cursor-element-id="cursor-el-182"
+                                                              >
+                                                                <div
+                                                                  className={"z-10 mt-1 flex h-10 w-10 items-center j..."}
+-                                                                 data-cursor-element-id="cursor-el-183"
+                                                                >
+                                                                  <span
+                                                                    className="text-sm text-emerald-300/70"
+-                                                                   data-cursor-element-id="cursor-el-184"
+                                                                  >
++                                                                   ◆
+                                                                <div
+                                                                  className="glass-surface card-hover glow-border flex..."
+-                                                                 data-cursor-element-id="cursor-el-185"
+                                                                >
+                                                                  <div
+                                                                    className="flex flex-col gap-1 sm:flex-row sm:item..."
+-                                                                   data-cursor-element-id="cursor-el-186"
+                                                                  >
+                                                                    <p
+                                                                      className="font-semibold text-slate-50"
+-                                                                     data-cursor-element-id="cursor-el-187"
+                                                                    >
++                                                                     Research Assistant
+                                                                    <time
+                                                                      className="text-xs text-slate-500"
+-                                                                     data-cursor-element-id="cursor-el-188"
+                                                                    >
++                                                                     2021 – 2023
+                                                                  <p
+                                                                    className="mt-1 text-sm font-medium text-emerald-200"
+-                                                                   data-cursor-element-id="cursor-el-189"
+                                                                  >
++                                                                   AI Innovation Lab
+                                                                  <p
+                                                                    className="mt-2 text-sm leading-relaxed text-slate..."
+-                                                                   data-cursor-element-id="cursor-el-190"
+                                                                  >
++                                                                   Research on generative models and decision systems....
+                                                            <ExperienceItem title="Creative T..." org="Design Stu..." ...>
+                                                              <div
+                                                                className={"relative flex items-start gap-4 "}
+-                                                               data-cursor-element-id="cursor-el-191"
+                                                              >
+                                                                <div
+                                                                  className={"z-10 mt-1 flex h-10 w-10 items-center j..."}
+-                                                                 data-cursor-element-id="cursor-el-192"
+                                                                >
+                                                                  <span
+                                                                    className="text-sm text-emerald-300/70"
+-                                                                   data-cursor-element-id="cursor-el-193"
+                                                                  >
++                                                                   ◆
+                                                                <div
+                                                                  className="glass-surface card-hover glow-border flex..."
+-                                                                 data-cursor-element-id="cursor-el-194"
+                                                                >
+                                                                  <div
+                                                                    className="flex flex-col gap-1 sm:flex-row sm:item..."
+-                                                                   data-cursor-element-id="cursor-el-195"
+                                                                  >
+                                                                    <p
+                                                                      className="font-semibold text-slate-50"
+-                                                                     data-cursor-element-id="cursor-el-196"
+                                                                    >
++                                                                     Creative Technologist Intern
+                                                                    <time
+                                                                      className="text-xs text-slate-500"
+-                                                                     data-cursor-element-id="cursor-el-197"
+                                                                    >
++                                                                     2020 – 2021
+                                                                  <p
+                                                                    className="mt-1 text-sm font-medium text-emerald-200"
+-                                                                   data-cursor-element-id="cursor-el-198"
+                                                                  >
++                                                                   Design Studio X
+                                                                  <p
+                                                                    className="mt-2 text-sm leading-relaxed text-slate..."
+-                                                                   data-cursor-element-id="cursor-el-199"
+                                                                  >
++                                                                   Built interactive web experiences with WebGL/Three....
+                                        ...
+                                <Footer>
+                                  <footer
+                                    className="border-t border-slate-800/70 bg-slate-950/80 py-5 text-xs text-slate-50..."
+-                                   data-cursor-element-id="cursor-el-200"
+                                  >
+                                    <div
+                                      className="mx-auto flex max-w-6xl flex-col gap-3 px-4 sm:flex-row sm:items-cente..."
+-                                     data-cursor-element-id="cursor-el-201"
+                                    >
+                                      <p
+                                        className="text-[0.7rem]"
+-                                       data-cursor-element-id="cursor-el-202"
+                                      >
++                                       Built as an AI lab style portfolio — focusing on systems, not vanity.
+                                      <p
+                                        className="text-[0.7rem]"
+-                                       data-cursor-element-id="cursor-el-203"
+                                      >
++                                       Designed with responsive, performance-first motion and modular architecture.
+                  ...
+
+[00:00:04.851] Browser WARN    Image with src "/profile.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:00:05.072] Browser WARN    Image with src "/profile.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:00:34.169] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:34.478] Browser WARN    Image with src "/profile.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:00:37.970] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:38.253] Browser WARN    Image with src "/profile.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:01:03.920] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:04.223] Browser WARN    Image with src "/profile.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:01:08.276] Server  LOG     ✓ Compiled in 1683ms
+[00:01:08.765] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/profile1.jpeg" "received" null
+[00:01:08.796] Server  ERROR   ⨯ "The requested resource isn't a valid image for" "/profile1.jpeg" "received" null
+[00:01:08.991] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:09.295] Browser WARN    Image with src "/profile1.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:01:32.932] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:33.264] Browser WARN    Image with src "/profile1.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:03:13.674] Server  LOG     ✓ Compiled in 168ms
+[00:03:13.843] Browser WARN    Image with src "/a.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:03:13.884] Browser WARN    Image with src "/a.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:03:16.746] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:03:17.055] Browser WARN    Image with src "/a.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:03:20.077] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:03:20.668] Browser WARN    Image with src "/a.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:04:28.832] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:29.148] Browser WARN    Image with src "/a.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:04:31.755] Server  LOG     ✓ Compiled in 154ms
+[00:04:33.614] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:33.947] Browser WARN    Image with src "/a.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:05:08.887] Server  LOG     ✓ Compiled in 161ms
+[00:05:10.692] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:05:11.095] Browser WARN    Image with src "/a.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:05:25.115] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:05:25.444] Browser WARN    Image with src "/a.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:05:30.375] Server  LOG     ✓ Compiled in 209ms
+[00:05:32.113] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:05:32.469] Browser WARN    Image with src "/a.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:08:56.982] Server  LOG     ✓ Compiled in 182ms
+[00:12:23.416] Server  LOG     ✓ Compiled in 117ms
+[00:12:23.560] Browser ERROR   uncaughtError: Error: link is a void element tag and must neither have `children` nor use `dangerouslySetInnerHTML`.
+[00:12:27.799] Browser ERROR   uncaughtError: Error: link is a void element tag and must neither have `children` nor use `dangerouslySetInnerHTML`.
+[00:12:39.421] Server  ERROR   ⨯ Error: link is a self-closing tag and must neither have `children` nor use `dangerouslySetInnerHTML`.
+[00:12:39.671] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:12:39.949] Browser ERROR   uncaughtError: Error: link is a void element tag and must neither have `children` nor use `dangerouslySetInnerHTML`.
+[00:12:41.588] Server  ERROR   ⨯ Error: link is a self-closing tag and must neither have `children` nor use `dangerouslySetInnerHTML`.
+[00:12:41.850] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:12:42.080] Browser ERROR   uncaughtError: Error: link is a void element tag and must neither have `children` nor use `dangerouslySetInnerHTML`.
+[00:12:43.225] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:12:43.227] Server  WARN    ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[00:12:43.401] Server  LOG     ✓ Compiled in 145ms
+[00:12:43.834] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:12:43.890] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:12:44.188] Browser WARN    Image with src "/a.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:12:44.570] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" suppressHydrationWarning={true}>
+                          <body className="bg-backgro..." suppressHydrationWarning={true}>
+                            <div>
+                            <div>
+                            <div>
+                            <div>
+                            <div>
+                            <LayoutShell>
+                              <Cursor>
+                              <div className="relative f...">
+                                ...
+                                  <div className="fixed inse..." style={{opacity:0, ...}} ...>
+                                    <div className="mx-4 overf...">
+                                      <nav className="flex flex-...">
+                                        <LinkComponent>
+                                        <LinkComponent href="/engineering" className="flex items..." data-cursor="link">
+                                          <a
+                                            className="flex items-center justify-between"
+                                            data-cursor="link"
+                                            ref={function}
+                                            onClick={function onClick}
+                                            onMouseEnter={function onMouseEnter}
+                                            onTouchStart={function onTouchStart}
+                                            href="/engineering"
+-                                           data-cursor-element-id="cursor-el-39"
+                                          >
+                                            <span
+-                                             data-cursor-element-id="cursor-el-40"
+                                            >
++                                             Engineering
+                                        <LinkComponent href="/research" className="flex items..." data-cursor="link">
+                                          <a
+                                            className="flex items-center justify-between"
+                                            data-cursor="link"
+                                            ref={function}
+                                            onClick={function onClick}
+                                            onMouseEnter={function onMouseEnter}
+                                            onTouchStart={function onTouchStart}
+                                            href="/research"
+-                                           data-cursor-element-id="cursor-el-41"
+                                          >
+                                            <span
+-                                             data-cursor-element-id="cursor-el-42"
+                                            >
++                                             Research
+                                        <LinkComponent href="/creative" className="flex items..." data-cursor="link">
+                                          <a
+                                            className="flex items-center justify-between"
+                                            data-cursor="link"
+                                            ref={function}
+                                            onClick={function onClick}
+                                            onMouseEnter={function onMouseEnter}
+                                            onTouchStart={function onTouchStart}
+                                            href="/creative"
+-                                           data-cursor-element-id="cursor-el-43"
+                                          >
+                                            <span
+-                                             data-cursor-element-id="cursor-el-44"
+                                            >
++                                             Creative Studio
+                                        <LinkComponent href="/leadership" className="flex items..." data-cursor="link">
+                                          <a
+                                            className="flex items-center justify-between"
+                                            data-cursor="link"
+                                            ref={function}
+                                            onClick={function onClick}
+                                            onMouseEnter={function onMouseEnter}
+                                            onTouchStart={function onTouchStart}
+                                            href="/leadership"
+-                                           data-cursor-element-id="cursor-el-45"
+                                          >
+                                            <span
+-                                             data-cursor-element-id="cursor-el-46"
+                                            >
++                                             Leadership
+                                        <LinkComponent href="/contact" className="flex items..." data-cursor="link">
+                                          <a
+                                            className="flex items-center justify-between"
+                                            data-cursor="link"
+                                            ref={function}
+                                            onClick={function onClick}
+                                            onMouseEnter={function onMouseEnter}
+                                            onTouchStart={function onTouchStart}
+                                            href="/contact"
+-                                           data-cursor-element-id="cursor-el-47"
+                                          >
+                                            <span
+-                                             data-cursor-element-id="cursor-el-48"
+                                            >
++                                             Contact
+                                      <div
+                                        className="mt-6"
+-                                       data-cursor-element-id="cursor-el-49"
+                                      >
+                                        <LinkComponent href="/cv" className="block" data-cursor="button">
+                                          <a
+                                            className="block"
+                                            data-cursor="button"
+                                            ref={function}
+                                            onClick={function onClick}
+                                            onMouseEnter={function onMouseEnter}
+                                            onTouchStart={function onTouchStart}
+                                            href="/cv"
+-                                           data-cursor-element-id="cursor-el-50"
+                                          >
+                                            <button
+                                              className="btn-primary w-full text-xs"
+-                                             data-cursor-element-id="cursor-el-51"
+                                            >
+                                              <span
+-                                               data-cursor-element-id="cursor-el-52"
+                                              >
++                                               Download Resume
+                                ...
+                                  <motion.main initial={{opacity:0,y:12}} animate={{opacity:1,y:0}} ...>
+                                    <main
+                                      className="flex-1"
+                                      style={{opacity:0,transform:"translateY..."}}
+                                      ref={function useMotionRef.useCallback}
+-                                     data-cursor-element-id="cursor-el-53"
+                                    >
+                                      ...
+                                        <SegmentViewNode type="page" pagePath="page.tsx">
+                                          <SegmentTrieNode>
+                                          <HomePage>
+                                            <div
+                                              className="mx-auto max-w-[1200px]"
+-                                             data-cursor-element-id="cursor-el-54"
+                                            >
+                                              <HeroSection>
+                                                <section
+                                                  className="px-4 pb-6 pt-12 sm:px-6 sm:pt-16 lg:flex lg:items-center ..."
+-                                                 data-cursor-element-id="cursor-el-55"
+                                                >
+                                                  <div
+                                                    className="flex-1"
+-                                                   data-cursor-element-id="cursor-el-56"
+                                                  >
+                                                    <motion.div initial={{opacity:0,y:10, ...}} ...>
+                                                      <div
+                                                        className="inline-flex items-center gap-2 rounded-full border ..."
+                                                        data-cursor="card"
+                                                        style={{opacity:0,transform:"translateY..."}}
+                                                        ref={function useMotionRef.useCallback}
+-                                                       data-cursor-element-id="cursor-el-57"
+                                                      >
+                                                        <span
+                                                          className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-so..."
+-                                                         data-cursor-element-id="cursor-el-58"
+                                                        >
+                                                        <span
+-                                                         data-cursor-element-id="cursor-el-59"
+                                                        >
++                                                         {"Available for AI & Full Stack Work"}
+                                                    <motion.div className="mt-6 space..." initial="hidden" ...>
+                                                      <div
+                                                        className="mt-6 space-y-5"
+                                                        style={{}}
+                                                        ref={function useMotionRef.useCallback}
+-                                                       data-cursor-element-id="cursor-el-60"
+                                                      >
+                                                        <motion.h1 className="text-balan...">
+                                                          <h1
+                                                            className="text-balance text-3xl font-semibold leading-tig..."
+                                                            style={{}}
+                                                            ref={function useMotionRef.useCallback}
+-                                                           data-cursor-element-id="cursor-el-61"
+                                                          >
+                                                            <motion.span variants={{hidden:{...}, ...}} ...>
+                                                              <span
+                                                                className={"inline-block pr-1 "}
+                                                                style={{opacity:0,letterSpacing:"0.12em",transform:"translateY..."}}
+                                                                ref={function useMotionRef.useCallback}
+-                                                               data-cursor-element-id="cursor-el-62"
+                                                              >
++                                                               Full
+                                                            <motion.span variants={{hidden:{...}, ...}} ...>
+                                                              <span
+                                                                className={"inline-block pr-1 "}
+                                                                style={{opacity:0,letterSpacing:"0.12em",transform:"translateY..."}}
+                                                                ref={function useMotionRef.useCallback}
+-                                                               data-cursor-element-id="cursor-el-63"
+                                                              >
++                                                               Stack
+                                                            <motion.span variants={{hidden:{...}, ...}} ...>
+                                                              <span
+                                                                className={"inline-block pr-1 "}
+                                                                style={{opacity:0,letterSpacing:"0.12em",transform:"translateY..."}}
+                                                                ref={function useMotionRef.useCallback}
+-                                                               data-cursor-element-id="cursor-el-64"
+                                                              >
++                                                               Engineer
+                                                            <motion.span variants={{hidden:{...}, ...}} ...>
+                                                              <span
+                                                                className={"inline-block pr-1 "}
+                                                                style={{opacity:0,letterSpacing:"0.12em",transform:"translateY..."}}
+                                                                ref={function useMotionRef.useCallback}
+-                                                               data-cursor-element-id="cursor-el-65"
+                                                              >
++                                                               for
+                                                            <motion.span variants={{hidden:{...}, ...}} ...>
+                                                              <span
+                                                                className="inline-block pr-1 bg-gradient-to-r from-eme..."
+                                                                style={{opacity:0,letterSpacing:"0.12em",transform:"translateY..."}}
+                                                                ref={function useMotionRef.useCallback}
+-                                                               data-cursor-element-id="cursor-el-66"
+                                                              >
++                                                               Intelligent
+                                                            <motion.span variants={{hidden:{...}, ...}} ...>
+                                                              <span
+                                                                className={"inline-block pr-1 "}
+                                                                style={{opacity:0,letterSpacing:"0.12em",transform:"translateY..."}}
+                                                                ref={function useMotionRef.useCallback}
+-                                                               data-cursor-element-id="cursor-el-67"
+                                                              >
++                                                               Systems.
+                                                        <motion.p initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} ...>
+                                                          <p
+                                                            className="text-sm text-slate-300 sm:text-base"
+                                                            style={{opacity:0,transform:"translateY..."}}
+                                                            ref={function useMotionRef.useCallback}
+-                                                           data-cursor-element-id="cursor-el-68"
+                                                          >
++                                                           I architect scalable web systems, integrate AI where it mat...
+                                                    <motion.div initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} ...>
+                                                      <div
+                                                        className="mt-6 text-xs text-slate-400 sm:text-sm"
+                                                        style={{opacity:0,transform:"translateY..."}}
+                                                        ref={function useMotionRef.useCallback}
+-                                                       data-cursor-element-id="cursor-el-69"
+                                                      >
+                                                        <TypingText text={"Full Sta..."}>
+                                                          <span
+                                                            className="inline-flex items-center"
+-                                                           data-cursor-element-id="cursor-el-70"
+                                                          >
+                                                            <span
+-                                                             data-cursor-element-id="cursor-el-71"
+                                                            >
++                                                             
+                                                            <span
+                                                              className="typing-caret h-4"
+-                                                             data-cursor-element-id="cursor-el-72"
+                                                            >
+                                                    <motion.div initial={{opacity:0,y:8}} animate={{opacity:1,y:0}} ...>
+                                                      <div
+                                                        className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
+                                                        style={{opacity:0,transform:"translateY..."}}
+                                                        ref={function useMotionRef.useCallback}
+-                                                       data-cursor-element-id="cursor-el-73"
+                                                      >
+                                                        <MagneticButton>
+                                                          <div
+                                                            ref={{current:null}}
+                                                            onMouseMove={function handleMouseMove}
+                                                            onMouseLeave={function handleMouseLeave}
+                                                            className="transition-transform duration-250 ease-lab-ease"
+                                                            data-cursor="button"
+-                                                           data-cursor-element-id="cursor-el-74"
+                                                          >
+                                                            <button
+                                                              className="btn-primary group"
+                                                              data-cursor="button"
+-                                                             data-cursor-element-id="cursor-el-75"
+                                                            >
+                                                              <span
+-                                                               data-cursor-element-id="cursor-el-76"
+                                                              >
++                                                               View Engineering Systems
+                                                              <span
+                                                                className="inline-flex h-5 w-5 items-center justify-ce..."
+-                                                               data-cursor-element-id="cursor-el-77"
+                                                              >
++                                                               →
+                                                        <motion.a whileTap={{scale:0.96}} whileHover={{scale:1.03}} ...>
+                                                          <a
+                                                            href="/webcv.pdf"
+                                                            download={true}
+                                                            className="btn-muted"
+                                                            tabIndex={0}
+                                                            style={{}}
+                                                            ref={function useMotionRef.useCallback}
+-                                                           data-cursor-element-id="cursor-el-78"
+                                                          >
++                                                           Download Resume
+                                                  <motion.div initial={{opacity:0,y:20, ...}} ...>
+                                                    <div
+                                                      className="mt-12 flex flex-1 justify-center lg:mt-0"
+                                                      style={{opacity:0,transform:"translateY..."}}
+                                                      ref={function useMotionRef.useCallback}
+-                                                     data-cursor-element-id="cursor-el-79"
+                                                    >
+                                                      <motion.div className="relative h..." data-cursor="card" ...>
+                                                        <div
+                                                          className="relative h-56 w-56 overflow-hidden rounded-full b..."
+                                                          data-cursor="card"
+                                                          style={{}}
+                                                          ref={function useMotionRef.useCallback}
+-                                                         data-cursor-element-id="cursor-el-80"
+                                                        >
+                                                          <img
+                                                            alt="Anant Rai"
+                                                            fetchPriority={undefined}
+                                                            loading={undefined}
+                                                            width={undefined}
+                                                            height={undefined}
+                                                            decoding="async"
+                                                            data-nimg="fill"
+                                                            className="object-cover"
+                                                            style={{position:"absolute",height:"100%",width:"100%",left:0,top:0,right:0,bottom:0, ...}}
+                                                            sizes="100vw"
+                                                            srcSet={"/_next/image?url=%2Fa.jpeg&w=640&q=75 640w, /_ne..."}
+                                                            src={"/_next/image?url=%2Fa.jpeg&w=3840&q=75"}
+                                                            ref={function}
+                                                            onLoad={function onLoad}
+                                                            onError={function onError}
+-                                                           data-cursor-element-id="cursor-el-81"
+                                                          >
+                                                          ...
+                                                          <div
+                                                            className="absolute inset-0 bg-gradient-to-b from-transpar..."
+-                                                           data-cursor-element-id="cursor-el-82"
+                                                          >
+                                                          <div
+                                                            className="absolute inset-x-6 bottom-8 flex flex-col gap-1..."
+-                                                           data-cursor-element-id="cursor-el-83"
+                                                          >
+                                              <MetricStrip>
+                                                <Section className="pt-6 md:pt-4">
+                                                  <motion.section id={undefined} initial={{opacity:0,y:30}} ...>
+                                                    <section
+                                                      id={undefined}
+                                                      className="px-4 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-28 pt-6 md:..."
+                                                      style={{opacity:0,transform:"translateY..."}}
+                                                      ref={function useMotionRef.useCallback}
+-                                                     data-cursor-element-id="cursor-el-84"
+                                                    >
+                                                      <div
+                                                        className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4"
+-                                                       data-cursor-element-id="cursor-el-85"
+                                                      >
+                                                        <MetricCard metric={{id:"projects", ...}} index={0}>
+                                                          <motion.div ref={{current:null}} initial={{opacity:0,y:20}} ...>
+                                                            <div
+                                                              className="card-hover glass-surface relative flex flex-c..."
+                                                              data-cursor="card"
+                                                              style={{opacity:0,transform:"translateY..."}}
+                                                              ref={function useMotionRef.useCallback}
+-                                                             data-cursor-element-id="cursor-el-86"
+                                                            >
+                                                              <div
+                                                                className="flex items-baseline gap-1.5 text-2xl font-s..."
+-                                                               data-cursor-element-id="cursor-el-87"
+                                                              >
+                                                                <span
+-                                                                 data-cursor-element-id="cursor-el-88"
+                                                                >
++                                                                 0
+                                                                <span
+                                                                  className="text-base font-medium text-emerald-300/80"
+-                                                                 data-cursor-element-id="cursor-el-89"
+                                                                >
++                                                                 +
+                                                              <div
+                                                                className="mt-3 text-xs font-medium uppercase tracking..."
+-                                                               data-cursor-element-id="cursor-el-90"
+                                                              >
++                                                               Production-Level Projects
+                                                              <p
+                                                                className="mt-2 text-[0.74rem] leading-5 text-slate-400"
+-                                                               data-cursor-element-id="cursor-el-91"
+                                                              >
++                                                               Deployed systems across full stack, not demo apps.
+                                                        <MetricCard metric={{id:"research", ...}} index={1}>
+                                                          <motion.div ref={{current:null}} initial={{opacity:0,y:20}} ...>
+                                                            <div
+                                                              className="card-hover glass-surface relative flex flex-c..."
+                                                              data-cursor="card"
+                                                              style={{opacity:0,transform:"translateY..."}}
+                                                              ref={function useMotionRef.useCallback}
+-                                                             data-cursor-element-id="cursor-el-92"
+                                                            >
+                                                              <div
+                                                                className="flex items-baseline gap-1.5 text-2xl font-s..."
+-                                                               data-cursor-element-id="cursor-el-93"
+                                                              >
+                                                                <span
+-                                                                 data-cursor-element-id="cursor-el-94"
+                                                                >
++                                                                 0
+                                                                <span
+                                                                  className="text-base font-medium text-emerald-300/80"
+-                                                                 data-cursor-element-id="cursor-el-95"
+                                                                >
++                                                                 st
+                                                              <div
+                                                                className="mt-3 text-xs font-medium uppercase tracking..."
+-                                                               data-cursor-element-id="cursor-el-96"
+                                                              >
++                                                               Research Award
+                                                              <p
+                                                                className="mt-2 text-[0.74rem] leading-5 text-slate-400"
+-                                                               data-cursor-element-id="cursor-el-97"
+                                                              >
++                                                               Prize for applied optimization in healthcare systems.
+                                                        <MetricCard metric={{id:"hackat...", ...}} index={2}>
+                                                          <motion.div ref={{current:null}} initial={{opacity:0,y:20}} ...>
+                                                            <div
+                                                              className="card-hover glass-surface relative flex flex-c..."
+                                                              data-cursor="card"
+                                                              style={{opacity:0,transform:"translateY..."}}
+                                                              ref={function useMotionRef.useCallback}
+-                                                             data-cursor-element-id="cursor-el-98"
+                                                            >
+                                                              <div
+                                                                className="flex items-baseline gap-1.5 text-2xl font-s..."
+-                                                               data-cursor-element-id="cursor-el-99"
+                                                              >
+                                                                <span
+-                                                                 data-cursor-element-id="cursor-el-100"
+                                                                >
++                                                                 0
+                                                                <span
+                                                                  className="text-base font-medium text-emerald-300/80"
+-                                                                 data-cursor-element-id="cursor-el-101"
+                                                                >
++                                                                 +
+                                                              <div
+                                                                className="mt-3 text-xs font-medium uppercase tracking..."
+-                                                               data-cursor-element-id="cursor-el-102"
+                                                              >
++                                                               Hackathons
+                                                              <p
+                                                                className="mt-2 text-[0.74rem] leading-5 text-slate-400"
+-                                                               data-cursor-element-id="cursor-el-103"
+                                                              >
++                                                               AI, space-tech and systems-focused builds under pressure.
+                                                        <MetricCard metric={{id:"intern...", ...}} index={3}>
+                                                          <motion.div ref={{current:null}} initial={{opacity:0,y:20}} ...>
+                                                            <div
+                                                              className="card-hover glass-surface relative flex flex-c..."
+                                                              data-cursor="card"
+                                                              style={{opacity:0,transform:"translateY..."}}
+                                                              ref={function useMotionRef.useCallback}
+-                                                             data-cursor-element-id="cursor-el-104"
+                                                            >
+                                                              <div
+                                                                className="flex items-baseline gap-1.5 text-2xl font-s..."
+-                                                               data-cursor-element-id="cursor-el-105"
+                                                              >
+                                                                <span
+-                                                                 data-cursor-element-id="cursor-el-106"
+                                                                >
++                                                                 0
+                                                                <span
+                                                                  className="text-base font-medium text-emerald-300/80"
+-                                                                 data-cursor-element-id="cursor-el-107"
+                                                                >
++                                                                 +
+                                                              <div
+                                                                className="mt-3 text-xs font-medium uppercase tracking..."
+-                                                               data-cursor-element-id="cursor-el-108"
+                                                              >
++                                                               Internship Months
+                                                              <p
+                                                                className="mt-2 text-[0.74rem] leading-5 text-slate-400"
+-                                                               data-cursor-element-id="cursor-el-109"
+                                                              >
++                                                               Real-world engineering experience shipping production w...
+                                              <FeaturedWorkSection>
+                                                <Section className="pt-4">
+                                                  <motion.section id={undefined} initial={{opacity:0,y:30}} ...>
+                                                    <section
+                                                      id={undefined}
+                                                      className="px-4 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-28 pt-4"
+                                                      style={{opacity:0,transform:"translateY..."}}
+                                                      ref={function useMotionRef.useCallback}
+-                                                     data-cursor-element-id="cursor-el-110"
+                                                    >
+                                                      <div
+                                                        className="mx-auto max-w-[1200px]"
+-                                                       data-cursor-element-id="cursor-el-111"
+                                                      >
+                                                        <div
+                                                          className="mb-6 flex items-center gap-3"
+-                                                         data-cursor-element-id="cursor-el-112"
+                                                        >
+                                                          <div
+                                                            className="flex h-11 w-11 items-center justify-center roun..."
+-                                                           data-cursor-element-id="cursor-el-113"
+                                                          >
+                                                            <span
+                                                              className="text-sm font-semibold"
+-                                                             data-cursor-element-id="cursor-el-114"
+                                                            >
++                                                             ▦
+                                                          <h2
+                                                            className="text-2xl font-semibold tracking-tight text-slat..."
+-                                                           data-cursor-element-id="cursor-el-115"
+                                                          >
++                                                           Featured Work
+                                                        <div
+                                                          className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"
+-                                                         data-cursor-element-id="cursor-el-116"
+                                                        >
+                                                          <FeaturedTile icon="▤" title="Thumbnail ...">
+                                                            <div
+                                                              className="glass-surface card-hover glow-border group cu..."
+                                                              data-cursor="card"
+-                                                             data-cursor-element-id="cursor-el-117"
+                                                            >
+                                                              <div
+                                                                className="relative flex h-40 w-full items-center just..."
+-                                                               data-cursor-element-id="cursor-el-118"
+                                                              >
+                                                                <div
+                                                                  className="absolute inset-0 bg-gradient-to-t from-sl..."
+-                                                                 data-cursor-element-id="cursor-el-119"
+                                                                >
+                                                                <div
+                                                                  className="relative text-5xl text-emerald-300/50 tra..."
+-                                                                 data-cursor-element-id="cursor-el-120"
+                                                                >
++                                                                 ▤
+                                                                <div
+                                                                  className="absolute bottom-3 left-4 text-sm font-sem..."
+-                                                                 data-cursor-element-id="cursor-el-121"
+                                                                >
++                                                                 Thumbnail Design
+                                                          <FeaturedTile icon="⌬" title="Web Dev Work">
+                                                            <div
+                                                              className="glass-surface card-hover glow-border group cu..."
+                                                              data-cursor="card"
+-                                                             data-cursor-element-id="cursor-el-122"
+                                                            >
+                                                              <div
+                                                                className="relative flex h-40 w-full items-center just..."
+-                                                               data-cursor-element-id="cursor-el-123"
+                                                              >
+                                                                <div
+                                                                  className="absolute inset-0 bg-gradient-to-t from-sl..."
+-                                                                 data-cursor-element-id="cursor-el-124"
+                                                                >
+                                                                <div
+                                                                  className="relative text-5xl text-emerald-300/50 tra..."
+-                                                                 data-cursor-element-id="cursor-el-125"
+                                                                >
++                                                                 ⌬
+                                                                <div
+                                                                  className="absolute bottom-3 left-4 text-sm font-sem..."
+-                                                                 data-cursor-element-id="cursor-el-126"
+                                                                >
++                                                                 Web Dev Work
+                                                          <FeaturedTile icon="⌁" title="Android Apps">
+                                                            <div
+                                                              className="glass-surface card-hover glow-border group cu..."
+                                                              data-cursor="card"
+-                                                             data-cursor-element-id="cursor-el-127"
+                                                            >
+                                                              <div
+                                                                className="relative flex h-40 w-full items-center just..."
+-                                                               data-cursor-element-id="cursor-el-128"
+                                                              >
+                                                                <div
+                                                                  className="absolute inset-0 bg-gradient-to-t from-sl..."
+-                                                                 data-cursor-element-id="cursor-el-129"
+                                                                >
+                                                                <div
+                                                                  className="relative text-5xl text-emerald-300/50 tra..."
+-                                                                 data-cursor-element-id="cursor-el-130"
+                                                                >
++                                                                 ⌁
+                                                                <div
+                                                                  className="absolute bottom-3 left-4 text-sm font-sem..."
+-                                                                 data-cursor-element-id="cursor-el-131"
+                                                                >
++                                                                 Android Apps
+                                                          <FeaturedTile icon="⟡" title="Research Pubs">
+                                                            <div
+                                                              className="glass-surface card-hover glow-border group cu..."
+                                                              data-cursor="card"
+-                                                             data-cursor-element-id="cursor-el-132"
+                                                            >
+                                                              <div
+                                                                className="relative flex h-40 w-full items-center just..."
+-                                                               data-cursor-element-id="cursor-el-133"
+                                                              >
+                                                                <div
+                                                                  className="absolute inset-0 bg-gradient-to-t from-sl..."
+-                                                                 data-cursor-element-id="cursor-el-134"
+                                                                >
+                                                                <div
+                                                                  className="relative text-5xl text-emerald-300/50 tra..."
+-                                                                 data-cursor-element-id="cursor-el-135"
+                                                                >
++                                                                 ⟡
+                                                                <div
+                                                                  className="absolute bottom-3 left-4 text-sm font-sem..."
+-                                                                 data-cursor-element-id="cursor-el-136"
+                                                                >
++                                                                 Research Pubs
+                                              <ToolsExperienceSection>
+                                                <Section className="pt-4 pb-24">
+                                                  <motion.section id={undefined} initial={{opacity:0,y:30}} ...>
+                                                    <section
+                                                      id={undefined}
+                                                      className="px-4 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-28 pt-4 pb-24"
+                                                      style={{opacity:0,transform:"translateY..."}}
+                                                      ref={function useMotionRef.useCallback}
+-                                                     data-cursor-element-id="cursor-el-137"
+                                                    >
+                                                      <div
+                                                        className="mx-auto grid max-w-[1200px] grid-cols-1 gap-8 lg:gr..."
+-                                                       data-cursor-element-id="cursor-el-138"
+                                                      >
+                                                        <div
+                                                          className="flex flex-col gap-6 lg:col-span-4"
+-                                                         data-cursor-element-id="cursor-el-139"
+                                                        >
+                                                          <ToolGrid title="Tech Tools" items={[...]}>
+                                                            <div
+                                                              className="glass-surface card-hover glow-border rounded-..."
+-                                                             data-cursor-element-id="cursor-el-140"
+                                                            >
+                                                              <h3
+                                                                className="text-base font-semibold text-slate-50"
+-                                                               data-cursor-element-id="cursor-el-141"
+                                                              >
++                                                               Tech Tools
+                                                              <div
+                                                                className="mt-4 grid grid-cols-3 gap-3"
+-                                                               data-cursor-element-id="cursor-el-142"
+                                                              >
+                                                                <div
+                                                                  className="flex aspect-square items-center justify-c..."
+                                                                  data-cursor="card"
+-                                                                 data-cursor-element-id="cursor-el-143"
+                                                                >
++                                                                 VS Code
+                                                                <div
+                                                                  className="flex aspect-square items-center justify-c..."
+                                                                  data-cursor="card"
+-                                                                 data-cursor-element-id="cursor-el-144"
+                                                                >
++                                                                 Git
+                                                                <div
+                                                                  className="flex aspect-square items-center justify-c..."
+                                                                  data-cursor="card"
+-                                                                 data-cursor-element-id="cursor-el-145"
+                                                                >
++                                                                 Docker
+                                                                <div
+                                                                  className="flex aspect-square items-center justify-c..."
+                                                                  data-cursor="card"
+-                                                                 data-cursor-element-id="cursor-el-146"
+                                                                >
++                                                                 Figma
+                                                                <div
+                                                                  className="flex aspect-square items-center justify-c..."
+                                                                  data-cursor="card"
+-                                                                 data-cursor-element-id="cursor-el-147"
+                                                                >
++                                                                 Postman
+                                                                <div
+                                                                  className="flex aspect-square items-center justify-c..."
+                                                                  data-cursor="card"
+-                                                                 data-cursor-element-id="cursor-el-148"
+                                                                >
++                                                                 Linux
+                                                          <div
+                                                            className="glass-surface card-hover glow-border rounded-2x..."
+-                                                           data-cursor-element-id="cursor-el-149"
+                                                          >
+                                                            <h3
+                                                              className="text-base font-semibold text-slate-50"
+-                                                             data-cursor-element-id="cursor-el-150"
+                                                            >
++                                                             Dev Stack
+                                                            <div
+                                                              className="mt-4 flex flex-wrap gap-2"
+-                                                             data-cursor-element-id="cursor-el-151"
+                                                            >
+                                                              <Pill text="React">
+                                                                <span
+                                                                  className="rounded-full border border-slate-800/70 b..."
+-                                                                 data-cursor-element-id="cursor-el-152"
+                                                                >
++                                                                 React
+                                                              <Pill text="Next.js">
+                                                                <span
+                                                                  className="rounded-full border border-slate-800/70 b..."
+-                                                                 data-cursor-element-id="cursor-el-153"
+                                                                >
++                                                                 Next.js
+                                                              <Pill text="Node.js">
+                                                                <span
+                                                                  className="rounded-full border border-slate-800/70 b..."
+-                                                                 data-cursor-element-id="cursor-el-154"
+                                                                >
++                                                                 Node.js
+                                                              <Pill text="Python">
+                                                                <span
+                                                                  className="rounded-full border border-slate-800/70 b..."
+-                                                                 data-cursor-element-id="cursor-el-155"
+                                                                >
++                                                                 Python
+                                                              <Pill text="TypeScript">
+                                                                <span
+                                                                  className="rounded-full border border-slate-800/70 b..."
+-                                                                 data-cursor-element-id="cursor-el-156"
+                                                                >
++                                                                 TypeScript
+                                                              <Pill text="Tailwind">
+                                                                <span
+                                                                  className="rounded-full border border-slate-800/70 b..."
+-                                                                 data-cursor-element-id="cursor-el-157"
+                                                                >
++                                                                 Tailwind
+                                                              <Pill text="PostgreSQL">
+                                                                <span
+                                                                  className="rounded-full border border-slate-800/70 b..."
+-                                                                 data-cursor-element-id="cursor-el-158"
+                                                                >
++                                                                 PostgreSQL
+                                                          <div
+                                                            className="glass-surface card-hover glow-border rounded-2x..."
+-                                                           data-cursor-element-id="cursor-el-159"
+                                                          >
+                                                            <h3
+                                                              className="text-base font-semibold text-slate-50"
+-                                                             data-cursor-element-id="cursor-el-160"
+                                                            >
++                                                             Design Tools
+                                                            <div
+                                                              className="mt-4 flex h-20 items-center justify-center ro..."
+-                                                             data-cursor-element-id="cursor-el-161"
+                                                            >
++                                                             Illustrative Graphic
+                                                        <div
+                                                          className="glass-surface relative overflow-hidden rounded-2x..."
+-                                                         data-cursor-element-id="cursor-el-162"
+                                                        >
+                                                          <div
+                                                            className="pointer-events-none absolute right-0 top-0 h-64..."
+-                                                           data-cursor-element-id="cursor-el-163"
+                                                          >
+                                                          <div
+                                                            className="mb-8 flex items-center justify-between"
+-                                                           data-cursor-element-id="cursor-el-164"
+                                                          >
+                                                            <h2
+                                                              className="text-3xl font-semibold tracking-tight text-sl..."
+-                                                             data-cursor-element-id="cursor-el-165"
+                                                            >
++                                                             Experience
+                                                            <button
+                                                              className="text-sm font-medium text-emerald-200 transiti..."
+                                                              data-cursor="link"
+-                                                             data-cursor-element-id="cursor-el-166"
+                                                            >
+                                                              <span
+                                                                className="ml-1"
+-                                                               data-cursor-element-id="cursor-el-167"
+                                                              >
++                                                               ↗
+                                                          <div
+                                                            className="relative space-y-8"
+-                                                           data-cursor-element-id="cursor-el-168"
+                                                          >
+                                                            <div
+                                                              className="absolute left-5 top-0 hidden h-full w-px bg-g..."
+-                                                             data-cursor-element-id="cursor-el-169"
+                                                            >
+                                                            <ExperienceItem title="Senior Ful..." org="TechCorp Inc." ...>
+                                                              <div
+                                                                className="relative flex items-start gap-4 is-active"
+-                                                               data-cursor-element-id="cursor-el-170"
+                                                              >
+                                                                <div
+                                                                  className="z-10 mt-1 flex h-10 w-10 items-center jus..."
+-                                                                 data-cursor-element-id="cursor-el-171"
+                                                                >
+                                                                  <span
+                                                                    className="text-sm text-emerald-100"
+-                                                                   data-cursor-element-id="cursor-el-172"
+                                                                  >
++                                                                   ◆
+                                                                <div
+                                                                  className="glass-surface card-hover glow-border flex..."
+-                                                                 data-cursor-element-id="cursor-el-173"
+                                                                >
+                                                                  <div
+                                                                    className="flex flex-col gap-1 sm:flex-row sm:item..."
+-                                                                   data-cursor-element-id="cursor-el-174"
+                                                                  >
+                                                                    <p
+                                                                      className="font-semibold text-slate-50"
+-                                                                     data-cursor-element-id="cursor-el-175"
+                                                                    >
++                                                                     Senior Full Stack Engineer
+                                                                    <time
+                                                                      className="text-xs text-slate-500"
+-                                                                     data-cursor-element-id="cursor-el-176"
+                                                                    >
++                                                                     2023 – Present
+                                                                  <p
+                                                                    className="mt-1 text-sm font-medium text-emerald-200"
+-                                                                   data-cursor-element-id="cursor-el-177"
+                                                                  >
++                                                                   TechCorp Inc.
+                                                                  <p
+                                                                    className="mt-2 text-sm leading-relaxed text-slate..."
+-                                                                   data-cursor-element-id="cursor-el-178"
+                                                                  >
++                                                                   Leading scalable architectures and AI-integrated se...
+                                                            <ExperienceItem title="Research A..." org="AI Innovat..." ...>
+                                                              <div
+                                                                className={"relative flex items-start gap-4 "}
+-                                                               data-cursor-element-id="cursor-el-179"
+                                                              >
+                                                                <div
+                                                                  className={"z-10 mt-1 flex h-10 w-10 items-center j..."}
+-                                                                 data-cursor-element-id="cursor-el-180"
+                                                                >
+                                                                  <span
+                                                                    className="text-sm text-emerald-300/70"
+-                                                                   data-cursor-element-id="cursor-el-181"
+                                                                  >
++                                                                   ◆
+                                                                <div
+                                                                  className="glass-surface card-hover glow-border flex..."
+-                                                                 data-cursor-element-id="cursor-el-182"
+                                                                >
+                                                                  <div
+                                                                    className="flex flex-col gap-1 sm:flex-row sm:item..."
+-                                                                   data-cursor-element-id="cursor-el-183"
+                                                                  >
+                                                                    <p
+                                                                      className="font-semibold text-slate-50"
+-                                                                     data-cursor-element-id="cursor-el-184"
+                                                                    >
++                                                                     Research Assistant
+                                                                    <time
+                                                                      className="text-xs text-slate-500"
+-                                                                     data-cursor-element-id="cursor-el-185"
+                                                                    >
++                                                                     2021 – 2023
+                                                                  <p
+                                                                    className="mt-1 text-sm font-medium text-emerald-200"
+-                                                                   data-cursor-element-id="cursor-el-186"
+                                                                  >
++                                                                   AI Innovation Lab
+                                                                  <p
+                                                                    className="mt-2 text-sm leading-relaxed text-slate..."
+-                                                                   data-cursor-element-id="cursor-el-187"
+                                                                  >
++                                                                   Research on generative models and decision systems....
+                                                            <ExperienceItem title="Creative T..." org="Design Stu..." ...>
+                                                              <div
+                                                                className={"relative flex items-start gap-4 "}
+-                                                               data-cursor-element-id="cursor-el-188"
+                                                              >
+                                                                <div
+                                                                  className={"z-10 mt-1 flex h-10 w-10 items-center j..."}
+-                                                                 data-cursor-element-id="cursor-el-189"
+                                                                >
+                                                                  <span
+                                                                    className="text-sm text-emerald-300/70"
+-                                                                   data-cursor-element-id="cursor-el-190"
+                                                                  >
++                                                                   ◆
+                                                                <div
+                                                                  className="glass-surface card-hover glow-border flex..."
+-                                                                 data-cursor-element-id="cursor-el-191"
+                                                                >
+                                                                  <div
+                                                                    className="flex flex-col gap-1 sm:flex-row sm:item..."
+-                                                                   data-cursor-element-id="cursor-el-192"
+                                                                  >
+                                                                    <p
+                                                                      className="font-semibold text-slate-50"
+-                                                                     data-cursor-element-id="cursor-el-193"
+                                                                    >
++                                                                     Creative Technologist Intern
+                                                                    <time
+                                                                      className="text-xs text-slate-500"
+-                                                                     data-cursor-element-id="cursor-el-194"
+                                                                    >
++                                                                     2020 – 2021
+                                                                  <p
+                                                                    className="mt-1 text-sm font-medium text-emerald-200"
+-                                                                   data-cursor-element-id="cursor-el-195"
+                                                                  >
++                                                                   Design Studio X
+                                                                  <p
+                                                                    className="mt-2 text-sm leading-relaxed text-slate..."
+-                                                                   data-cursor-element-id="cursor-el-196"
+                                                                  >
++                                                                   Built interactive web experiences with WebGL/Three....
+                                        ...
+                                <Footer>
+                                  <footer
+                                    className="border-t border-slate-800/70 bg-slate-950/80 py-5 text-xs text-slate-50..."
+-                                   data-cursor-element-id="cursor-el-197"
+                                  >
+                                    <div
+                                      className="mx-auto flex max-w-6xl flex-col gap-3 px-4 sm:flex-row sm:items-cente..."
+-                                     data-cursor-element-id="cursor-el-198"
+                                    >
+                                      <p
+                                        className="text-[0.7rem]"
+-                                       data-cursor-element-id="cursor-el-199"
+                                      >
++                                       Built as an AI lab style portfolio — focusing on systems, not vanity.
+                                      <p
+                                        className="text-[0.7rem]"
+-                                       data-cursor-element-id="cursor-el-200"
+                                      >
++                                       Designed with responsive, performance-first motion and modular architecture.
+                  ...
+
+[00:12:44.570] Browser WARN    Image with src "/a.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:14:00.733] Server  LOG     ✓ Compiled in 238ms
+[00:15:46.321] Server  LOG     ✓ Compiled in 202ms
+[00:15:48.288] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:15:48.642] Browser WARN    Image with src "/a.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:20:32.742] Server  LOG     ✓ Compiled in 104ms
+[00:20:38.427] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:20:38.749] Browser WARN    Image with src "/a.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[00:23:48.708] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:23:51.196] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:23:54.338] Browser WARN    Image with src "/a.jpeg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
