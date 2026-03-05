@@ -56,9 +56,40 @@ export default function ContactPage() {
               Direct Channels
             </p>
             <ul className="mt-3 space-y-2">
-              <li>Email: your.email@example.com</li>
-              <li>GitHub: github.com/your-handle</li>
-              <li>LinkedIn: linkedin.com/in/your-handle</li>
+              <li>
+                Email:{" "}
+                <a
+                  href="mailto:anantrai0809@gmail.com"
+                  className="text-emerald-200 hover:text-emerald-100"
+                  data-cursor="link"
+                >
+                  anantrai0809@gmail.com
+                </a>
+              </li>
+              <li>
+                GitHub:{" "}
+                <a
+                  href="https://github.com/Anant-4-code"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-emerald-200 hover:text-emerald-100"
+                  data-cursor="link"
+                >
+                  github.com/Anant-4-code
+                </a>
+              </li>
+              <li>
+                LinkedIn:{" "}
+                <a
+                  href="https://www.linkedin.com/feed/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-emerald-200 hover:text-emerald-100"
+                  data-cursor="link"
+                >
+                  linkedin.com
+                </a>
+              </li>
             </ul>
           </div>
         </div>
