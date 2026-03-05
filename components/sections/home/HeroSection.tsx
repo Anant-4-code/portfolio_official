@@ -126,6 +126,47 @@ export function HeroSection() {
             Download Resume
           </motion.a>
         </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, delay: 0.5 }}
+          className="mt-4 flex flex-wrap gap-2"
+        >
+          <motion.a
+            whileTap={{ scale: 0.96 }}
+            whileHover={{ scale: 1.03 }}
+            href="mailto:anantrai0809@gmail.com"
+            className="btn-muted"
+            data-cursor="link"
+          >
+            anantrai0809@gmail.com
+          </motion.a>
+
+          <motion.a
+            whileTap={{ scale: 0.96 }}
+            whileHover={{ scale: 1.03 }}
+            href="https://www.linkedin.com/feed/"
+            target="_blank"
+            rel="noreferrer"
+            className="btn-muted"
+            data-cursor="link"
+          >
+            LinkedIn
+          </motion.a>
+
+          <motion.a
+            whileTap={{ scale: 0.96 }}
+            whileHover={{ scale: 1.03 }}
+            href="https://github.com/Anant-4-code"
+            target="_blank"
+            rel="noreferrer"
+            className="btn-muted"
+            data-cursor="link"
+          >
+            GitHub
+          </motion.a>
+        </motion.div>
       </div>
 
       {/* RIGHT IMAGE SECTION */}
