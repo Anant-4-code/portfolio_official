@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/HP/Downloads/Portfolio/components/ui/Section.tsx"],"sourcesContent":["\"use client\";\r\n\r\nimport { ReactNode } from \"react\";\r\nimport { motion } from \"framer-motion\";\r\n\r\ninterface SectionProps {\r\n  id?: string;\r\n  children: ReactNode;\r\n  className?: string;\r\n}\r\n\r\nexport function Section({ id, children, className }: SectionProps) {\r\n  return (\r\n    <motion.section\r\n      id={id}\r\n      initial={{ opacity: 0, y: 30 }}\r\n      whileInView={{ opacity: 1, y: 0 }}\r\n      viewport={{ once: true, amount: 0.2 }}\r\n      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}\r\n      className={`px-4 py-16 sm:px-6 md:py-20 lg:px-8 lg:py-28 ${className ?? \"\"}`}\r\n    >\r\n      {children}\r\n    </motion.section>\r\n  );\r\n}\r\n\r\n"],"names":[],"mappings":";;;;;AAGA;AAHA;;;AAWO,SAAS,QAAQ,EAAE,EAAE,EAAE,QAAQ,EAAE,SAAS,EAAgB;IAC/D,qBACE,8OAAC,oMAAM,CAAC,OAAO;QACb,IAAI;QACJ,SAAS;YAAE,SAAS;YAAG,GAAG;QAAG;QAC7B,aAAa;YAAE,SAAS;YAAG,GAAG;QAAE;QAChC,UAAU;YAAE,MAAM;YAAM,QAAQ;QAAI;QACpC,YAAY;YAAE,UAAU;YAAK,MAAM;gBAAC;gBAAK;gBAAG;gBAAK;aAAE;QAAC;QACpD,WAAW,CAAC,6CAA6C,EAAE,aAAa,IAAI;kBAE3E;;;;;;AAGP"}}]
-}

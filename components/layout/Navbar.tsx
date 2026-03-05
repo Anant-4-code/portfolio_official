@@ -81,15 +81,16 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <Link
-              href="/cv"
+            <a
+              href="/webcv.pdf"
               className="hidden text-[0.78rem] font-medium text-slate-200 md:inline-flex"
               data-cursor="button"
+              download
             >
               <span className="btn-muted">
                 <span>Download Resume</span>
               </span>
-            </Link>
+            </a>
 
             <button
               type="button"
@@ -151,15 +152,16 @@ export function Navbar() {
           </nav>
 
           <div className="mt-6">
-            <Link
-              href="/cv"
+            <a
+              href="/webcv.pdf"
               className="block"
               data-cursor="button"
+              download
             >
-              <button className="btn-primary w-full text-xs">
+              <button className="btn-primary w-full text-xs" type="button">
                 <span>Download Resume</span>
               </button>
-            </Link>
+            </a>
           </div>
         </div>
       </motion.div>

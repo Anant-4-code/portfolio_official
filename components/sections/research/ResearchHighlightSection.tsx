@@ -58,14 +58,26 @@ export function ResearchHighlightSection() {
             <p className="mt-3 text-center text-[0.72rem] italic text-slate-500">
               Figure: Hybrid OR system schematic (conceptual)
             </p>
-            <div className="mt-4 flex justify-center">
+            <div className="mt-4 flex flex-wrap justify-center gap-3">
               <a
-                href="#"
+                href="https://iejse.com/journals/index.php/iejse/article/view/219"
                 className="btn-primary"
                 data-cursor="button"
+                target="_blank"
+                rel="noreferrer"
               >
                 Read Full Paper
                 <span className="text-base leading-none">→</span>
+              </a>
+              <a
+                href="/01-Sapna%20Bhusare%20-%20Online%20-%20IEJSE4515223995.pdf"
+                className="btn-muted"
+                data-cursor="button"
+                target="_blank"
+                rel="noreferrer"
+              >
+                PDF Preview
+                <span className="text-base leading-none">↗</span>
               </a>
             </div>
           </div>

@@ -54,15 +54,32 @@ export function MobileSection() {
                   <TechTag key={t} label={t} />
                 ))}
               </div>
-              <div className="mt-4">
-                {(p.links ?? []).slice(0, 1).map((link) => (
+              <div className="mt-4 flex items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  {(p.links ?? []).slice(0, 1).map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      className="text-sm font-medium text-emerald-200 transition-colors duration-250 ease-lab-ease hover:text-emerald-100"
+                      data-cursor="link"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+                {(p.links ?? []).slice(1, 2).map((link) => (
                   <a
                     key={link.label}
                     href={link.href}
-                    className="text-sm font-medium text-emerald-200 transition-colors duration-250 ease-lab-ease hover:text-emerald-100"
-                    data-cursor="link"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-gradient-to-r from-white/12 via-white/6 to-transparent px-3 py-1.5 text-xs font-semibold text-emerald-200 shadow-sm backdrop-blur-md transition-all duration-250 ease-lab-ease hover:border-emerald-400/35 hover:text-emerald-100 hover:shadow-md hover:shadow-emerald-500/20"
+                    data-cursor="button"
+                    target="_blank"
+                    rel="noreferrer"
                   >
-                    {link.label}
+                    <span>{link.label}</span>
+                    <span className="text-base leading-none">↗</span>
                   </a>
                 ))}
               </div>

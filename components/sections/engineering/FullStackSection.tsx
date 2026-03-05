@@ -35,12 +35,31 @@ export function FullStackSection() {
 
             <div className="relative h-48 w-full overflow-hidden">
               <div className="absolute inset-0 z-10 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
-              <div
-                className="h-full w-full transition-transform duration-450 ease-lab-ease group-hover:scale-[1.03]"
-                style={{
-                  backgroundImage: project.heroImage ?? undefined
-                }}
-              />
+              {project.previewUrl ? (
+                <>
+                  <div
+                    className="absolute inset-0 bg-slate-950"
+                    style={{
+                      backgroundImage: project.heroImage ?? undefined
+                    }}
+                  />
+                  <iframe
+                    className="absolute inset-0 h-full w-full origin-top-left scale-[0.85] transition-transform duration-450 ease-lab-ease group-hover:scale-[0.88] pointer-events-none"
+                    src={project.previewUrl}
+                    title={`${project.title} preview`}
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                    sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+                  />
+                </>
+              ) : (
+                <div
+                  className="h-full w-full transition-transform duration-450 ease-lab-ease group-hover:scale-[1.03]"
+                  style={{
+                    backgroundImage: project.heroImage ?? undefined
+                  }}
+                />
+              )}
 
               {project.badges?.length ? (
                 <div className="absolute right-4 top-4 z-20 flex gap-2">
@@ -96,6 +115,8 @@ export function FullStackSection() {
                         href={link.href}
                         className="text-slate-400 transition-colors duration-250 ease-lab-ease hover:text-slate-100"
                         data-cursor="link"
+                        target="_blank"
+                        rel="noreferrer"
                       >
                         {link.label}
                       </a>
@@ -105,8 +126,10 @@ export function FullStackSection() {
                     <a
                       key={link.label}
                       href={link.href}
-                      className="inline-flex items-center gap-1 font-medium text-emerald-200 transition-colors duration-250 ease-lab-ease hover:text-emerald-100"
+                      className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-gradient-to-r from-white/12 via-white/6 to-transparent px-3 py-1.5 font-medium text-emerald-200 shadow-sm backdrop-blur-md transition-all duration-250 ease-lab-ease hover:border-emerald-400/30 hover:text-emerald-100 hover:shadow-md hover:shadow-emerald-500/10"
                       data-cursor="link"
+                      target="_blank"
+                      rel="noreferrer"
                     >
                       <span>{link.label}</span>
                       <span className="text-base leading-none">↗</span>
