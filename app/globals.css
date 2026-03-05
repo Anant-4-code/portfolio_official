@@ -205,6 +205,7 @@ body {
   width: 4px;
   height: 4px;
   background-color: #4dae91;
+  box-shadow: 0 0 18px rgba(77, 174, 145, 0.7);
 }
 
 .cursor-ring {
@@ -212,6 +213,7 @@ body {
   height: 30px;
   border: 1px solid rgba(77, 174, 145, 0.9);
   background-color: transparent;
+  box-shadow: 0 0 14px rgba(77, 174, 145, 0.25);
   transition:
     width 250ms cubic-bezier(0.4, 0, 0.2, 1),
     height 250ms cubic-bezier(0.4, 0, 0.2, 1),
@@ -230,23 +232,37 @@ body {
 .cursor-ring--link {
   width: 45px;
   height: 45px;
-  box-shadow: 0 0 32px rgba(77, 174, 145, 0.55);
-  background-color: rgba(16, 185, 129, 0.12);
+  box-shadow:
+    0 0 38px rgba(77, 174, 145, 0.7),
+    0 0 90px rgba(77, 174, 145, 0.25);
+  background-color: rgba(16, 185, 129, 0.16);
 }
 
 .cursor-ring--button {
   width: 40px;
   height: 40px;
-  background-color: rgba(16, 185, 129, 0.3);
-  box-shadow: 0 0 32px rgba(77, 174, 145, 0.75);
+  background-color: rgba(16, 185, 129, 0.34);
+  box-shadow:
+    0 0 42px rgba(77, 174, 145, 0.85),
+    0 0 110px rgba(77, 174, 145, 0.28);
 }
 
 .cursor-ring--card {
   width: 52px;
   height: 52px;
   border-color: rgba(165, 243, 198, 0.8);
-  box-shadow: 0 0 40px rgba(165, 243, 198, 0.7);
-  background-color: rgba(15, 23, 42, 0.4);
+  box-shadow:
+    0 0 52px rgba(165, 243, 198, 0.78),
+    0 0 140px rgba(77, 174, 145, 0.22);
+  background-color: rgba(15, 23, 42, 0.42);
+}
+
+.cursor-glow {
+  box-shadow:
+    0 0 65px rgba(77, 174, 145, 0.9),
+    0 0 180px rgba(77, 174, 145, 0.35),
+    0 0 220px rgba(16, 185, 129, 0.15) !important;
+  border-color: rgba(165, 243, 198, 0.95) !important;
 }
 
 .typing-caret {

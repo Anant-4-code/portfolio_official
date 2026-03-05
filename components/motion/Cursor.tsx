@@ -8,6 +8,8 @@ export function Cursor() {
   const dotRef = useRef<HTMLDivElement | null>(null);
   const ringRef = useRef<HTMLDivElement | null>(null);
   const [mode, setMode] = useState<CursorMode>("default");
+  const [isMoving, setIsMoving] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
     const dot = dotRef.current;
@@ -23,6 +25,9 @@ export function Cursor() {
     const handleMove = (event: MouseEvent) => {
       targetX = event.clientX;
       targetY = event.clientY;
+      setIsMoving(true);
+      clearTimeout(moveTimeout);
+      moveTimeout = window.setTimeout(() => setIsMoving(false), 150);
 
       const target = event.target as HTMLElement | null;
       if (!target) return;
@@ -34,6 +39,8 @@ export function Cursor() {
       else if (cursorAttr === "card") setMode("card");
       else setMode("default");
     };
+
+    let moveTimeout: number;
 
     const render = () => {
       // Slight trailing for ring
@@ -49,9 +56,20 @@ export function Cursor() {
     window.addEventListener("mousemove", handleMove);
     rafId = window.requestAnimationFrame(render);
 
+    const handleScroll = () => {
+      setIsScrolling(true);
+      clearTimeout(scrollTimeout);
+      scrollTimeout = window.setTimeout(() => setIsScrolling(false), 200);
+    };
+    let scrollTimeout: number;
+    window.addEventListener("scroll", handleScroll);
+
     return () => {
       window.removeEventListener("mousemove", handleMove);
+      window.removeEventListener("scroll", handleScroll);
       window.cancelAnimationFrame(rafId);
+      clearTimeout(moveTimeout);
+      clearTimeout(scrollTimeout);
     };
   }, []);
 
@@ -64,10 +82,12 @@ export function Cursor() {
       ? "cursor-ring--card"
       : "";
 
+  const glowClass = (isMoving || isScrolling) ? "cursor-glow" : "";
+
   return (
     <>
       <div ref={dotRef} className="cursor-dot" />
-      <div ref={ringRef} className={`cursor-ring ${ringModeClass}`} />
+      <div ref={ringRef} className={`cursor-ring ${ringModeClass} ${glowClass}`} />
     </>
   );
 }
