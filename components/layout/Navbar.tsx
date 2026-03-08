@@ -51,10 +51,10 @@ export function Navbar() {
             data-cursor="link"
           >
             <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/20 text-xs font-bold text-emerald-200 ring-1 ring-emerald-400/50">
-              AI
+              MY
             </span>
             <span className="hidden text-xs uppercase tracking-[0.2em] text-slate-400 sm:inline">
-              Lab Portfolio
+              Works
             </span>
           </Link>
 
