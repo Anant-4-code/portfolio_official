@@ -1,0 +1,129 @@
+.sticky-side-nav {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  z-index: 50;
+  pointer-events: auto;
+}
+
+.nav-dot-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.nav-dot-container:hover {
+  transform: translateX(-3px);
+}
+
+/* Comic speech bubble labels — hidden by default, only active section shows */
+.nav-comic-bubble {
+  position: absolute;
+  right: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%) translateX(8px);
+  transform-origin: right center;
+  opacity: 0;
+  pointer-events: none;
+
+  background: rgba(13, 13, 15, 0.82);
+  color: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 4px 4px 4px 0px;
+  padding: 5px 10px;
+
+  font-family: 'Bangers', cursive;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.25);
+  transition: opacity 0.2s ease, transform 0.2s ease, color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+
+/* Triangle tail pointing right toward the dot */
+.nav-comic-bubble::after {
+  content: '';
+  position: absolute;
+  right: -9px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 8px solid rgba(255, 255, 255, 0.16);
+}
+
+/* Inner white tail (layered over black to fake border) */
+.nav-comic-bubble::before {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 7px solid rgba(13, 13, 15, 0.82);
+  z-index: 1;
+}
+
+/* Active section — label visible, styled in gold */
+.nav-dot-container.active .nav-comic-bubble {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+  background: rgba(255, 229, 0, 0.96);
+  border-color: #0D0D0F;
+  color: #0D0D0F;
+}
+
+.nav-dot-container.active .nav-comic-bubble::after {
+  border-left-color: #0D0D0F;
+}
+
+.nav-dot-container.active .nav-comic-bubble::before {
+  border-left-color: rgba(255, 229, 0, 0.96);
+}
+
+/* The dot itself */
+.nav-dot {
+  width: 7px;
+  height: 7px;
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-dot-container.active .nav-dot {
+  width: 11px;
+  height: 11px;
+  background-color: #FFE500;
+  box-shadow: 0 0 8px #FFE500, 0 0 16px rgba(255, 229, 0, 0.5);
+}
+
+.nav-dot-container:hover .nav-dot {
+  transform: scale(1.5);
+  background-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+}
+
+.nav-dot-container.active:hover .nav-dot {
+  background-color: #FFE500;
+  box-shadow: 0 0 8px #FFE500, 0 0 16px rgba(255, 229, 0, 0.5);
+}
+
+@media (max-width: 1024px) {
+  .sticky-side-nav {
+    display: none;
+  }
+}

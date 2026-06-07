@@ -1,0 +1,471 @@
+/* Master Color System — Manga × Cyberpunk × Ink */
+:root {
+  --gold: #FFD60A;
+  --cyan: #00C9E0;
+  --red: #FF3B5C;
+  --green: #3DFFA0;
+  --black: #0D0D0F;
+  --ink: #131318;
+  --purple: #BF8FFF;
+  --orange: #FF7C40;
+  --gray: #888890;
+  --white: #FFFFFF;
+
+  /* Font Families */
+  --font-display: 'Bangers', cursive;
+  --font-heading: 'Bebas Neue', sans-serif;
+  --font-body: 'IBM Plex Mono', monospace;
+  --font-jp: 'Noto Sans JP', sans-serif;
+
+  /* Snappy Anime-style Animation Timings */
+  --ease-enter: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-exit: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-sharp: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Global resets */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: var(--black);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Screentone Dot Grid Background - 8% density with two overlapping layers */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px),
+    radial-gradient(rgba(255, 214, 10, 0.04) 1.8px, transparent 1.8px);
+  background-size: 9px 9px, 18px 18px;
+  background-position: 0 0, 4.5px 4.5px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.05) 1.2px, transparent 1.2px);
+  background-size: 10px 10px;
+  background-position: 5px 5px;
+  transform: rotate(45deg) scale(1.5);
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Custom Scrollbar - Manga Style */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--black);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cyan);
+}
+
+/* Structural Layout Container */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.data-matrix-backdrop {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  isolation: isolate;
+}
+
+.data-matrix-backdrop::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #0F0F0F;
+  z-index: -10;
+}
+
+.data-matrix-macro {
+  position: absolute;
+  right: 3vw;
+  top: 10vh;
+  z-index: -5;
+  writing-mode: vertical-rl;
+  font-family: var(--font-jp), sans-serif;
+  font-size: clamp(92px, 12vw, 190px);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: 0.08em;
+  color: #24282D;
+  opacity: 0.04;
+  user-select: none;
+}
+
+.data-matrix-terminal-layer {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.data-matrix-terminal-stream {
+  position: absolute;
+  writing-mode: vertical-rl;
+  font-family: var(--font-body), monospace;
+  font-size: 11px;
+  line-height: 1.35;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  color: rgba(112, 151, 174, 0.08);
+  opacity: 1;
+  animation-name: data-matrix-drift, data-matrix-flicker;
+  animation-timing-function: linear, steps(6, end);
+  animation-iteration-count: infinite, infinite;
+  will-change: transform, opacity;
+}
+
+.data-matrix-watermark-layer {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.data-matrix-id-watermark {
+  position: absolute;
+  font-family: var(--font-body), monospace;
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 229, 0, 0.10);
+  white-space: nowrap;
+  user-select: none;
+}
+
+@keyframes data-matrix-drift {
+  0% { transform: translateY(-10px); }
+  100% { transform: translateY(40px); }
+}
+
+@keyframes data-matrix-flicker {
+  0%, 100% { opacity: 0.82; }
+  9% { opacity: 0.38; }
+  11% { opacity: 0.96; }
+  28% { opacity: 0.54; }
+  31% { opacity: 0.88; }
+  66% { opacity: 0.44; }
+  69% { opacity: 0.92; }
+}
+
+/* Typography Rules */
+.bangers {
+  font-family: var(--font-display);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.bebas {
+  font-family: var(--font-heading);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.mono {
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: normal;
+  text-transform: uppercase;
+  color: var(--white);
+  letter-spacing: 2px;
+}
+
+/* Manga Panel Grid Card baseline with Snappy Anime-style interactions */
+.manga-panel {
+  background-color: var(--ink);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0px; /* Sharp corners max 4px - 0px is better for terminal */
+  padding: 32px; /* Generous Desktop Cushioning */
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.12s var(--ease-enter), 
+              box-shadow 0.12s var(--ease-enter), 
+              transform 0.12s var(--ease-enter);
+}
+
+/* Snappy Displacement Shift + Neon Glow Jump on hover */
+.manga-panel:hover {
+  border-color: var(--gold);
+  box-shadow: -4px 4px 0px var(--gold);
+  transform: translate(4px, -4px);
+}
+
+.manga-panel.cyan-hover:hover {
+  border-color: var(--cyan);
+  box-shadow: -4px 4px 0px var(--cyan);
+  transform: translate(4px, -4px);
+}
+
+.manga-panel.purple-hover:hover {
+  border-color: var(--purple);
+  box-shadow: -4px 4px 0px var(--purple);
+  transform: translate(4px, -4px);
+}
+
+/* Manga Panel Borders - SVG dashed layout */
+.border-draw-container {
+  position: relative;
+}
+
+/* Manga Crosshair Bracket decoration - starts invisible/faded and flashes in on hover */
+.corner-bracket {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--gold);
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0.15;
+  transition: transform 0.15s var(--ease-spring), border-color 0.15s ease, opacity 0.15s ease;
+}
+
+.corner-bracket.tl { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+.corner-bracket.tr { top: -2px; right: -2px; border-left: none; border-bottom: none; }
+.corner-bracket.br { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+.corner-bracket.bl { bottom: -2px; left: -2px; border-right: none; border-top: none; }
+
+.manga-panel:hover .corner-bracket {
+  transform: scale(1.1);
+  opacity: 1;
+}
+.manga-panel.cyan-hover:hover .corner-bracket {
+  border-color: var(--cyan);
+}
+.manga-panel.purple-hover:hover .corner-bracket {
+  border-color: var(--purple);
+}
+
+/* CRT monitor scan lines filter overlay */
+.scanlines-overlay {
+  position: relative;
+}
+.scanlines-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0.40) 2px,
+    rgba(0, 0, 0, 0) 4px
+  );
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.scanlines-overlay:hover::after {
+  opacity: 1;
+}
+
+/* Japanese Background Watermarks (Manga ambiance) */
+.manga-watermark {
+  position: absolute;
+  font-family: var(--font-jp);
+  font-weight: 900;
+  color: var(--white);
+  opacity: 0.04;
+  font-size: 15vw;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  white-space: nowrap;
+}
+
+.watermark-vertical {
+  writing-mode: vertical-rl;
+  font-size: 10vw;
+}
+
+/* Speed lines effect template */
+.speed-lines-bg {
+  position: relative;
+}
+.speed-lines-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-conic-gradient(
+    from 0deg,
+    transparent 0deg 3deg,
+    rgba(255, 255, 255, 0.04) 4deg 5deg,
+    transparent 6deg 10deg
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Floating Action labels */
+.action-label-floating {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: var(--white);
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 2;
+  animation: float-sine 4s ease-in-out infinite;
+}
+
+@keyframes float-sine {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(1deg); }
+}
+
+/* Highlight style */
+mark.manga-highlight {
+  background: transparent;
+  color: inherit;
+  border-bottom: 2px solid var(--cyan);
+  padding-bottom: 1px;
+}
+mark.manga-highlight.gold {
+  border-bottom-color: var(--gold);
+}
+mark.manga-highlight.purple {
+  border-bottom-color: var(--purple);
+}
+
+/* Target Cursor targeting selector class */
+.cursor-target {
+  cursor: none !important;
+}
+
+/* Global native pointer suppression */
+html, body, a, button, input, textarea, select, .project-modal-container, .modal-backdrop {
+  cursor: none !important;
+}
+
+/* RPG Skills Tier colors */
+.tier-s { color: var(--gold); border-color: var(--gold); }
+.tier-aplus { color: var(--cyan); border-color: var(--cyan); }
+.tier-a { color: var(--purple); border-color: var(--purple); }
+.tier-bplus { color: var(--orange); border-color: var(--orange); }
+
+/* Animation Utility classes */
+.ease-enter { transition-timing-function: var(--ease-enter); }
+.ease-exit { transition-timing-function: var(--ease-exit); }
+.ease-spring { transition-timing-function: var(--ease-spring); }
+.ease-sharp { transition-timing-function: var(--ease-sharp); }
+
+/* Mecha Flicker Animation for Button Hover */
+@keyframes mechaFlicker {
+  0% { opacity: 0.3; filter: hue-rotate(0deg); }
+  10% { opacity: 1; }
+  20% { opacity: 0.6; }
+  30% { opacity: 1; }
+  55% { opacity: 0.4; }
+  60% { opacity: 1; }
+  100% { opacity: 1; filter: hue-rotate(10deg); }
+}
+
+.animate-mecha-flicker {
+  animation: mechaFlicker 0.28s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+/* Hardware Glitch Strike Animation for Premium Resume Button */
+@keyframes hardwareGlitchStrike {
+  0% { 
+    opacity: 0.8;
+    background-color: rgba(255, 229, 0, 0.08);
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1;
+    background-color: transparent;
+    transform: scale(1.02);
+  }
+  100% { 
+    opacity: 0.9;
+    background-color: rgba(255, 229, 0, 0.15);
+    transform: scale(1);
+  }
+}
+
+/* Section Dividers with military coordinates & dotted lines */
+.layout-divider {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  height: 1px;
+  border-top: 1px dashed rgba(255, 214, 10, 0.2);
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.layout-divider-label {
+  font-family: var(--font-body);
+  font-size: 8px;
+  color: rgba(255, 214, 10, 0.4);
+  letter-spacing: 2px;
+  background-color: var(--black);
+  padding: 0 8px;
+  position: relative;
+  top: -6px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  :root {
+    --section-min-height: auto;
+  }
+  .manga-panel {
+    padding: 16px; /* Mobile Internal Cushioning */
+  }
+  .layout-divider {
+    padding: 0 16px;
+  }
+  /* NOTE: Do NOT add a blanket section{} override here —
+     each section controls its own mobile padding via component-level CSS */
+}
