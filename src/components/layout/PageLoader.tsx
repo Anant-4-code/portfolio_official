@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 // Specialized text component utilizing your portfolio typography tokens
-const FuzzyText = ({ children, fontSize = "54px", fontWeight = 900, fontFamily = "Bangers", color = "#FFE500" }) => {
+const FuzzyText = ({ children, fontSize = "54px", fontWeight = 900, fontFamily = "Bangers", color = "#FFE500" }: { children: React.ReactNode; fontSize?: string; fontWeight?: number; fontFamily?: string; color?: string }) => {
   return (
     <span style={{ fontSize, fontWeight, fontFamily, color, textTransform: 'uppercase', letterSpacing: '2px' }}>
       {children}

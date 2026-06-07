@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function CyberBackgroundMatrix() {
   // Array of highly specific mecha-terminal telemetry strings to scatter across layout empty zones
   const terminalLogsColumnA = [
