@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function PremiumResumeButton({ resumeUrl = "/img/resume.pdf" }) {
   return (
     <a

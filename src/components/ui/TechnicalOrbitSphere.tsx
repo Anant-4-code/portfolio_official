@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 export function TechnicalOrbitSphere() {
   // Refined Tech Stack Array (Valid Simple Icons Slugs Only)
@@ -17,7 +17,7 @@ export function TechnicalOrbitSphere() {
 
   const [rotation, setRotation] = useState({ x: 20, y: 20 });
   const [isHovered, setIsHovered] = useState(false);
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const iconUrls = Array.from(new Set(techSlugs)).map(slug => ({
     slug,
@@ -39,7 +39,7 @@ export function TechnicalOrbitSphere() {
   }, [isHovered]);
 
   // STABILIZED MOUSE INTERACTION
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent) => {
     setIsHovered(true);
     const container = containerRef.current;
     if (!container) return;
