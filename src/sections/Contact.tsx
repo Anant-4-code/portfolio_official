@@ -209,7 +209,6 @@ const Contact: React.FC = () => {
                       border: '2px solid var(--black)',
                       fontSize: '18px',
                       letterSpacing: '3px',
-                      cursor: 'none',
                       width: '100%',
                       transition: 'background-color 0.2s ease, box-shadow 0.1s ease',
                       boxShadow: '3px 3px 0 rgba(0,0,0,0.5)'
@@ -287,7 +286,6 @@ const Contact: React.FC = () => {
                       backgroundColor: hoveredLink === link.label ? link.color + '12' : 'rgba(255,255,255,0.02)',
                       textDecoration: 'none',
                       transition: 'all 0.1s var(--ease-sharp)',
-                      cursor: 'none',
                       transform: hoveredLink === link.label ? 'translateX(4px)' : 'translateX(0)'
                     }}
                   >
@@ -357,9 +355,32 @@ const Contact: React.FC = () => {
           </div>
 
           {/* Center — copyright */}
-          <div className="footer-center">
-            <span className="bangers" style={{ fontSize: '16px', color: 'var(--gold)', letterSpacing: '2px' }}>AR</span>
-            <div style={{ fontFamily: 'var(--font-body)', fontSize: '8px', color: 'rgba(255,255,255,0.3)', letterSpacing: '1px', marginTop: '4px' }}>
+          <div className="footer-center" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <span className="bangers" style={{ fontSize: '18px', color: 'var(--gold)', letterSpacing: '2px' }}>AR</span>
+            
+            {/* Manga Colophon credits strip */}
+            <div style={{
+              border: '1.5px solid rgba(255, 214, 10, 0.3)',
+              padding: '12px 18px',
+              fontFamily: 'monospace',
+              fontSize: '8.5px',
+              color: 'rgba(255, 255, 255, 0.6)',
+              backgroundColor: 'rgba(13, 13, 15, 0.8)',
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '6px 14px',
+              maxWidth: '380px',
+              marginTop: '10px',
+              textAlign: 'left',
+              boxShadow: '3px 3px 0px rgba(0,0,0,0.5)'
+            }}>
+              <div>• AUTHOR: ANANT RAI</div>
+              <div>• VOL: 01 // SHONEN ARC</div>
+              <div>• STATUS: OPTIMAL</div>
+              <div>• TO BE CONTINUED...</div>
+            </div>
+            
+            <div style={{ fontFamily: 'var(--font-body)', fontSize: '8px', color: 'rgba(255,255,255,0.3)', letterSpacing: '1px', marginTop: '12px' }}>
               DESIGNED & ENGINEERED BY ANANT RAI // {new Date().getFullYear()}
             </div>
           </div>
@@ -389,7 +410,7 @@ const Contact: React.FC = () => {
           max-width: 1080px;
           margin: 0 auto;
           width: 100%;
-          padding: 80px 40px 0;
+          padding: 120px 40px 0;
           position: relative;
           z-index: 2;
         }
@@ -428,7 +449,7 @@ const Contact: React.FC = () => {
         /* Terminal Footer */
         .terminal-footer {
           position: relative;
-          margin-top: 60px;
+          margin-top: 120px;
           z-index: 3;
         }
 

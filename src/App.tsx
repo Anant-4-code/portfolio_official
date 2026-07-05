@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import './index.css';
 
 // Layout
@@ -89,7 +89,6 @@ const DataMatrixBackdrop: React.FC = () => (
   </div>
 );
 
-// Structural divider tag helper
 const SectionDivider: React.FC<{ tag: string }> = ({ tag }) => (
   <div className="layout-divider">
     <span className="layout-divider-label">
@@ -104,26 +103,23 @@ const SectionDivider: React.FC<{ tag: string }> = ({ tag }) => (
 function App() {
   const [loaded, setLoaded] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const mainRef = useRef<HTMLElement>(null);
 
+  // Pure IntersectionObserver active section tracking — no scroll position math
   useEffect(() => {
     if (!loaded) return;
 
     const observers: IntersectionObserver[] = [];
-
-    // Debounce rapid section changes to prevent flickering
     let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+
     const debouncedSetActive = (sectionId: string) => {
       if (debounceTimer) clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(() => {
-        setActiveSection(sectionId);
-      }, 100);
+      debounceTimer = setTimeout(() => setActiveSection(sectionId), 80);
     };
 
     const handleIntersect = (entries: IntersectionObserverEntry[]) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          debouncedSetActive(entry.target.id);
-        }
+        if (entry.isIntersecting) debouncedSetActive(entry.target.id);
       });
     };
 
@@ -134,7 +130,7 @@ function App() {
           const observer = new IntersectionObserver(handleIntersect, {
             root: null,
             rootMargin: '-30% 0px -50% 0px',
-            threshold: [0, 0.1, 0.5, 1.0]
+            threshold: 0
           });
           observer.observe(element);
           observers.push(observer);
@@ -144,15 +140,14 @@ function App() {
 
     return () => {
       clearTimeout(timer);
+      if (debounceTimer) clearTimeout(debounceTimer);
       observers.forEach(obs => obs.disconnect());
     };
   }, [loaded]);
 
   const handleNavigate = useCallback((sectionId: string) => {
     const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (element) element.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
   return (
@@ -168,24 +163,18 @@ function App() {
       <Navbar activeSection={activeSection} onNavigate={handleNavigate} />
       <StickySideNav activeSection={activeSection} onNavigate={handleNavigate} />
 
-      <main style={{ position: 'relative', zIndex: 2 }}>
+      <main ref={mainRef} style={{ position: 'relative', zIndex: 2 }}>
         <Hero onNavigate={handleNavigate} />
-
         <SectionDivider tag="[SYS_REF // CHAR_SHEET_01]" />
         <Skills />
-
         <SectionDivider tag="[SYS_REF // MISS_ARCHIVE_02]" />
         <Projects />
-
         <SectionDivider tag="[SYS_REF // BTL_CHRONICLE_03]" />
         <Experience />
-
         <SectionDivider tag="[SYS_REF // SYS_SCHEMATICS_04]" />
         <Research />
-
         <SectionDivider tag="[SYS_REF // FEAT_STRENGTH_05]" />
         <Achievements />
-
         <SectionDivider tag="[SYS_REF // TO_BE_CONTINUED_06]" />
         <Contact />
       </main>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import GlitchText from '../components/ui/GlitchText';
 import TiltCard from '../components/ui/TiltCard';
@@ -154,14 +154,310 @@ const tierLabel: Record<string, string> = {
   COMMON: '★★'
 };
 
+// Shifting ASCII/matrix characters generator
+const AsciiCamouflage: React.FC<{ opacity: number; color: string }> = ({ opacity, color }) => {
+  const [staticText, setStaticText] = useState('');
+
+  useEffect(() => {
+    const symbols = "01$#@%&?*+-=<>{}[]/\\|X";
+    const makeText = () => {
+      let res = '';
+      for (let r = 0; r < 7; r++) {
+        let line = '';
+        for (let c = 0; c < 28; c++) {
+          line += symbols[Math.floor(Math.random() * symbols.length)];
+        }
+        res += line + '\n';
+      }
+      return res;
+    };
+
+    setStaticText(makeText());
+    const interval = setInterval(() => {
+      setStaticText(makeText());
+    }, 110);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <pre
+      style={{
+        position: 'absolute',
+        inset: 0,
+        margin: 0,
+        padding: '24px 20px',
+        fontFamily: 'monospace',
+        fontSize: '11px',
+        lineHeight: '1.45',
+        color: color,
+        opacity: opacity,
+        backgroundColor: '#0c0c0e',
+        pointerEvents: 'none',
+        zIndex: 5,
+        overflow: 'hidden',
+        whiteSpace: 'pre-wrap',
+        wordBreak: 'break-all',
+        userSelect: 'none',
+        transition: 'opacity 0.25s cubic-bezier(0.25, 0.8, 0.25, 1)'
+      }}
+    >
+      {staticText}
+    </pre>
+  );
+};
+
+// Individual card with cursor proximity tracker
+const AchievementRevealCard: React.FC<{
+  ach: Achievement;
+  idx: number;
+  mousePos: { x: number; y: number };
+  isMouseOverGrid: boolean;
+  onSelect: (id: string) => void;
+}> = ({ ach, idx, mousePos, isMouseOverGrid, onSelect }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [proximity, setProximity] = useState(0);
+  const [arrivalActive, setArrivalActive] = useState(true);
+  const [sparkFlashed, setSparkFlashed] = useState(false);
+  const isLocked = !ach.unlocked;
+
+  // Reveal briefly on section mount
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setArrivalActive(false);
+    }, 1800);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Proximity math: distance from mouse to card center
+  useEffect(() => {
+    if (arrivalActive) return;
+
+    const card = cardRef.current;
+    if (!card) return;
+
+    if (!isMouseOverGrid) {
+      setProximity(0);
+      return;
+    }
+
+    const rect = card.getBoundingClientRect();
+    const cX = rect.left + rect.width / 2;
+    const cY = rect.top + rect.height / 2;
+
+    const dist = Math.hypot(mousePos.x - cX, mousePos.y - cY);
+    const maxRadius = 240; // Detection radius bounds
+
+    if (dist < maxRadius) {
+      const factor = 1 - dist / maxRadius;
+      setProximity(Math.min(1, factor * 1.3)); // Boost curve scaling
+    } else {
+      setProximity(0);
+    }
+  }, [mousePos, isMouseOverGrid, arrivalActive]);
+
+  const activeReveal = arrivalActive ? 1 : proximity;
+  const isFullyResolved = activeReveal > 0.92;
+
+  // Trigger legendary burst sparks on full resolution
+  useEffect(() => {
+    if (isFullyResolved && ach.tier === 'LEGENDARY' && !isLocked) {
+      setSparkFlashed(true);
+      const timer = setTimeout(() => setSparkFlashed(false), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [isFullyResolved, ach.tier, isLocked]);
+
+  return (
+    <div ref={cardRef} style={{ position: 'relative', height: '100%' }}>
+      <TiltCard
+        className="cursor-target ach-panel-card"
+        maxTilt={4}
+        onClick={() => !isLocked && onSelect(ach.id)}
+        style={{
+          padding: 0,
+          overflow: 'hidden',
+          border: `2px solid ${isFullyResolved && !isLocked ? ach.color : 'rgba(255,255,255,0.08)'}`,
+          backgroundColor: isLocked ? '#0c0c0e' : 'var(--ink)',
+          opacity: isLocked ? 0.45 : 1,
+          filter: isLocked ? 'grayscale(1)' : 'none',
+          transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+          boxShadow: isFullyResolved && !isLocked ? `-4px 4px 0px ${ach.color}` : 'none',
+          position: 'relative',
+          display: 'block',
+          height: '100%'
+        }}
+      >
+        {/* Camouflage Layer */}
+        {!isLocked && (
+          <AsciiCamouflage opacity={1 - activeReveal} color={ach.color} />
+        )}
+
+        {/* Real Content (Visible as activeReveal approaches 1) */}
+        <div style={{ opacity: isLocked ? 1 : activeReveal, transition: 'opacity 0.2s ease', padding: '20px' }}>
+          {/* Top border tier glow */}
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              height: '3px',
+              background: isLocked ? 'var(--gray)' : tierGradient[ach.tier],
+              width: '100%'
+            }}
+          />
+
+          {/* Icon + Title Row */}
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
+            <motion.div
+              animate={{
+                scale: isFullyResolved && !isLocked ? [1, 1.15, 1] : 1,
+                rotate: isFullyResolved && !isLocked ? [0, -8, 8, 0] : 0
+              }}
+              transition={{ duration: 0.5 }}
+              style={{
+                width: '48px',
+                height: '48px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '24px',
+                border: `2px solid ${isLocked ? 'var(--gray)' : ach.color}`,
+                backgroundColor: `rgba(255,255,255,0.02)`,
+                flexShrink: 0,
+                position: 'relative'
+              }}
+            >
+              {ach.icon}
+              {isFullyResolved && !isLocked && (
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0.6 }}
+                  animate={{ scale: 1.8, opacity: 0 }}
+                  transition={{ duration: 0.7, repeat: Infinity }}
+                  style={{
+                    position: 'absolute',
+                    inset: '-4px',
+                    border: `2px solid ${ach.color}`,
+                    borderRadius: '2px',
+                    pointerEvents: 'none'
+                  }}
+                />
+              )}
+            </motion.div>
+
+            <div style={{ flex: 1 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2px' }}>
+                <span style={{
+                  fontSize: '8px',
+                  fontFamily: 'var(--font-body)',
+                  color: isLocked ? 'var(--gray)' : ach.color,
+                  letterSpacing: '1px'
+                }}>
+                  {ach.tier} • {ach.category.replace('_', ' ')}
+                </span>
+              </div>
+              <h3 className="bebas" style={{
+                fontSize: '16px',
+                margin: 0,
+                color: isLocked ? 'var(--gray)' : 'var(--white)',
+                lineHeight: 1.2
+              }}>
+                {ach.title}
+              </h3>
+            </div>
+          </div>
+
+          {/* Description */}
+          <p style={{
+            fontSize: '10px',
+            color: isLocked ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.6)',
+            lineHeight: '1.5',
+            marginTop: '12px',
+            fontFamily: 'var(--font-body)'
+          }}>
+            {ach.description}
+          </p>
+
+          {/* Footer stats */}
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginTop: '14px',
+            paddingTop: '10px',
+            borderTop: '1px solid rgba(255,255,255,0.06)'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{
+                fontSize: '10px',
+                fontFamily: 'var(--font-body)',
+                color: isLocked ? 'var(--gray)' : 'var(--gold)',
+                fontWeight: 'bold'
+              }}>
+                +{ach.xp.toLocaleString()} XP
+              </span>
+              <span style={{ fontSize: '8px', color: 'var(--gray)', fontFamily: 'var(--font-body)' }}>
+                {ach.date}
+              </span>
+            </div>
+            <span style={{
+              fontSize: '10px',
+              letterSpacing: '2px',
+              color: isLocked ? 'var(--gray)' : ach.color,
+              filter: isLocked ? 'none' : `drop-shadow(0 0 4px ${ach.color})`
+            }}>
+              {tierLabel[ach.tier]}
+            </span>
+          </div>
+        </div>
+
+        {/* Spark burst overlay */}
+        {sparkFlashed && !isLocked && (
+          <div style={{ position: 'absolute', inset: 0, zIndex: 12, pointerEvents: 'none' }}>
+            <svg viewBox="0 0 100 100" style={{ width: '100%', height: '100%' }}>
+              <path d="M10 20 L40 40 L20 60 L90 80" stroke="#FFE500" strokeWidth="6" fill="none" strokeLinecap="round" style={{ animation: 'draw-greetings-spark 0.3s steps(2) forwards' }} />
+            </svg>
+          </div>
+        )}
+
+        {/* Locked padlock overlay */}
+        {isLocked && (
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'rgba(0,0,0,0.5)',
+              pointerEvents: 'none'
+            }}
+          >
+            <span className="bangers" style={{ fontSize: '14px', color: 'var(--gray)', letterSpacing: '3px' }}>
+              🔒 LOCKED
+            </span>
+          </div>
+        )}
+      </TiltCard>
+    </div>
+  );
+};
+
 const Achievements: React.FC = () => {
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isMouseOverGrid, setIsMouseOverGrid] = useState(false);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   const totalXP = achievementsData.filter(a => a.unlocked).reduce((sum, a) => sum + a.xp, 0);
   const unlockedCount = achievementsData.filter(a => a.unlocked).length;
   const totalCount = achievementsData.length;
   const selectedAch = achievementsData.find(a => a.id === selectedId) || null;
+
+  // Track coordinates relative to grid container boundary
+  const handleMouseMove = (e: React.MouseEvent) => {
+    setMousePos({ x: e.clientX, y: e.clientY });
+  };
 
   return (
     <section
@@ -248,177 +544,31 @@ const Achievements: React.FC = () => {
         </div>
       </div>
 
-      {/* Achievement Grid */}
-      <div className="achievements-grid">
-        {achievementsData.map((ach, idx) => {
-          const isHovered = hoveredId === ach.id;
-          const isLocked = !ach.unlocked;
-
-          return (
-            <motion.div
-              key={ach.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.3, delay: idx * 0.05 }}
-              onMouseEnter={() => setHoveredId(ach.id)}
-              onMouseLeave={() => setHoveredId(null)}
-              onClick={() => !isLocked && setSelectedId(ach.id)}
-            >
-              <TiltCard
-                className="cursor-target ach-panel-card"
-                maxTilt={5}
-                style={{
-                  padding: 0,
-                  overflow: 'hidden',
-                  border: `2px solid ${isHovered && !isLocked ? ach.color : 'rgba(255,255,255,0.08)'}`,
-                  backgroundColor: isLocked ? '#0c0c0e' : 'var(--ink)',
-                  opacity: isLocked ? 0.5 : 1,
-                  filter: isLocked ? 'grayscale(1)' : 'none',
-                  transition: 'border-color 0.15s ease, box-shadow 0.15s ease',
-                  boxShadow: isHovered && !isLocked ? `-3px 3px 0px ${ach.color}` : 'none',
-                  position: 'relative',
-                  display: 'block'
-                }}
-              >
-                {/* Tier gradient top strip */}
-                <div
-                  style={{
-                    height: '3px',
-                    background: isLocked ? 'var(--gray)' : tierGradient[ach.tier],
-                    width: '100%'
-                  }}
-                />
-
-                <div style={{ padding: '20px' }}>
-                  {/* Icon + Title Row */}
-                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
-                    {/* Achievement Icon */}
-                    <motion.div
-                      animate={{
-                        scale: isHovered && !isLocked ? [1, 1.15, 1] : 1,
-                        rotate: isHovered && !isLocked ? [0, -8, 8, 0] : 0
-                      }}
-                      transition={{ duration: 0.5 }}
-                      style={{
-                        width: '48px',
-                        height: '48px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '24px',
-                        border: `2px solid ${isLocked ? 'var(--gray)' : ach.color}`,
-                        backgroundColor: `rgba(255,255,255,0.02)`,
-                        flexShrink: 0,
-                        position: 'relative'
-                      }}
-                    >
-                      {ach.icon}
-                      {/* Expanding ring on hover */}
-                      {isHovered && !isLocked && (
-                        <motion.div
-                          initial={{ scale: 0.8, opacity: 0.6 }}
-                          animate={{ scale: 1.8, opacity: 0 }}
-                          transition={{ duration: 0.7, repeat: Infinity }}
-                          style={{
-                            position: 'absolute',
-                            inset: '-4px',
-                            border: `2px solid ${ach.color}`,
-                            borderRadius: '2px',
-                            pointerEvents: 'none'
-                          }}
-                        />
-                      )}
-                    </motion.div>
-
-                    <div style={{ flex: 1 }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2px' }}>
-                        <span style={{
-                          fontSize: '8px',
-                          fontFamily: 'var(--font-body)',
-                          color: isLocked ? 'var(--gray)' : ach.color,
-                          letterSpacing: '1px'
-                        }}>
-                          {ach.tier} • {ach.category.replace('_', ' ')}
-                        </span>
-                      </div>
-                      <h3 className="bebas" style={{
-                        fontSize: '16px',
-                        margin: 0,
-                        color: isLocked ? 'var(--gray)' : 'var(--white)',
-                        lineHeight: 1.2
-                      }}>
-                        {ach.title}
-                      </h3>
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <p style={{
-                    fontSize: '10px',
-                    color: isLocked ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.6)',
-                    lineHeight: '1.5',
-                    marginTop: '12px',
-                    fontFamily: 'var(--font-body)'
-                  }}>
-                    {ach.description}
-                  </p>
-
-                  {/* Footer: XP + Date + Stars */}
-                  <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginTop: '14px',
-                    paddingTop: '10px',
-                    borderTop: '1px solid rgba(255,255,255,0.06)'
-                  }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <span style={{
-                        fontSize: '10px',
-                        fontFamily: 'var(--font-body)',
-                        color: isLocked ? 'var(--gray)' : 'var(--gold)',
-                        fontWeight: 'bold'
-                      }}>
-                        +{ach.xp.toLocaleString()} XP
-                      </span>
-                      <span style={{ fontSize: '8px', color: 'var(--gray)', fontFamily: 'var(--font-body)' }}>
-                        {ach.date}
-                      </span>
-                    </div>
-                    <span style={{
-                      fontSize: '10px',
-                      letterSpacing: '2px',
-                      color: isLocked ? 'var(--gray)' : ach.color,
-                      filter: isLocked ? 'none' : `drop-shadow(0 0 4px ${ach.color})`
-                    }}>
-                      {tierLabel[ach.tier]}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Locked overlay */}
-                {isLocked && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      backgroundColor: 'rgba(0,0,0,0.5)',
-                      pointerEvents: 'none'
-                    }}
-                  >
-                    <span className="bangers" style={{ fontSize: '14px', color: 'var(--gray)', letterSpacing: '3px' }}>
-                      🔒 LOCKED
-                    </span>
-                  </div>
-                )}
-              </TiltCard>
-            </motion.div>
-          );
-        })}
+      {/* Grid container tracking proximity */}
+      <div 
+        ref={gridRef}
+        className="achievements-grid"
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setIsMouseOverGrid(true)}
+        onMouseLeave={() => setIsMouseOverGrid(false)}
+      >
+        {achievementsData.map((ach, idx) => (
+          <motion.div
+            key={ach.id}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.3, delay: idx * 0.05 }}
+          >
+            <AchievementRevealCard 
+              ach={ach} 
+              idx={idx} 
+              mousePos={mousePos} 
+              isMouseOverGrid={isMouseOverGrid} 
+              onSelect={setSelectedId}
+            />
+          </motion.div>
+        ))}
       </div>
 
       {/* Achievement Detail Modal */}

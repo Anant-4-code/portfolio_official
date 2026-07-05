@@ -228,7 +228,6 @@ const Projects: React.FC = () => {
                 flexDirection: 'column',
                 justifyContent: 'flex-end',
                 position: 'relative',
-                cursor: 'none',
                 height: '100%',
                 overflow: 'hidden'
               }}
@@ -236,6 +235,15 @@ const Projects: React.FC = () => {
               {/* Corner brackets */}
               <div className="corner-bracket tl" style={{ borderColor: proj.borderColor }} />
               <div className="corner-bracket br" style={{ borderColor: proj.borderColor }} />
+
+              {/* Hover spark accent */}
+              {hoveredId === proj.id && (
+                <div style={{ position: 'absolute', top: '10px', right: '10px', width: '32px', height: '32px', pointerEvents: 'none', zIndex: 10 }}>
+                  <svg viewBox="0 0 100 100" style={{ width: '100%', height: '100%' }}>
+                    <path d="M10 30 L40 40 L20 60 L80 90" stroke="#FFE500" strokeWidth="6" fill="none" strokeLinecap="round" style={{ animation: 'draw-greetings-spark 0.25s steps(2) forwards' }} />
+                  </svg>
+                </div>
+              )}
 
               {/* Category badge */}
               <div style={{

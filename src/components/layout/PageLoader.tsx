@@ -18,10 +18,10 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
   const [bootStage, setBootStage] = useState('greetings'); // 'greetings' | 'diagnostics' | 'exiting'
   const [progress, setProgress] = useState(0);
   const [currentLog, setCurrentLog] = useState('');
+  const [greetingSpark, setGreetingSpark] = useState(false);
 
   const greetings = ['HELLO', 'नमस्ते', 'こんにちは', 'SAT SRI AKAAL', 'HOLA', 'BONJOUR', 'SYSTEM ONLINE'];
 
-  // Terminal diagnostic string logs mapped directly to progress tracking percentage milestones
   const diagnosticLogs = [
     { threshold: 0, text: "> INITIALIZING COGNITIVE CORE PROCESSES... [ OK ]" },
     { threshold: 30, text: "> SYNCING MISSION ARCHIVES & PROJECT BLUEPRINTS... [ 100% ]" },
@@ -29,13 +29,12 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
     { threshold: 85, text: "> DEPLOYING COMPILER SIMULATORS & INTERACTIVE DATA GRID... [ READY ]" }
   ];
 
-  // Freeze document body scrolling immediately when loader mounts
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => { document.body.style.overflow = 'auto'; };
   }, []);
 
-  // Lifecycle 1: Rapid multi-lingual text cycle ticker
+  // Word Ticks & Ticks-Spark Lifecycle
   useEffect(() => {
     if (bootStage !== 'greetings') return;
 
@@ -48,12 +47,20 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
         }
         return prev + 1;
       });
-    }, 280); // Strict pacing speed per translation string
+    }, 280);
 
     return () => clearInterval(wordInterval);
   }, [bootStage]);
 
-  // Lifecycle 2: Non-linear system loading bar progression tracking mechanics
+  // Flash micro-spark on word change tick
+  useEffect(() => {
+    if (bootStage === 'greetings' && currentWordIndex > 0) {
+      setGreetingSpark(true);
+      const timer = setTimeout(() => setGreetingSpark(false), 200);
+      return () => clearTimeout(timer);
+    }
+  }, [currentWordIndex, bootStage]);
+
   useEffect(() => {
     if (bootStage !== 'diagnostics') return;
 
@@ -61,14 +68,12 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(progressInterval);
-          setTimeout(() => setBootStage('exiting'), 150); // Small pause at 100% charge for impact
+          setTimeout(() => setBootStage('exiting'), 150);
           return 100;
         }
-        // Non-linear acceleration curves simulating variable data streaming rates
         const step = prev < 40 ? 4 : prev < 75 ? 2 : 5;
         const nextProgress = prev + step;
 
-        // Dynamic terminal tracker string matching log update thresholds
         const activeLog = diagnosticLogs.reduce((acc, log) => {
           if (nextProgress >= log.threshold) return log.text;
           return acc;
@@ -82,13 +87,12 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
     return () => clearInterval(progressInterval);
   }, [bootStage]);
 
-  // Lifecycle 3: Animation complete callback cleanup hook
   useEffect(() => {
     if (bootStage === 'exiting') {
       const completionTimeout = setTimeout(() => {
-        document.body.style.overflow = 'auto'; // Unfreeze document interaction safely
+        document.body.style.overflow = 'auto';
         if (onComplete) onComplete();
-      }, 500); // Synchronized to match the horizontal iris split CSS slide execution window
+      }, 600); // 100ms offset for sparks completion
       return () => clearTimeout(completionTimeout);
     }
   }, [bootStage, onComplete]);
@@ -98,11 +102,18 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
       {/* Top Hatch Segment */}
       <div className="iris-panel top-panel" />
 
-      {/* Central Screen Control Plane Container */}
+      {/* Central Core Screen */}
       <div className="loader-center-core">
         {bootStage === 'greetings' && (
-          <div className="greeting-node-frame">
+          <div className="greeting-node-frame" style={{ position: 'relative' }}>
             <FuzzyText>{greetings[currentWordIndex]}</FuzzyText>
+            {greetingSpark && (
+              <div className="greetings-spark-container">
+                <svg viewBox="0 0 100 100" className="greeting-spark-svg" fill="none">
+                  <path d="M10 20 L40 40 L20 60 L90 80" stroke="#FFE500" strokeWidth="5" strokeLinecap="round" />
+                </svg>
+              </div>
+            )}
           </div>
         )}
 
@@ -110,7 +121,7 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
           <div className="terminal-matrix-hud">
             <div className="branding-logo-initials">AR</div>
             
-            {/* Structural Progression Bar Rail */}
+            {/* Structural Progression Rail */}
             <div className="progress-rail-container">
               <div 
                 className="progress-fill-beam" 
@@ -119,7 +130,7 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
               <span className="metrics-percentage-ticker">{progress}%</span>
             </div>
 
-            {/* Micro Terminal Log Outputs */}
+            {/* Micro logs outputs */}
             <div className="diagnostic-log-terminal">
               {currentLog}
             </div>
@@ -127,10 +138,27 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
         )}
       </div>
 
+      {/* Exit split sparks */}
+      {bootStage === 'exiting' && (
+        <div className="exit-spark-wrapper">
+          <svg className="exit-spark-svg" viewBox="0 0 1000 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="loader-spark-halftone" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
+                <circle cx="3" cy="3" r="1.5" fill="#FFE500" />
+              </pattern>
+            </defs>
+            {/* Tapered needle arcs with halftone fill */}
+            <path className="spark-arc spark-left" d="M500 200 L420 180 L440 210 L320 175 L350 220 L200 190 L230 225 L50 200" stroke="url(#loader-spark-halftone)" strokeWidth="9" strokeLinecap="round" />
+            <path className="spark-arc spark-right" d="M500 200 L580 220 L560 190 L680 225 L650 180 L800 210 L770 175 L950 200" stroke="url(#loader-spark-halftone)" strokeWidth="9" strokeLinecap="round" />
+          </svg>
+          <div className="exit-sfx-text bangers">バリバリ</div>
+        </div>
+      )}
+
       {/* Bottom Hatch Segment */}
       <div className="iris-panel bottom-panel" />
 
-      {/* Encapsulated Component Stylesheet Mapping Block */}
+      {/* Page Loader Stylesheet */}
       <style>{`
         .boot-wrapper {
           position: fixed;
@@ -138,7 +166,7 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
           left: 0;
           width: 100vw;
           height: 100vh;
-          background-color: #0F0F0F; /* Solid, 100% non-translucent matte black */
+          background-color: #0F0F0F;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -177,6 +205,74 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
 
         .greeting-node-frame {
           animation: fastGlitchFlicker 0.15s steps(2) infinite alternate;
+        }
+
+        .greetings-spark-container {
+          position: absolute;
+          top: -20px;
+          right: -40px;
+          width: 44px;
+          height: 44px;
+          pointer-events: none;
+        }
+
+        .greeting-spark-svg {
+          width: 100%;
+          height: 100%;
+          animation: draw-greetings-spark 0.18s steps(2) forwards;
+        }
+
+        @keyframes draw-greetings-spark {
+          0% { transform: scale(0.6) rotate(0deg); opacity: 1; }
+          100% { transform: scale(1.3) rotate(40deg); opacity: 0; }
+        }
+
+        /* Exit moment sparks wrapper */
+        .exit-spark-wrapper {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 100;
+          pointer-events: none;
+        }
+
+        .exit-spark-svg {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+        }
+
+        /* Frame-by-frame lightning arcs */
+        .spark-arc {
+          transform-origin: 500px 200px;
+          animation: exit-spark-sequence 0.5s steps(4) forwards;
+        }
+
+        @keyframes exit-spark-sequence {
+          0% { transform: scaleX(0.05); opacity: 1; }
+          25% { transform: scaleX(0.4) scaleY(1.4); opacity: 1; }
+          50% { transform: scaleX(0.7) scaleY(0.7); opacity: 0.8; stroke-dasharray: 40, 20; }
+          75% { transform: scaleX(0.9) scaleY(0.4); opacity: 0.4; stroke-dasharray: 10, 40; }
+          100% { transform: scaleX(1) scaleY(0); opacity: 0; }
+        }
+
+        /* SFX Text */
+        .exit-sfx-text {
+          font-size: 82px;
+          color: #FFE500;
+          text-shadow: 4px 4px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000;
+          z-index: 10;
+          transform: scale(0.6) rotate(-10deg);
+          animation: exit-sfx-sequence 0.4s steps(3) forwards;
+        }
+
+        @keyframes exit-sfx-sequence {
+          0% { transform: scale(0.6) rotate(-10deg); opacity: 0; }
+          20% { transform: scale(1.3) rotate(-15deg); opacity: 1; }
+          80% { transform: scale(1.1) rotate(-12deg); opacity: 0.8; }
+          100% { transform: scale(1) rotate(-12deg); opacity: 0; }
         }
 
         .terminal-matrix-hud {
@@ -238,6 +334,12 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
         @keyframes fastGlitchFlicker {
           0% { transform: scale(0.98); filter: hue-rotate(0deg); opacity: 0.95; }
           100% { transform: scale(1); filter: hue-rotate(5deg); opacity: 1; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .spark-arc, .exit-sfx-text, .greeting-spark-svg {
+            animation: none !important;
+          }
         }
       `}</style>
     </div>

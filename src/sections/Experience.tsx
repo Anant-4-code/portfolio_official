@@ -125,17 +125,19 @@ const Experience: React.FC = () => {
         </p>
       </div>
 
-      {/* Timeline Layout */}
+      {/* Manga Spine Timeline Layout */}
       <div style={{ position: 'relative', width: '100%' }}>
-        {/* Center dashed line */}
+        {/* Center mecha-spine line */}
         <div
           style={{
             position: 'absolute',
-            left: '42px',
+            left: '46px',
             top: '0',
             bottom: '0',
-            width: '2px',
-            borderLeft: '2px dashed rgba(255, 255, 255, 0.15)',
+            width: '6px',
+            backgroundColor: 'rgba(255, 214, 10, 0.15)',
+            borderLeft: '2px solid var(--gold)',
+            borderRight: '2px solid var(--gold)',
             zIndex: 1
           }}
         />
@@ -157,26 +159,34 @@ const Experience: React.FC = () => {
               }}
               className="timeline-item-row"
             >
-              {/* Year indicator on Left */}
+              {/* Year indicator & Chapter badge on Left */}
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
                 <span className="bangers" style={{ fontSize: '24px', color: exp.color, zIndex: 3 }}>
                   <AnimatedCounter target={exp.yearNum} decimals={0} duration={800} />
                 </span>
 
-                {/* Timeline node circle — active ones pulse */}
-                <div
+                {/* Numbered Chapter Spine Tag */}
+                <div 
+                  className="bangers" 
                   style={{
-                    width: idx === 0 ? '14px' : '10px',
-                    height: idx === 0 ? '14px' : '10px',
-                    borderRadius: '50%',
-                    backgroundColor: idx === 0 ? 'var(--gold)' : exp.color,
-                    border: `2px solid ${idx === 0 ? 'var(--gold)' : '#222'}`,
-                    boxShadow: idx === 0 ? '0 0 12px var(--gold)' : idx === 1 ? `0 0 8px ${exp.color}` : 'none',
+                    width: '26px',
+                    height: '26px',
+                    backgroundColor: exp.color,
+                    color: '#000',
+                    border: '2px solid #000',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '12px',
                     marginTop: '8px',
-                    animation: idx <= 1 ? 'pulse-node 2s infinite' : 'none',
-                    animationDelay: `${idx * 0.4}s`
+                    transform: 'rotate(-5deg)',
+                    boxShadow: '2px 2px 0px rgba(0,0,0,0.5)',
+                    zIndex: 3,
+                    animation: idx <= 1 ? 'pulse-node 2s infinite' : 'none'
                   }}
-                />
+                >
+                  {idx + 1}
+                </div>
               </div>
 
               {/* Experience Panel */}
@@ -233,9 +243,9 @@ const Experience: React.FC = () => {
                     <li
                       key={i}
                       style={{
-                        fontSize: '11px',
-                        color: 'rgba(255, 255, 255, 0.75)',
-                        lineHeight: '1.5',
+                        fontSize: '11.5px',
+                        color: 'rgba(255, 255, 255, 0.85)',
+                        lineHeight: '1.6',
                         display: 'flex',
                         gap: '8px'
                       }}
@@ -270,6 +280,19 @@ const Experience: React.FC = () => {
                     ))}
                   </div>
                 )}
+
+                {/* Micro-accent log index tag */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: '10px',
+                  right: '12px',
+                  fontSize: '8px',
+                  fontFamily: 'monospace',
+                  color: 'rgba(255, 255, 255, 0.25)',
+                  letterSpacing: '1px'
+                }}>
+                  [ SEC_LOG // {exp.chapter.replace('CHAPTER ', '')}_{exp.year} ]
+                </div>
               </motion.div>
             </motion.div>
           ))}

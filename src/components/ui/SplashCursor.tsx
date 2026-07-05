@@ -74,7 +74,15 @@ export default function SplashCursor({
 }: SplashCursorProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  const isSupported = (() => {
+    if (typeof window === 'undefined') return false;
+    const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    return !isMobile && !prefersReducedMotion;
+  })();
+
   useEffect(() => {
+    if (!isSupported) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -1273,6 +1281,8 @@ export default function SplashCursor({
     RAINBOW_MODE,
     COLOR
   ]);
+
+  if (!isSupported) return null;
 
   return (
     <div

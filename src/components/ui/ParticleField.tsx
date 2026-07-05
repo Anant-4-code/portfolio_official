@@ -17,6 +17,13 @@ interface Particle {
 const COLORS = ['rgba(255, 214, 10, ALPHA)', 'rgba(0, 201, 224, ALPHA)', 'rgba(255, 59, 92, ALPHA)', 'rgba(191, 143, 255, ALPHA)'];
 
 const ParticleField: React.FC = () => {
+  const isSupported = (() => {
+    if (typeof window === 'undefined') return false;
+    const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    return !isMobile && !prefersReducedMotion;
+  })();
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const animRef = useRef<number | null>(null);
@@ -24,6 +31,7 @@ const ParticleField: React.FC = () => {
   const lastScrollY = useRef(0);
 
   const spawnParticle = (x: number, y: number, count = 1) => {
+    if (!isSupported) return;
     for (let i = 0; i < count; i++) {
       const colorTemplate = COLORS[Math.floor(Math.random() * COLORS.length)];
       const maxLife = 60 + Math.random() * 80;
@@ -49,6 +57,7 @@ const ParticleField: React.FC = () => {
   };
 
   useEffect(() => {
+    if (!isSupported) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -141,6 +150,8 @@ const ParticleField: React.FC = () => {
       if (animRef.current) cancelAnimationFrame(animRef.current);
     };
   }, []);
+
+  if (!isSupported) return null;
 
   return (
     <canvas

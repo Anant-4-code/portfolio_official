@@ -9,6 +9,7 @@ interface SkillCategory {
   rank: string;
   rankClass: string;
   color: string;
+  description: string;
   items: string[];
 }
 
@@ -18,6 +19,7 @@ const skillCategories: SkillCategory[] = [
     rank: 'S-RANK',
     rankClass: 'tier-s',
     color: 'var(--gold)',
+    description: 'Core Focus (92% mastery) — Custom models, CV architectures, healthcare AI, and real-time inference.',
     items: ['Python', 'YOLOv7/v8', 'ONNX Runtime', 'OpenCV', 'NumPy', 'Pandas', 'Scikit-learn', 'MPVE Framework', 'Tesseract OCR', 'Gradio', 'Attention Heatmaps', 'Bounding Box Regression']
   },
   {
@@ -25,6 +27,7 @@ const skillCategories: SkillCategory[] = [
     rank: 'S-RANK',
     rankClass: 'tier-s',
     color: 'var(--cyan)',
+    description: 'Core Focus (90% mastery) — Agentic RAG workflows, KG-oT graphs, n8n automations, and LLM integrations.',
     items: ['Ollama (Llama 3.2)', 'Gemini API 1.5 Flash', 'OpenAI API', 'RAG Pipelines', 'Knowledge Graph (KG-oT)', 'GNN', 'n8n', 'Make.com', 'Zapier', 'Prompt Engineering', 'LangChain', 'Multi-Agent Systems']
   },
   {
@@ -32,6 +35,7 @@ const skillCategories: SkillCategory[] = [
     rank: 'A-RANK',
     rankClass: 'tier-aplus',
     color: 'var(--purple)',
+    description: 'High Competency (88% mastery) — Modern SPA and SSR dashboards, high-performance APIs, and live websockets.',
     items: ['React.js', 'Next.js', 'TypeScript', 'JavaScript (ES6+)', 'Node.js', 'Express.js', 'FastAPI', 'REST APIs', 'GraphQL', 'WebSockets', 'Tailwind CSS', 'Chart.js']
   },
   {
@@ -39,20 +43,23 @@ const skillCategories: SkillCategory[] = [
     rank: 'A-RANK',
     rankClass: 'tier-aplus',
     color: 'var(--orange)',
+    description: 'High Competency (85% mastery) — Relational & NoSQL database structures, ORMs, JWT/OAuth security, and schemas.',
     items: ['MongoDB', 'MySQL', 'PostgreSQL', 'Firebase', 'SQLite', 'SQLAlchemy', 'Pydantic', 'JWT / OAuth2', 'Socket.IO', 'Jinja2']
   },
   {
     title: 'MLOps & DevOps',
-    rank: 'B+-RANK',
+    rank: 'B-RANK',
     rankClass: 'tier-a',
     color: 'var(--green)',
+    description: 'Auxiliary (82% mastery) — Containerized deployment pipelines, serverless hosting, cloud infrastructure, and CI/CD.',
     items: ['Docker', 'AWS', 'Vercel', 'Netlify', 'Render', 'Hugging Face Spaces', 'Git', 'GitHub', 'CI/CD Pipelines', 'Postman', 'Figma', 'VS Code']
   },
   {
     title: 'Mobile & Other Languages',
-    rank: 'B+-RANK',
+    rank: 'B-RANK',
     rankClass: 'tier-bplus',
     color: 'var(--red)',
+    description: 'Auxiliary (80% mastery) — Native Android (MVVM) and hybrid mobile setups, system programming, and CSS frameworks.',
     items: ['Kotlin', 'Android Studio (MVVM)', 'React Native', 'Java', 'C', 'HTML5 / CSS3', 'Bootstrap', 'Material UI']
   }
 ];
@@ -146,8 +153,8 @@ const Skills: React.FC = () => {
           interval={4000}
           duration={500}
         />
-        <p style={{ color: 'var(--gray)', fontSize: '12px' }}>
-          SKILLS TIER LIST // UNLOCKED ABILITIES SYSTEM
+        <p style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '13px', marginTop: '6px' }}>
+          SKILLS TIER LIST // CORE COMPETENCY LEGEND
         </p>
       </div>
 
@@ -204,22 +211,27 @@ const Skills: React.FC = () => {
               />
 
               {/* Header info */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <h3 style={{ fontSize: '18px', color: 'var(--white)', margin: 0 }} className="bebas">
-                  {cat.title}
-                </h3>
-                <span
-                  className={`bangers ${cat.rankClass}`}
-                  style={{
-                    fontSize: '16px',
-                    border: '1.5px solid',
-                    padding: '1px 8px',
-                    borderRadius: '0',
-                    backgroundColor: 'rgba(13, 13, 15, 0.6)'
-                  }}
-                >
-                  {cat.rank}
-                </span>
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <h3 style={{ fontSize: '18px', color: 'var(--white)', margin: 0 }} className="bebas">
+                    {cat.title}
+                  </h3>
+                  <span
+                    className={`bangers ${cat.rankClass}`}
+                    style={{
+                      fontSize: '16px',
+                      border: '1.5px solid',
+                      padding: '1px 8px',
+                      borderRadius: '0',
+                      backgroundColor: 'rgba(13, 13, 15, 0.6)'
+                    }}
+                  >
+                    {cat.rank}
+                  </span>
+                </div>
+                <p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '11px', margin: '0 0 12px 0', lineHeight: '1.5' }}>
+                  {cat.description}
+                </p>
               </div>
 
               {/* Skill chips inside card */}
@@ -230,8 +242,8 @@ const Skills: React.FC = () => {
                     className="skill-badge"
                     style={{
                       fontFamily: 'var(--font-body)',
-                      fontSize: '10px',
-                      color: 'rgba(255, 255, 255, 0.8)',
+                      fontSize: '10.5px',
+                      color: 'rgba(255, 255, 255, 0.85)',
                       backgroundColor: 'rgba(255, 255, 255, 0.04)',
                       border: '1px solid rgba(255, 255, 255, 0.1)',
                       padding: '4px 10px',
@@ -249,7 +261,7 @@ const Skills: React.FC = () => {
                       const el = e.currentTarget;
                       el.style.borderColor = 'rgba(255, 255, 255, 0.1)';
                       el.style.backgroundColor = 'rgba(255, 255, 255, 0.04)';
-                      el.style.color = 'rgba(255, 255, 255, 0.8)';
+                      el.style.color = 'rgba(255, 255, 255, 0.85)';
                       el.style.boxShadow = 'none';
                     }}
                   >
@@ -291,7 +303,7 @@ const Skills: React.FC = () => {
               gap: 16px;
             }
             .skill-tier-card {
-              padding: 1rem !important;
+              padding: 1.25rem !important;
             }
             .skill-badges-container {
               display: grid;
@@ -304,7 +316,7 @@ const Skills: React.FC = () => {
               justify-content: center;
               text-align: center;
               padding: 6px 4px !important;
-              font-size: 9px !important;
+              font-size: 10px !important;
               width: 100%;
             }
           }

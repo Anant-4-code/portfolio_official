@@ -309,12 +309,12 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-jp);
   font-weight: 900;
   color: var(--white);
-  opacity: 0.04;
+  opacity: 0.025;
   font-size: 15vw;
   line-height: 1;
   pointer-events: none;
   user-select: none;
-  z-index: 0;
+  z-index: -2;
   white-space: nowrap;
 }
 
@@ -372,13 +372,9 @@ mark.manga-highlight.purple {
   border-bottom-color: var(--purple);
 }
 
-/* Target Cursor targeting selector class */
-.cursor-target {
-  cursor: none !important;
-}
-
-/* Global native pointer suppression */
-html, body, a, button, input, textarea, select, .project-modal-container, .modal-backdrop {
+/* Only hide standard cursor when custom cursor is active and confirmed working */
+.custom-cursor-active,
+.custom-cursor-active * {
   cursor: none !important;
 }
 

@@ -54,11 +54,12 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
   const tickerFnRef = useRef<(() => void) | null>(null);
   const activeStrengthRef = useRef({ current: 0 });
 
-  const isMobile = useMemo(() => {
+  const isMobileOrReduced = useMemo(() => {
     if (typeof window === 'undefined') return false;
     const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     const isSmallScreen = window.innerWidth <= 768;
-    return hasTouchScreen || isSmallScreen;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    return hasTouchScreen || isSmallScreen || prefersReduced;
   }, []);
 
   const constants = useMemo(() => ({ borderWidth: 1, cornerSize: 10 }), []);
@@ -70,20 +71,14 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
   }, []);
 
   useEffect(() => {
-    if (isMobile || !cursorRef.current) return;
+    if (isMobileOrReduced || !cursorRef.current) return;
+
+    // Custom cursor is active
+    document.body.classList.add('custom-cursor-active');
 
     const originalCursor = document.body.style.cursor;
     if (hideDefaultCursor) {
       document.body.style.cursor = 'none';
-      
-      // Inject standard cursor hiding styles for interactive elements
-      const styleEl = document.createElement('style');
-      styleEl.innerHTML = `
-        a, button, input, textarea, select, [role="button"], .cursor-target {
-          cursor: none !important;
-        }
-      `;
-      document.head.appendChild(styleEl);
     }
 
     const cursor = cursorRef.current;
@@ -312,24 +307,25 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
         cleanupTarget(activeTarget);
       }
       spinTl.current?.kill();
+      document.body.classList.remove('custom-cursor-active');
       document.body.style.cursor = originalCursor;
       isActiveRef.current = false;
       targetCornerPositionsRef.current = null;
       activeStrengthRef.current.current = 0;
     };
-  }, [targetSelector, spinDuration, moveCursor, constants, hideDefaultCursor, isMobile, hoverDuration, parallaxOn]);
+  }, [targetSelector, spinDuration, moveCursor, constants, hideDefaultCursor, isMobileOrReduced, hoverDuration, parallaxOn]);
 
   useEffect(() => {
-    if (isMobile || !cursorRef.current || !spinTl.current) return;
+    if (isMobileOrReduced || !cursorRef.current || !spinTl.current) return;
     if (spinTl.current.isActive()) {
       spinTl.current.kill();
       spinTl.current = gsap
         .timeline({ repeat: -1 })
         .to(cursorRef.current, { rotation: '+=360', duration: spinDuration, ease: 'none' });
     }
-  }, [spinDuration, isMobile]);
+  }, [spinDuration, isMobileOrReduced]);
 
-  if (isMobile) {
+  if (isMobileOrReduced) {
     return null;
   }
 
