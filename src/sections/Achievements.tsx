@@ -210,11 +210,10 @@ const AsciiCamouflage: React.FC<{ opacity: number; color: string }> = ({ opacity
 // Individual card with cursor proximity tracker
 const AchievementRevealCard: React.FC<{
   ach: Achievement;
-  idx: number;
   mousePos: { x: number; y: number };
   isMouseOverGrid: boolean;
   onSelect: (id: string) => void;
-}> = ({ ach, idx, mousePos, isMouseOverGrid, onSelect }) => {
+}> = ({ ach, mousePos, isMouseOverGrid, onSelect }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [proximity, setProximity] = useState(0);
   const [arrivalActive, setArrivalActive] = useState(true);
@@ -562,7 +561,6 @@ const Achievements: React.FC = () => {
           >
             <AchievementRevealCard 
               ach={ach} 
-              idx={idx} 
               mousePos={mousePos} 
               isMouseOverGrid={isMouseOverGrid} 
               onSelect={setSelectedId}
