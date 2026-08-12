@@ -77,49 +77,50 @@
   z-index: 1;
 }
 
-/* Active section — label visible, styled in gold */
+/* Active section — label visible, styled in sleek light grey / dark mode */
 .nav-dot-container.active .nav-comic-bubble {
   opacity: 1;
   transform: translateY(-50%) translateX(0);
-  background: rgba(255, 229, 0, 0.96);
-  border-color: #0D0D0F;
-  color: #0D0D0F;
+  background: #0A0A0A;
+  border-color: #333333;
+  color: #FFFFFF;
 }
 
 .nav-dot-container.active .nav-comic-bubble::after {
-  border-left-color: #0D0D0F;
+  border-left-color: #333333;
 }
 
 .nav-dot-container.active .nav-comic-bubble::before {
-  border-left-color: rgba(255, 229, 0, 0.96);
+  border-left-color: #0A0A0A;
 }
 
 /* The dot itself */
 .nav-dot {
   width: 7px;
   height: 7px;
-  background-color: rgba(255,255,255,0.2);
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   flex-shrink: 0;
   transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .nav-dot-container.active .nav-dot {
-  width: 11px;
-  height: 11px;
-  background-color: #FFE500;
-  box-shadow: 0 0 8px #FFE500, 0 0 16px rgba(255, 229, 0, 0.5);
+  width: 9px;
+  height: 9px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
 }
 
 .nav-dot-container:hover .nav-dot {
-  transform: scale(1.5);
-  background-color: rgba(255, 255, 255, 0.35);
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+  transform: scale(1.3);
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15);
 }
 
 .nav-dot-container.active:hover .nav-dot {
-  background-color: #FFE500;
-  box-shadow: 0 0 8px #FFE500, 0 0 16px rgba(255, 229, 0, 0.5);
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
 @media (max-width: 1024px) {

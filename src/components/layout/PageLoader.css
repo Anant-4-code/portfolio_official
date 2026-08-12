@@ -4,7 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #0F0F0F;
+  background-color: #000000;
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -18,7 +18,7 @@
   left: 0;
   width: 100%;
   height: 50%;
-  background-color: #0F0F0F;
+  background-color: #000000;
   z-index: 2;
   pointer-events: none;
   transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
@@ -66,7 +66,6 @@
   justify-content: center;
   min-height: 96px;
   animation: pl-word-step 0.15s steps(2, end) both, pl-fast-glitch-flicker 0.15s steps(2, end) infinite alternate;
-  filter: drop-shadow(2px 2px 0 #00FFFF) drop-shadow(-2px -2px 0 #FF00FF);
 }
 
 .pl-terminal-matrix-hud {
@@ -77,23 +76,20 @@
 }
 
 .pl-logo {
-  font-family: var(--font-display), Bangers, sans-serif;
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
   font-size: 48px;
-  color: #FFE500;
-  font-style: italic;
+  color: #FFFFFF;
   font-weight: 900;
   line-height: 1;
   margin-bottom: 0.5rem;
-  letter-spacing: 1px;
-  text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.6);
-  animation: pl-logo-flash 0.28s steps(2, end) both;
+  letter-spacing: 2px;
 }
 
 .pl-bar-track {
   position: relative;
   width: min(100%, 600px);
   height: 4px;
-  background-color: #222222;
+  background-color: #1A1A1A;
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
@@ -101,8 +97,8 @@
 
 .pl-bar-fill {
   height: 100%;
-  background-color: #FFE500;
-  box-shadow: 0 0 14px #FFE500, 0 0 4px #FFE500;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.8), 0 0 4px #FFFFFF;
   transition: width 0.05s linear;
 }
 
@@ -110,8 +106,9 @@
   position: absolute;
   right: 0;
   top: -24px;
+  font-family: var(--font-body, 'JetBrains Mono', monospace);
   font-size: 14px;
-  color: #FFE500;
+  color: #FFFFFF;
   font-weight: 700;
   letter-spacing: 1px;
 }
@@ -122,6 +119,7 @@
   overflow: hidden;
   text-align: left;
   white-space: nowrap;
+  font-family: var(--font-body, 'JetBrains Mono', monospace);
   font-size: 11px;
   letter-spacing: 0.5px;
   color: #888888;
@@ -159,11 +157,9 @@
 
 @keyframes pl-fast-glitch-flicker {
   0% {
-    filter: hue-rotate(0deg);
     opacity: 0.95;
   }
   100% {
-    filter: hue-rotate(5deg);
     opacity: 1;
   }
 }
@@ -171,13 +167,11 @@
 @keyframes pl-logo-flash {
   0% {
     opacity: 0;
-    transform: scale(0.88) skewX(-10deg);
-    text-shadow: 2px 0 0 #00FFFF, -2px 0 0 #FF00FF;
+    transform: scale(0.9);
   }
   100% {
     opacity: 1;
-    transform: scale(1) skewX(-4deg);
-    text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.6);
+    transform: scale(1);
   }
 }
 

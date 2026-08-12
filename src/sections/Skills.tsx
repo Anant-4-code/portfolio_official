@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import GlitchText from '../components/ui/GlitchText';
 import TiltCard from '../components/ui/TiltCard';
-import { TechnicalOrbitSphere } from '../components/ui/TechnicalOrbitSphere';
+import { SkillTreeForceGraph } from '../components/ui/SkillTreeForceGraph';
 
 interface SkillCategory {
   title: string;
@@ -158,9 +158,9 @@ const Skills: React.FC = () => {
         </p>
       </div>
 
-      {/* 3D Technical Orbit Sphere */}
-      <div style={{ marginBottom: '40px', display: 'flex', justifyContent: 'center' }}>
-        <TechnicalOrbitSphere />
+      {/* Interactive Force-Directed Skill Tree Graph */}
+      <div style={{ marginBottom: '40px', width: '100%' }}>
+        <SkillTreeForceGraph />
       </div>
 
       {/* Grid of 6 tier cards */}

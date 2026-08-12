@@ -70,7 +70,7 @@ export default function SplashCursor({
   BACK_COLOR = { r: 0, g: 0, b: 0 },
   TRANSPARENT = true,
   RAINBOW_MODE = false,
-  COLOR = '#ffd60a' /* Shonen Gold by default */
+  COLOR = '#d4d4d8' /* Light Grey by default */
 }: SplashCursorProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 

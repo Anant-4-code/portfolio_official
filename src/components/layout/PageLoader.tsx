@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-// Specialized text component utilizing your portfolio typography tokens
-const FuzzyText = ({ children, fontSize = "54px", fontWeight = 900, fontFamily = "Bangers", color = "#FFE500" }: { children: React.ReactNode; fontSize?: string; fontWeight?: number; fontFamily?: string; color?: string }) => {
+// Specialized text component utilizing Neural Monolith typography tokens
+const FuzzyText = ({ children, fontSize = "52px", fontWeight = 900, fontFamily = "var(--font-display, 'Space Grotesk', sans-serif)", color = "#FFFFFF" }: { children: React.ReactNode; fontSize?: string; fontWeight?: number; fontFamily?: string; color?: string }) => {
   return (
     <span style={{ fontSize, fontWeight, fontFamily, color, textTransform: 'uppercase', letterSpacing: '2px' }}>
       {children}
@@ -25,7 +25,7 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
   const diagnosticLogs = [
     { threshold: 0, text: "> INITIALIZING COGNITIVE CORE PROCESSES... [ OK ]" },
     { threshold: 30, text: "> SYNCING MISSION ARCHIVES & PROJECT BLUEPRINTS... [ 100% ]" },
-    { threshold: 65, text: "> INJECTING DYNAMIC JAPANESE TEXT BACKGROUND TEXTURE... [ ACTIVE ]" },
+    { threshold: 65, text: "> INJECTING NEURAL MONOLITH GRAPH VISUALIZER... [ ACTIVE ]" },
     { threshold: 85, text: "> DEPLOYING COMPILER SIMULATORS & INTERACTIVE DATA GRID... [ READY ]" }
   ];
 
@@ -34,7 +34,7 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
     return () => { document.body.style.overflow = 'auto'; };
   }, []);
 
-  // Word Ticks & Ticks-Spark Lifecycle
+  // Word Ticks Lifecycle
   useEffect(() => {
     if (bootStage !== 'greetings') return;
 
@@ -52,7 +52,7 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
     return () => clearInterval(wordInterval);
   }, [bootStage]);
 
-  // Flash micro-spark on word change tick
+  // Micro-spark on word change tick
   useEffect(() => {
     if (bootStage === 'greetings' && currentWordIndex > 0) {
       setGreetingSpark(true);
@@ -92,7 +92,7 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
       const completionTimeout = setTimeout(() => {
         document.body.style.overflow = 'auto';
         if (onComplete) onComplete();
-      }, 600); // 100ms offset for sparks completion
+      }, 600);
       return () => clearTimeout(completionTimeout);
     }
   }, [bootStage, onComplete]);
@@ -110,7 +110,7 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
             {greetingSpark && (
               <div className="greetings-spark-container">
                 <svg viewBox="0 0 100 100" className="greeting-spark-svg" fill="none">
-                  <path d="M10 20 L40 40 L20 60 L90 80" stroke="#FFE500" strokeWidth="5" strokeLinecap="round" />
+                  <path d="M10 20 L40 40 L20 60 L90 80" stroke="#FFFFFF" strokeWidth="5" strokeLinecap="round" />
                 </svg>
               </div>
             )}
@@ -144,14 +144,13 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
           <svg className="exit-spark-svg" viewBox="0 0 1000 400" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <pattern id="loader-spark-halftone" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
-                <circle cx="3" cy="3" r="1.5" fill="#FFE500" />
+                <circle cx="3" cy="3" r="1.5" fill="#FFFFFF" />
               </pattern>
             </defs>
-            {/* Tapered needle arcs with halftone fill */}
             <path className="spark-arc spark-left" d="M500 200 L420 180 L440 210 L320 175 L350 220 L200 190 L230 225 L50 200" stroke="url(#loader-spark-halftone)" strokeWidth="9" strokeLinecap="round" />
             <path className="spark-arc spark-right" d="M500 200 L580 220 L560 190 L680 225 L650 180 L800 210 L770 175 L950 200" stroke="url(#loader-spark-halftone)" strokeWidth="9" strokeLinecap="round" />
           </svg>
-          <div className="exit-sfx-text bangers">バリバリ</div>
+          <div className="exit-sfx-text">SYSTEM_READY</div>
         </div>
       )}
 
@@ -166,7 +165,7 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
           left: 0;
           width: 100vw;
           height: 100vh;
-          background-color: #0F0F0F;
+          background-color: #000000;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -179,7 +178,7 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
           left: 0;
           width: 100%;
           height: 50%;
-          background-color: #0F0F0F;
+          background-color: #000000;
           z-index: 2;
           transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
         }
@@ -227,7 +226,6 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
           100% { transform: scale(1.3) rotate(40deg); opacity: 0; }
         }
 
-        /* Exit moment sparks wrapper */
         .exit-spark-wrapper {
           position: absolute;
           inset: 0;
@@ -244,7 +242,6 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
           height: 100%;
         }
 
-        /* Frame-by-frame lightning arcs */
         .spark-arc {
           transform-origin: 500px 200px;
           animation: exit-spark-sequence 0.5s steps(4) forwards;
@@ -258,21 +255,22 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
           100% { transform: scaleX(1) scaleY(0); opacity: 0; }
         }
 
-        /* SFX Text */
         .exit-sfx-text {
-          font-size: 82px;
-          color: #FFE500;
-          text-shadow: 4px 4px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000;
+          font-family: var(--font-body, 'JetBrains Mono', monospace);
+          font-size: 42px;
+          font-weight: 800;
+          color: #FFFFFF;
+          letter-spacing: 4px;
           z-index: 10;
-          transform: scale(0.6) rotate(-10deg);
+          transform: scale(0.6);
           animation: exit-sfx-sequence 0.4s steps(3) forwards;
         }
 
         @keyframes exit-sfx-sequence {
-          0% { transform: scale(0.6) rotate(-10deg); opacity: 0; }
-          20% { transform: scale(1.3) rotate(-15deg); opacity: 1; }
-          80% { transform: scale(1.1) rotate(-12deg); opacity: 0.8; }
-          100% { transform: scale(1) rotate(-12deg); opacity: 0; }
+          0% { transform: scale(0.6); opacity: 0; }
+          20% { transform: scale(1.1); opacity: 1; }
+          80% { transform: scale(1); opacity: 0.8; }
+          100% { transform: scale(1); opacity: 0; }
         }
 
         .terminal-matrix-hud {
@@ -283,20 +281,19 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
         }
 
         .branding-logo-initials {
-          font-family: 'Bangers', sans-serif;
+          font-family: var(--font-display, 'Space Grotesk', sans-serif);
           font-size: 48px;
-          color: #FFE500;
-          font-style: italic;
+          color: #FFFFFF;
           font-weight: 900;
           margin-bottom: 0.5rem;
-          letter-spacing: 1px;
+          letter-spacing: 2px;
         }
 
         .progress-rail-container {
           position: relative;
           width: 100%;
           height: 4px;
-          background-color: #222222;
+          background-color: #1A1A1A;
           margin-bottom: 1.5rem;
           display: flex;
           align-items: center;
@@ -304,8 +301,8 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
 
         .progress-fill-beam {
           height: 100%;
-          background-color: #FFE500;
-          box-shadow: 0 0 14px #FFE500, 0 0 4px #FFE500;
+          background-color: #FFFFFF;
+          box-shadow: 0 0 14px rgba(255, 255, 255, 0.8), 0 0 4px #FFFFFF;
           transition: width 0.05s linear;
         }
 
@@ -313,14 +310,14 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
           position: absolute;
           right: 0;
           top: -24px;
-          font-family: monospace;
+          font-family: var(--font-body, 'JetBrains Mono', monospace);
           font-size: 14px;
-          color: #FFE500;
+          color: #FFFFFF;
           font-weight: bold;
         }
 
         .diagnostic-log-terminal {
-          font-family: monospace;
+          font-family: var(--font-body, 'JetBrains Mono', monospace);
           font-size: 11px;
           color: #888888;
           text-align: left;
@@ -332,8 +329,8 @@ const PageLoader: React.FC<PageLoaderProps> = ({ onComplete }) => {
         }
 
         @keyframes fastGlitchFlicker {
-          0% { transform: scale(0.98); filter: hue-rotate(0deg); opacity: 0.95; }
-          100% { transform: scale(1); filter: hue-rotate(5deg); opacity: 1; }
+          0% { transform: scale(0.98); opacity: 0.95; }
+          100% { transform: scale(1); opacity: 1; }
         }
 
         @media (prefers-reduced-motion: reduce) {

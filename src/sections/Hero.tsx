@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Magnet from '../components/ui/Magnet';
 import PremiumResumeButton from '../components/ui/PremiumResumeButton';
 import { Manga3DVolume } from '../components/ui/Manga3DVolume';
@@ -44,19 +44,18 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [stage, setStage] = useState(0);
-  const [hudOpen, setHudOpen] = useState(false);
-  const [sfxWhooshFlash, setSfxWhooshFlash] = useState(false);
-  const [sfxKzzztFlash, setSfxKzzztFlash] = useState(false);
-  const [sfxLockedOnFlash, setSfxLockedOnFlash] = useState(false);
+  const [cardFlipped, setCardFlipped] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
 
+  /* Page load stagger stage sequence */
   useEffect(() => {
     const timers = [200, 500, 700, 900, 1100, 1300, 1500, 1700].map((delay, i) =>
       setTimeout(() => setStage(i + 1), delay)
     );
-    const sfxTimer = setTimeout(() => { setSfxWhooshFlash(true); setTimeout(() => setSfxWhooshFlash(false), 300); }, 1800);
-    return () => { timers.forEach(clearTimeout); clearTimeout(sfxTimer); };
+    return () => { timers.forEach(clearTimeout); };
   }, []);
 
+  /* Typewriter effect loop */
   useEffect(() => {
     if (stage < 5) return;
     let timer: ReturnType<typeof setTimeout>;
@@ -71,35 +70,30 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
     return () => clearTimeout(timer);
   }, [stage, charIndex, isDeleting, roleIndex]);
 
-  const nameLetters = "ANANT".split("");
+  const firstNameLetters = "ANANT".split("");
+  const lastNameLetters = "RAI".split("");
 
   return (
-    <section id="hero" className="hero-section-container">
-      {/* BACKGROUND LAYERS */}
-      <div className="hero-bg-dotgrid" style={{ opacity: stage >= 1 ? 0.8 : 0 }} />
-      <div className="hero-speed-lines" style={{ position: 'absolute', inset: 0, background: 'repeating-conic-gradient(from 0deg at 68% 50%, transparent 0deg 3deg, rgba(255, 255, 255, 0.04) 4deg 5deg, transparent 6deg 10deg)', opacity: stage >= 1 ? 1 : 0, transition: 'opacity 0.8s ease', pointerEvents: 'none', zIndex: 2 }} />
-      <div className="watermark-vertical hero-jp-watermark" style={{ position: 'absolute', right: '20px', top: '50%', transform: 'translateY(-50%)', fontFamily: 'var(--font-jp)', fontSize: '4.5vh', fontWeight: 900, letterSpacing: '12px', color: '#FFFFFF', opacity: stage >= 1 ? 0.05 : 0, writingMode: 'vertical-rl', pointerEvents: 'none', zIndex: 3, transition: 'opacity 0.8s ease' }}>
-        経験　スキル　作品　未来
+    <section
+      id="hero"
+      ref={heroRef}
+      className="hero-section-container"
+    >
+      {/* ═══ THE "GHOST" INFINITE MARQUEE BACKGROUND LAYER ═══ */}
+      <div className="hero-ghost-marquee-container" aria-hidden="true">
+        <div className="hero-ghost-marquee-track">
+          <span className="hero-ghost-marquee-text">
+            NEURAL NETWORKS // SYSTEM SCHEMATICS // COMPUTER VISION // FULL-STACK //&nbsp;
+          </span>
+          <span className="hero-ghost-marquee-text">
+            NEURAL NETWORKS // SYSTEM SCHEMATICS // COMPUTER VISION // FULL-STACK //&nbsp;
+          </span>
+        </div>
       </div>
 
-      {/* SFX Labels */}
-      <div className="bangers float-sfx-woosh" style={{ position: 'absolute', top: '12%', right: '10%', fontSize: '52px', color: sfxWhooshFlash ? '#FF3B5C' : 'rgba(255,255,255,0.1)', pointerEvents: 'none', zIndex: 6, transition: 'color 0.2s ease, opacity 0.3s ease', opacity: sfxWhooshFlash ? 0.95 : 0.12, animation: 'float-sine 4s ease-in-out infinite' }}>WHOOSH!</div>
-      <div className="bangers float-sfx-kzzzt" style={{ position: 'absolute', top: '45%', right: '48%', fontSize: '36px', color: sfxKzzztFlash ? '#00C9E0' : 'rgba(0,201,224,0.12)', pointerEvents: 'none', zIndex: 6, transition: 'color 0.2s ease, opacity 0.3s ease', opacity: sfxKzzztFlash ? 0.95 : 0.12, animation: 'float-sine 4s ease-in-out infinite', animationDelay: '1.5s' }}>KZZZT!</div>
-      <div className="bangers float-sfx-lock" style={{ position: 'absolute', bottom: '22%', left: '32%', fontSize: '28px', color: sfxLockedOnFlash ? '#FFD60A' : 'rgba(255,214,10,0.1)', pointerEvents: 'none', zIndex: 6, transition: 'color 0.2s ease, opacity 0.3s ease', opacity: sfxLockedOnFlash ? 0.95 : 0.1, animation: 'float-sine 4s ease-in-out infinite', animationDelay: '0.8s' }}>LOCKED ON!</div>
-
-      {/* ── JAPANESE TEXT FILLS — left column ambience ── */}
-      <div className="hero-jp-fill-left" style={{ position: 'absolute', left: '1.5%', top: '50%', transform: 'translateY(-50%)', writingMode: 'vertical-rl', fontFamily: 'var(--font-jp)', fontSize: '11px', color: 'rgba(255,255,255,0.06)', letterSpacing: '6px', lineHeight: 1.8, pointerEvents: 'none', zIndex: 3, userSelect: 'none' }}>
-        {'人工知能\n機械学習\nコンピュータ\nビジョン\n開発者\nエンジニア\n研究者\nナシク'}
-      </div>
-      <div className="hero-jp-fill-tl" style={{ position: 'absolute', left: '4%', top: '10%', fontFamily: 'var(--font-jp)', fontSize: '9px', color: 'rgba(255,214,10,0.07)', letterSpacing: '4px', pointerEvents: 'none', zIndex: 3, userSelect: 'none', lineHeight: 2 }}>
-        {'第一話　// 覚醒'}<br/>{'コード名：AI-99'}<br/>{'分類：脅威レベル　S'}
-      </div>
-      <div className="hero-jp-fill-bl" style={{ position: 'absolute', left: '4%', bottom: '8%', fontFamily: 'var(--font-jp)', fontSize: '9px', color: 'rgba(0,201,224,0.07)', letterSpacing: '3px', pointerEvents: 'none', zIndex: 3, userSelect: 'none', lineHeight: 2 }}>
-        {'実行中…'}<br/>{'スキャン完了'}<br/>{'接続確立'}
-      </div>
-
-      {/* MAIN CONTENT WRAPPER */}
+      {/* MAIN TWO-COLUMN CONTENT GRID WRAPPER */}
       <div className="hero-content-wrapper">
+
         {/* ═══ LEFT COL — TEXT CONTENT ═══ */}
         <div className="hero-left-col">
           {/* Subject label */}
@@ -108,88 +102,111 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             • SUBJECT FILE · AI/ML ENGINEER
           </div>
 
-          {/* NAME BLOCK */}
+          {/* HEADLINE BLOCK WITH STAGGERED ENTRANCE */}
           <div className="hero-name-block">
-            <div style={{ display: 'flex', flexDirection: 'row', overflow: 'hidden' }}>
-              {nameLetters.map((letter, i) => {
+            {/* First Name: ANANT */}
+            <div className="headline-word-row">
+              {firstNameLetters.map((letter, i) => {
                 const isLoaded = stage >= 3;
                 return (
-                  <span key={i} className="bangers hero-first-name" style={{ color: '#FFD60A', textShadow: '3px 3px 0 rgba(0,0,0,0.55)', display: 'inline-block', opacity: isLoaded ? 1 : 0, transform: isLoaded ? 'translateY(0)' : 'translateY(-30px)', transition: `transform 700ms cubic-bezier(0.23,1,0.32,1) ${i * 50}ms, opacity 700ms cubic-bezier(0.23,1,0.32,1) ${i * 50}ms` }}>
+                  <span
+                    key={i}
+                    className="bangers hero-first-name headline-letter-stagger"
+                    style={{
+                      color: '#FFFFFF',
+                      display: 'inline-block',
+                      opacity: isLoaded ? 1 : 0,
+                      transform: isLoaded ? 'translateY(0)' : 'translateY(-24px)',
+                      transition: `transform 700ms cubic-bezier(0.23,1,0.32,1) ${i * 45}ms, opacity 700ms cubic-bezier(0.23,1,0.32,1) ${i * 45}ms`
+                    }}
+                  >
                     {letter}
                   </span>
                 );
               })}
             </div>
-            <div className="bebas hero-last-name" style={{ color: '#FFFFFF', opacity: stage >= 4 ? 1 : 0, transform: stage >= 4 ? 'translateY(0)' : 'translateY(20px)', transition: 'opacity 0.6s cubic-bezier(0.23,1,0.32,1), transform 0.6s cubic-bezier(0.23,1,0.32,1)' }}>
-              RAI
+
+            {/* Last Name: RAI */}
+            <div className="headline-word-row" style={{ marginTop: '-4px' }}>
+              {lastNameLetters.map((letter, i) => {
+                const isLoaded = stage >= 4;
+                return (
+                  <span
+                    key={i}
+                    className="bangers hero-last-name headline-letter-stagger"
+                    style={{
+                      color: 'rgba(255, 255, 255, 0.55)',
+                      display: 'inline-block',
+                      opacity: isLoaded ? 1 : 0,
+                      transform: isLoaded ? 'translateY(0)' : 'translateY(20px)',
+                      transition: `transform 600ms cubic-bezier(0.23,1,0.32,1) ${180 + i * 50}ms, opacity 600ms cubic-bezier(0.23,1,0.32,1) ${180 + i * 50}ms`
+                    }}
+                  >
+                    {letter}
+                  </span>
+                );
+              })}
             </div>
           </div>
 
-          {/* TYPEWRITER */}
+          {/* TYPEWRITER ROLE */}
           <div className="hero-typewriter-container">
             <span>{currentRole}</span>
             <span className="hero-typewriter-cursor" />
           </div>
 
-          {/* ═══ INLINE BIO ═══ */}
+          {/* INLINE BIO & REFACTORED TAG CHIPS HIERARCHY */}
           <div className="hero-bio-container" style={{ opacity: stage >= 5 ? 1 : 0, transform: stage >= 5 ? 'translateY(0)' : 'translateY(8px)' }}>
             <p className="hero-bio-text">
               AI/ML engineer & Full-Stack developer from Nashik — building intelligent systems in computer vision, healthcare AI, and scalable web platforms. International research author · 5+ hackathons · RPD Group AI Ops.
             </p>
 
-            {/* Quick-info tag strip */}
-            <div className="hero-tag-strip">
-              {[
-                { icon: '◎', label: 'Nashik · MH', color: '#00C9E0' },
-                { icon: '⬡', label: 'RPD Group — AI Ops', color: '#3DFFA0' },
-                { icon: '▣', label: 'B.Sc CS · Sanjivani', color: '#BF8FFF' },
-                { icon: '●', label: 'ACTIVELY BUILDING', color: '#FFD60A' }
-              ].map(tag => (
-                <span key={tag.label} className="hero-info-tag" style={{ color: tag.color }}>
-                  <span style={{ fontSize: '7px' }}>{tag.icon}</span>
-                  {tag.label}
-                </span>
-              ))}
+            {/* REFACTORED TAG CHIPS: 1 PRIMARY FILLED TAG + 1 META ROW */}
+            <div className="hero-tag-block">
+              {/* PRIMARY FILLED TAG */}
+              <div className="hero-tag-primary">
+                <span className="tag-pulse-indicator" />
+                ACTIVELY BUILDING
+              </div>
+
+              {/* LOWER-CONTRAST META ROW */}
+              <div className="hero-meta-row">
+                <span>Nashik · MH</span>
+                <span className="meta-dot">·</span>
+                <span>RPD Group — AI Ops</span>
+                <span className="meta-dot">·</span>
+                <span>B.Sc CS · Sanjivani</span>
+              </div>
             </div>
           </div>
 
-          {/* ═══ CTA BUTTONS ═══ */}
+          {/* CTA BUTTONS ROW */}
           <div className="hero-cta-row">
-            {/* PRIMARY: RESUME ↓ */}
-            <a
-              href="/img/resume.pdf"
-              download="Anant_Rai_Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="resume-mobile-btn"
-              aria-label="Download Resume"
-            >
-              RESUME ↓
-            </a>
-            <div className="resume-desktop-sticker">
-              <PremiumResumeButton />
-            </div>
-
-            <div
-              onMouseEnter={() => { setSfxLockedOnFlash(true); setTimeout(() => setSfxLockedOnFlash(false), 300); }}
-            >
+            {/* PRIMARY CTA: HIRE ME → (Solid White) */}
+            <div>
               <Magnet padding={40} magnetStrength={4}>
                 <button
                   className="hero-hire-me-btn"
                   onClick={() => onNavigate ? onNavigate('contact') : document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 >
-                  HIRE ME →
+                  <span>HIRE ME</span>
+                  <span className="hire-arrow">→</span>
                 </button>
               </Magnet>
             </div>
 
-            {/* TERTIARY: [ SCAN PROFILE ] */}
+            {/* SECONDARY CTA: RESUME BUTTON */}
+            <div className="resume-desktop-sticker">
+              <PremiumResumeButton />
+            </div>
+
+            {/* TERTIARY SCAN PROFILE FLIP TRIGGER BUTTON */}
             <button
-              onClick={() => { setHudOpen(p => !p); setSfxKzzztFlash(true); setTimeout(() => setSfxKzzztFlash(false), 300); }}
-              className={`hero-scan-btn-cyber ${hudOpen ? 'hud-active' : ''}`}
+              onClick={() => setCardFlipped(p => !p)}
+              className={`hero-scan-btn-cyber ${cardFlipped ? 'hud-active' : ''}`}
             >
-              <span className={`hero-scan-dot ${hudOpen ? 'active' : ''}`} />
-              {hudOpen ? '[ CLOSE HUD ]' : '[ SCAN PROFILE ]'}
+              <span className={`hero-scan-dot ${cardFlipped ? 'active' : ''}`} />
+              {cardFlipped ? '[ CLOSE FILE ]' : '[ SCAN DOSSIER ]'}
             </button>
           </div>
 
@@ -230,11 +247,11 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* ═══ RIGHT COL — AVATAR + HUD PANEL ═══ */}
+        {/* ═══ RIGHT COL — CHARACTER DOSSIER FLIP CARD ═══ */}
         <div className="hero-right-col">
-          <Manga3DVolume 
-            isOpen={hudOpen} 
-            onToggle={() => setHudOpen(p => !p)} 
+          <Manga3DVolume
+            isOpen={cardFlipped}
+            onToggle={() => setCardFlipped(p => !p)}
             onNavigate={onNavigate}
           />
         </div>

@@ -1,0 +1,126 @@
+/* Ghost in the Machine — Cyber Operating System Background Layer */
+
+.ghost-machine-wrapper {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* 1. WebGL Cursor Spotlight Layer */
+.ghost-cursor-spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+  will-change: background;
+}
+
+/* 2. Ambient Data Visualization Chart (CNN / Neural Nodes SVG) */
+.ghost-data-vis-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 900px;
+  height: 340px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.85;
+}
+
+.ghost-chart-svg {
+  width: 100%;
+  height: 100%;
+  stroke: rgba(0, 255, 204, 0.09);
+  fill: none;
+}
+
+/* Continuous scrolling wave / data drift animation */
+.ghost-wave-line {
+  stroke-dasharray: 8 6;
+  animation: chart-wave-scroll 24s linear infinite;
+}
+
+.ghost-neural-node {
+  fill: rgba(0, 255, 204, 0.15);
+  animation: node-pulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes chart-wave-scroll {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 500; }
+}
+
+@keyframes node-pulse {
+  0% { transform: scale(1); opacity: 0.4; }
+  100% { transform: scale(1.4); opacity: 0.9; }
+}
+
+/* 3. Micro-Grid Accents & Corner Crosshairs [ + ] */
+.ghost-reticle-corner {
+  position: absolute;
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: rgba(0, 201, 224, 0.25);
+  letter-spacing: 2px;
+  user-select: none;
+  z-index: 3;
+}
+
+.ghost-reticle-corner.tl { top: 12%; left: 42%; }
+.ghost-reticle-corner.tr { top: 12%; right: 38%; }
+.ghost-reticle-corner.bl { bottom: 18%; left: 42%; }
+.ghost-reticle-corner.br { bottom: 18%; right: 38%; }
+
+.crosshair-plus {
+  font-weight: bold;
+  color: rgba(255, 214, 10, 0.3);
+}
+
+/* Live Telemetry String */
+.ghost-telemetry-box {
+  position: absolute;
+  bottom: 22%;
+  left: 48%;
+  transform: translateX(-50%);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9.5px;
+  letter-spacing: 1.5px;
+  color: rgba(0, 255, 204, 0.22);
+  background: rgba(0, 201, 224, 0.02);
+  border: 1px dashed rgba(0, 201, 224, 0.12);
+  padding: 4px 10px;
+  z-index: 3;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.telemetry-pulse-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #00FFCC;
+  box-shadow: 0 0 6px #00FFCC;
+  animation: telemetry-blink 0.9s steps(2, start) infinite;
+}
+
+@keyframes telemetry-blink {
+  to { visibility: hidden; }
+}
+
+/* Reduced Motion Fallback */
+@media (prefers-reduced-motion: reduce) {
+  .ghost-cursor-spotlight,
+  .ghost-wave-line,
+  .ghost-neural-node,
+  .telemetry-pulse-dot {
+    animation: none !important;
+    transition: none !important;
+  }
+}

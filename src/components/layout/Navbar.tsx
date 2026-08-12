@@ -13,22 +13,20 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection = 'hero', onNavigate }) =
   const [menuOpen, setMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
 
-  // New Shonen / Terminal section names mapping
   const links = [
-    { id: 'hero', label: 'HOME', code: 'SYS_BOOT' },
+    { id: 'hero', label: '[ HOME ]', code: 'SYS_BOOT' },
     { id: 'skills', label: '[ CHARACTER SHEET ]', code: 'PWR_LVL' },
     { id: 'projects', label: '[ MISSION ARCHIVE ]', code: 'OPS_LOG' },
     { id: 'experience', label: '[ BATTLE CHRONICLES ]', code: 'FLD_DEP' },
     { id: 'research', label: '[ SYSTEM SCHEMATICS ]', code: 'INT_FIL' },
     { id: 'achievements', label: '[ FEATS OF STRENGTH ]', code: 'XP_LOCK' },
-    { id: 'contact', label: '[ TO BE CONTINUED... ]', code: 'COM_LNK' }
+    { id: 'contact', label: '[ CONTACT ]', code: 'COM_LNK' }
   ];
 
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
-      setScrolled(currentY > 80);
-      // Hide when scrolling down past 120px, show when scrolling up
+      setScrolled(currentY > 40);
       if (currentY > 120) {
         setHidden(currentY > lastScrollY.current);
       } else {
@@ -55,53 +53,55 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection = 'hero', onNavigate }) =
   return (
     <>
       <header className={`navbar-header ${scrolled ? 'scrolled' : ''} ${hidden && !menuOpen ? 'navbar-hidden' : ''}`}>
-        <div className="navbar-logo bangers" onClick={() => handleClick('hero')}>
-          AR
+        {/* Brand Logo */}
+        <div className="navbar-logo" onClick={() => handleClick('hero')}>
+          <span className="logo-text">AR</span>
+          <span className="logo-dot" />
         </div>
 
+        {/* Desktop Links */}
         <ul className="navbar-links">
           {links.map(link => (
             <li
               key={link.id}
               className={`navbar-link-item ${activeSection === link.id ? 'active' : ''}`}
             >
-              <Magnet padding={10} magnetStrength={4}>
+              <Magnet padding={8} magnetStrength={3}>
                 <a href={`#${link.id}`} onClick={(e) => { e.preventDefault(); handleClick(link.id); }}>
                   {link.label}
                 </a>
               </Magnet>
             </li>
           ))}
-          <li className="navbar-link-item">
-            <Magnet padding={20} magnetStrength={3}>
-              <button className="nav-cta-btn" onClick={() => handleClick('contact')}>
-                HIRE ME →
-              </button>
-            </Magnet>
-          </li>
         </ul>
 
-        {/* Mobile Navigation Override button - Target reticle style [ + ] */}
+        {/* Call To Action */}
+        <div className="navbar-cta-wrapper">
+          <Magnet padding={12} magnetStrength={2}>
+            <button className="nav-cta-btn" onClick={() => handleClick('contact')}>
+              [ HIRE ME → ]
+            </button>
+          </Magnet>
+        </div>
+
+        {/* Mobile Reticle Toggle */}
         <button
           className={`mobile-reticle-toggle ${menuOpen ? 'reticle-active' : ''}`}
           aria-label="Toggle navigation"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <div className="reticle-inner">
-            <span className="reticle-symbol">{menuOpen ? '[ × ]' : '[ ＋ ]'}</span>
-          </div>
+          <span className="reticle-symbol">{menuOpen ? '[ × ]' : '[ ＋ ]'}</span>
         </button>
       </header>
 
-      {/* Mobile Terminal-style Boot-up Overlay Menu */}
+      {/* Mobile Terminal Overlay */}
       <div className={`mobile-overlay-nav ${menuOpen ? 'visible' : ''}`}>
-        {/* Terminal frame/header decoration */}
         <div className="mobile-overlay-header">
-          <div className="bangers" style={{ color: 'var(--red)', fontSize: '14px', letterSpacing: '2px' }}>
-            SYSTEM DIRECTORY OVERRIDE // ACTIVE
+          <div style={{ color: '#FFFFFF', fontSize: '11px', fontFamily: 'var(--font-body, "JetBrains Mono", monospace)', letterSpacing: '1px' }}>
+            // DIRECTORY OVERRIDE MENU
           </div>
-          <div style={{ color: 'var(--gray)', fontSize: '8px', fontFamily: 'var(--font-body)', marginTop: '4px' }}>
-            SECURE ACCESS MATRIX · SELECT CHANNEL TERMINAL
+          <div style={{ color: '#888888', fontSize: '9px', fontFamily: 'var(--font-body, "JetBrains Mono", monospace)', marginTop: '4px' }}>
+            SELECT SYSTEM MODULE TO NAVIGATE
           </div>
         </div>
 
@@ -110,43 +110,42 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection = 'hero', onNavigate }) =
             <li
               key={link.id}
               className="mobile-link-item"
-              style={{ 
-                transitionDelay: `${index * 40}ms`,
+              style={{
+                transitionDelay: `${index * 35}ms`,
                 opacity: menuOpen ? 1 : 0,
-                transform: menuOpen ? 'translateY(0)' : 'translateY(-15px)',
-                transition: 'transform 0.35s var(--ease-spring), opacity 0.35s'
+                transform: menuOpen ? 'translateY(0)' : 'translateY(-10px)',
+                transition: 'transform 0.25s ease, opacity 0.25s ease'
               }}
             >
               <a href={`#${link.id}`} onClick={(e) => { e.preventDefault(); handleClick(link.id); }}>
-                <span className="link-code" style={{ color: 'var(--gold)', marginRight: '16px' }}>{link.code}</span>
+                <span className="link-code" style={{ color: '#FFFFFF', marginRight: '14px', opacity: 0.5 }}>{link.code}</span>
                 <span className="link-text">{link.label}</span>
               </a>
             </li>
           ))}
-          
+
           <li
             className="mobile-link-item"
-            style={{ 
-              transitionDelay: `${links.length * 40}ms`,
+            style={{
+              transitionDelay: `${links.length * 35}ms`,
               opacity: menuOpen ? 1 : 0,
-              transform: menuOpen ? 'translateY(0)' : 'translateY(-15px)',
-              transition: 'transform 0.35s var(--ease-spring), opacity 0.35s',
+              transform: menuOpen ? 'translateY(0)' : 'translateY(-10px)',
+              transition: 'transform 0.25s ease, opacity 0.25s ease',
               marginTop: '16px'
             }}
           >
-            <button 
-              className="nav-cta-btn" 
+            <button
+              className="nav-cta-btn"
               onClick={() => handleClick('contact')}
-              style={{ width: '100%', padding: '12px', fontSize: '16px', cursor: 'none' }}
+              style={{ width: '100%', padding: '10px 0', textAlign: 'center' }}
             >
-              HIRE ME →
+              [ HIRE ME → ]
             </button>
           </li>
         </ul>
 
-        {/* Footer info in overlay */}
-        <div className="mobile-overlay-footer" style={{ fontFamily: 'var(--font-body)', fontSize: '7px', color: 'rgba(255, 255, 255, 0.25)', position: 'absolute', bottom: '24px', textAlign: 'center', width: '100%', left: 0 }}>
-          AR OVERRIDE TERMINAL V3.0 // NASHIK CORE
+        <div className="mobile-overlay-footer">
+          // AR OVERRIDE TERMINAL V3.0 // NASHIK CORE
         </div>
       </div>
     </>

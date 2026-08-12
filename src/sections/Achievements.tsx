@@ -1,20 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import GlitchText from '../components/ui/GlitchText';
-import TiltCard from '../components/ui/TiltCard';
 import AnimatedCounter from '../components/ui/AnimatedCounter';
 
 interface Achievement {
   id: string;
   title: string;
   description: string;
-  category: 'CERTIFICATION' | 'AWARD' | 'MILESTONE' | 'SKILL_UNLOCK';
-  tier: 'LEGENDARY' | 'EPIC' | 'RARE' | 'COMMON';
-  icon: string;
+  category: 'RESEARCH' | 'PUBLICATION' | 'HACKATHON' | 'MILESTONE';
+  rank: 'S-RANK' | 'A-RANK' | 'B-RANK';
+  iconTag: string;
   unlocked: boolean;
   date: string;
   xp: number;
-  color: string;
 }
 
 const achievementsData: Achievement[] = [
@@ -22,404 +19,445 @@ const achievementsData: Achievement[] = [
     id: 'ach-001',
     title: '1ST PRIZE — SRPS RESEARCH',
     description: 'SRPS Research Paper Competition 2025: MPVE framework boosts OCR from 68%→91%. AI + CV for medical intelligence at Ashoka Education Foundation.',
-    category: 'AWARD',
-    tier: 'LEGENDARY',
-    icon: '🥇',
+    category: 'RESEARCH',
+    rank: 'S-RANK',
+    iconTag: '[ AI/CV ]',
     unlocked: true,
     date: '2025',
-    xp: 5000,
-    color: 'var(--gold)'
+    xp: 5000
   },
   {
     id: 'ach-002',
-    title: 'IEJSE INTERNATIONAL PUBLICATION',
-    description: 'Published in IEJSE Vol. 8 No. 9 (Sep 2025): OR + ML hybrid model for hospital ICU allocation, patient flow & cost-efficiency. 1st Prize at conference.',
-    category: 'AWARD',
-    tier: 'LEGENDARY',
-    icon: '📄',
+    title: 'IEJSE PUBLICATION',
+    description: 'Co-authored research on operations research and healthcare efficiency accepted for publication.',
+    category: 'PUBLICATION',
+    rank: 'S-RANK',
+    iconTag: '[ PAPER ]',
     unlocked: true,
     date: 'Sep 2025',
-    xp: 4800,
-    color: 'var(--purple)'
+    xp: 4800
   },
   {
     id: 'ach-003',
     title: 'ISRO ANTARIKSH HACKATHON',
-    description: 'MOSDAC LLM assistant with spatio-temporal knowledge graph, GNN multi-hop reasoning & Knowledge Graph of Thoughts (KG-oT) for persistent context.',
-    category: 'MILESTONE',
-    tier: 'EPIC',
-    icon: '🚀',
+    description: 'Developed RAG models for space tech applications (Sep 2025).',
+    category: 'HACKATHON',
+    rank: 'S-RANK',
+    iconTag: '[ ISRO ]',
     unlocked: true,
-    date: '2025',
-    xp: 4000,
-    color: 'var(--cyan)'
+    date: 'Sep 2025',
+    xp: 4000
   },
   {
     id: 'ach-004',
     title: 'GHRHACK 2.0 — 30 HRS',
     description: 'Built AI-powered prescription handwriting recognition with multilingual audio support and confidence scoring in a 30-hour sprint.',
-    category: 'AWARD',
-    tier: 'EPIC',
-    icon: '⚡',
+    category: 'HACKATHON',
+    rank: 'A-RANK',
+    iconTag: '[ 30HRS ]',
     unlocked: true,
     date: '2026',
-    xp: 3800,
-    color: 'var(--gold)'
+    xp: 3800
   },
   {
     id: 'ach-005',
-    title: 'SUNHACKS UX AWARD',
-    description: 'Built StudyGenie AI study assistant with roadmaps, quizzes, and mindmaps in 36 hours at Sandip University. Earned recognition for innovation & usability.',
-    category: 'AWARD',
-    tier: 'EPIC',
-    icon: '🏆',
+    title: 'SUNHACKS 2025',
+    description: 'Generative AI hackathon at Sandip University. (Team: MythByte).',
+    category: 'HACKATHON',
+    rank: 'A-RANK',
+    iconTag: '[ GENAI ]',
     unlocked: true,
     date: '2025',
-    xp: 3800,
-    color: 'var(--green)'
+    xp: 3800
   },
   {
     id: 'ach-006',
     title: 'AVISHKAR 2025 — SPPU ZONAL',
     description: 'Represented Ashoka Center for Business & Computer Studies at Savitribai Phule Pune University zonal research festival.',
-    category: 'AWARD',
-    tier: 'RARE',
-    icon: '🔴',
+    category: 'RESEARCH',
+    rank: 'A-RANK',
+    iconTag: '[ ZONAL ]',
     unlocked: true,
     date: '2025',
-    xp: 3200,
-    color: 'var(--red)'
+    xp: 3200
   },
   {
     id: 'ach-007',
     title: 'GEN AI EXCHANGE — GOOGLE CLOUD',
-    description: 'Explored responsible AI development in production-level cloud environment at the Google Cloud Gen AI Exchange Hackathon (2025).',
-    category: 'MILESTONE',
-    tier: 'RARE',
-    icon: '🔵',
+    description: 'Explored responsible AI development in production-level cloud environment at Google Cloud Gen AI Exchange (2025).',
+    category: 'HACKATHON',
+    rank: 'B-RANK',
+    iconTag: '[ GCLOUD ]',
     unlocked: true,
     date: '2025',
-    xp: 2500,
-    color: 'var(--cyan)'
+    xp: 2500
   },
   {
     id: 'ach-008',
     title: 'RESEARCH CELL APPRECIATION',
-    description: 'ACBCS formal appreciation letter for coordinating Avishkar orientation, SRPS, Start-Up Talk Series, and IPR sessions (Mar 2026).',
+    description: 'ACBCS formal appreciation letter for coordinating Avishkar orientation, SRPS, Start-Up Talk Series, and IPR sessions.',
     category: 'MILESTONE',
-    tier: 'RARE',
-    icon: '📋',
+    rank: 'B-RANK',
+    iconTag: '[ RECOG ]',
     unlocked: true,
     date: 'Mar 2026',
-    xp: 2200,
-    color: 'var(--gold)'
+    xp: 2200
   },
   {
     id: 'ach-009',
     title: 'GOOGLE STUDENT AMBASSADOR',
-    description: 'Appointed as Google Student Ambassador (Apr 2026 – Present): representing engineering students and hosting GDG community events across India.',
+    description: 'Appointed as Google Student Ambassador (Apr 2026 – Present): representing engineering students and hosting GDG events.',
     category: 'MILESTONE',
-    tier: 'EPIC',
-    icon: '🌐',
+    rank: 'A-RANK',
+    iconTag: '[ AMBASS ]',
     unlocked: true,
     date: 'Apr 2026',
-    xp: 3500,
-    color: 'var(--cyan)'
+    xp: 3500
   },
   {
     id: 'ach-010',
-    title: '??? HIDDEN BOSS ???',
-    description: 'This achievement has not been unlocked yet. Keep pushing boundaries...',
+    title: '??? CLASSIFIED OBJECTIVE ???',
+    description: 'This achievement target has not been unlocked yet. Keep pushing system boundaries...',
     category: 'MILESTONE',
-    tier: 'LEGENDARY',
-    icon: '🔒',
+    rank: 'S-RANK',
+    iconTag: '[ LOCKED ]',
     unlocked: false,
     date: '—',
-    xp: 9999,
-    color: 'var(--gray)'
+    xp: 9999
   }
 ];
 
-const tierGradient: Record<string, string> = {
-  LEGENDARY: 'linear-gradient(135deg, #FFD60A 0%, #FF7C40 100%)',
-  EPIC: 'linear-gradient(135deg, #00C9E0 0%, #BF8FFF 100%)',
-  RARE: 'linear-gradient(135deg, #BF8FFF 0%, #3DFFA0 100%)',
-  COMMON: 'linear-gradient(135deg, #888890 0%, #555 100%)'
-};
-
-const tierLabel: Record<string, string> = {
-  LEGENDARY: '★★★★★',
-  EPIC: '★★★★',
-  RARE: '★★★',
-  COMMON: '★★'
-};
-
-// Shifting ASCII/matrix characters generator
-const AsciiCamouflage: React.FC<{ opacity: number; color: string }> = ({ opacity, color }) => {
-  const [staticText, setStaticText] = useState('');
+// ════════ CUSTOM CIPHER DECODE HOOK ════════
+function useCipherDecode(targetText: string, isHovered: boolean, durationMs = 300) {
+  const [displayText, setDisplayText] = useState(targetText);
 
   useEffect(() => {
-    const symbols = "01$#@%&?*+-=<>{}[]/\\|X";
-    const makeText = () => {
-      let res = '';
-      for (let r = 0; r < 7; r++) {
-        let line = '';
-        for (let c = 0; c < 28; c++) {
-          line += symbols[Math.floor(Math.random() * symbols.length)];
-        }
-        res += line + '\n';
-      }
-      return res;
-    };
-
-    setStaticText(makeText());
-    const interval = setInterval(() => {
-      setStaticText(makeText());
-    }, 110);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <pre
-      style={{
-        position: 'absolute',
-        inset: 0,
-        margin: 0,
-        padding: '24px 20px',
-        fontFamily: 'monospace',
-        fontSize: '11px',
-        lineHeight: '1.45',
-        color: color,
-        opacity: opacity,
-        backgroundColor: '#0c0c0e',
-        pointerEvents: 'none',
-        zIndex: 5,
-        overflow: 'hidden',
-        whiteSpace: 'pre-wrap',
-        wordBreak: 'break-all',
-        userSelect: 'none',
-        transition: 'opacity 0.25s cubic-bezier(0.25, 0.8, 0.25, 1)'
-      }}
-    >
-      {staticText}
-    </pre>
-  );
-};
-
-// Individual card with cursor proximity tracker
-const AchievementRevealCard: React.FC<{
-  ach: Achievement;
-  mousePos: { x: number; y: number };
-  isMouseOverGrid: boolean;
-  onSelect: (id: string) => void;
-}> = ({ ach, mousePos, isMouseOverGrid, onSelect }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [proximity, setProximity] = useState(0);
-  const [arrivalActive, setArrivalActive] = useState(true);
-  const [sparkFlashed, setSparkFlashed] = useState(false);
-  const isLocked = !ach.unlocked;
-
-  // Reveal briefly on section mount
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setArrivalActive(false);
-    }, 1800);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Proximity math: distance from mouse to card center
-  useEffect(() => {
-    if (arrivalActive) return;
-
-    const card = cardRef.current;
-    if (!card) return;
-
-    if (!isMouseOverGrid) {
-      setProximity(0);
+    if (!isHovered) {
+      setDisplayText(targetText);
       return;
     }
 
-    const rect = card.getBoundingClientRect();
-    const cX = rect.left + rect.width / 2;
-    const cY = rect.top + rect.height / 2;
+    const chars = '!@#$%^&*0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ<>[]{}/\\|X';
+    const startTime = performance.now();
+    let animId: number;
 
-    const dist = Math.hypot(mousePos.x - cX, mousePos.y - cY);
-    const maxRadius = 240; // Detection radius bounds
+    const update = () => {
+      const elapsed = performance.now() - startTime;
+      const progress = Math.min(1, elapsed / durationMs);
 
-    if (dist < maxRadius) {
-      const factor = 1 - dist / maxRadius;
-      setProximity(Math.min(1, factor * 1.3)); // Boost curve scaling
-    } else {
-      setProximity(0);
-    }
-  }, [mousePos, isMouseOverGrid, arrivalActive]);
+      const resolvedLength = Math.floor(progress * targetText.length);
 
-  const activeReveal = arrivalActive ? 1 : proximity;
-  const isFullyResolved = activeReveal > 0.92;
+      let result = '';
+      for (let i = 0; i < targetText.length; i++) {
+        if (targetText[i] === ' ' || targetText[i] === '\n') {
+          result += targetText[i];
+        } else if (i < resolvedLength) {
+          result += targetText[i];
+        } else {
+          result += chars[Math.floor(Math.random() * chars.length)];
+        }
+      }
 
-  // Trigger legendary burst sparks on full resolution
-  useEffect(() => {
-    if (isFullyResolved && ach.tier === 'LEGENDARY' && !isLocked) {
-      setSparkFlashed(true);
-      const timer = setTimeout(() => setSparkFlashed(false), 500);
-      return () => clearTimeout(timer);
-    }
-  }, [isFullyResolved, ach.tier, isLocked]);
+      setDisplayText(result);
+
+      if (progress < 1) {
+        animId = requestAnimationFrame(update);
+      } else {
+        setDisplayText(targetText);
+      }
+    };
+
+    animId = requestAnimationFrame(update);
+
+    return () => cancelAnimationFrame(animId);
+  }, [targetText, isHovered, durationMs]);
+
+  return displayText;
+}
+
+// ════════ TARGET RETICLE & ABSOLUTE LAYERED CARD ════════
+const AchievementRevealCard: React.FC<{
+  ach: Achievement;
+  onSelect: (id: string) => void;
+}> = ({ ach, onSelect }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const isLocked = !ach.unlocked;
+
+  const decodedTitle = useCipherDecode(ach.title, isHovered, 300);
+  const decodedDesc = useCipherDecode(ach.description, isHovered, 350);
 
   return (
-    <div ref={cardRef} style={{ position: 'relative', height: '100%' }}>
-      <TiltCard
-        className="cursor-target ach-panel-card"
-        maxTilt={4}
+    <div
+      style={{ position: 'relative', height: '220px', width: '100%' }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div
+        className="achievement-card cursor-target"
         onClick={() => !isLocked && onSelect(ach.id)}
         style={{
+          position: 'relative',
+          height: '100%',
+          minHeight: '220px',
           padding: 0,
           overflow: 'hidden',
-          border: `2px solid ${isFullyResolved && !isLocked ? ach.color : 'rgba(255,255,255,0.08)'}`,
-          backgroundColor: isLocked ? '#0c0c0e' : 'var(--ink)',
-          opacity: isLocked ? 0.45 : 1,
+          backgroundColor: '#0A0A0A',
+          border: `1px solid ${isHovered && !isLocked ? '#FFFFFF' : '#1A1A1A'}`,
+          borderRadius: '0px',
+          opacity: isLocked ? 0.35 : 1,
           filter: isLocked ? 'grayscale(1)' : 'none',
-          transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-          boxShadow: isFullyResolved && !isLocked ? `-4px 4px 0px ${ach.color}` : 'none',
-          position: 'relative',
-          display: 'block',
-          height: '100%'
+          transition: 'all 0.15s ease',
+          boxShadow: isHovered && !isLocked ? '0 10px 30px rgba(0, 0, 0, 0.95), 0 0 15px rgba(255, 255, 255, 0.08)' : 'none',
+          cursor: isLocked ? 'not-allowed' : 'pointer'
         }}
       >
-        {/* Camouflage Layer */}
-        {!isLocked && (
-          <AsciiCamouflage opacity={1 - activeReveal} color={ach.color} />
-        )}
+        {/* Top Accent Glow Bar */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            height: '2px',
+            backgroundColor: isHovered && !isLocked ? '#FFFFFF' : '#1A1A1A',
+            width: '100%',
+            zIndex: 10,
+            transition: 'background-color 0.15s ease'
+          }}
+        />
 
-        {/* Real Content (Visible as activeReveal approaches 1) */}
-        <div style={{ opacity: isLocked ? 1 : activeReveal, transition: 'opacity 0.2s ease', padding: '20px' }}>
-          {/* Top border tier glow */}
-          <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              height: '3px',
-              background: isLocked ? 'var(--gray)' : tierGradient[ach.tier],
-              width: '100%'
-            }}
-          />
-
-          {/* Icon + Title Row */}
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
-            <motion.div
-              animate={{
-                scale: isFullyResolved && !isLocked ? [1, 1.15, 1] : 1,
-                rotate: isFullyResolved && !isLocked ? [0, -8, 8, 0] : 0
-              }}
-              transition={{ duration: 0.5 }}
+        {/* ════ TARGET LOCK CORNER BRACKETS ════ */}
+        {isHovered && !isLocked && (
+          <>
+            <div
               style={{
-                width: '48px',
-                height: '48px',
+                position: 'absolute',
+                top: '4px',
+                left: '4px',
+                width: '10px',
+                height: '10px',
+                borderTop: '2px solid #FFFFFF',
+                borderLeft: '2px solid #FFFFFF',
+                zIndex: 15,
+                pointerEvents: 'none'
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                top: '4px',
+                right: '4px',
+                width: '10px',
+                height: '10px',
+                borderTop: '2px solid #FFFFFF',
+                borderRight: '2px solid #FFFFFF',
+                zIndex: 15,
+                pointerEvents: 'none'
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '4px',
+                left: '4px',
+                width: '10px',
+                height: '10px',
+                borderBottom: '2px solid #FFFFFF',
+                borderLeft: '2px solid #FFFFFF',
+                zIndex: 15,
+                pointerEvents: 'none'
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '4px',
+                right: '4px',
+                width: '10px',
+                height: '10px',
+                borderBottom: '2px solid #FFFFFF',
+                borderRight: '2px solid #FFFFFF',
+                zIndex: 15,
+                pointerEvents: 'none'
+              }}
+            />
+
+            {/* Target Crosshairs Radar Overlay */}
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '24px',
-                border: `2px solid ${isLocked ? 'var(--gray)' : ach.color}`,
-                backgroundColor: `rgba(255,255,255,0.02)`,
-                flexShrink: 0,
-                position: 'relative'
+                pointerEvents: 'none',
+                opacity: 0.08,
+                zIndex: 2
               }}
             >
-              {ach.icon}
-              {isFullyResolved && !isLocked && (
-                <motion.div
-                  initial={{ scale: 0.8, opacity: 0.6 }}
-                  animate={{ scale: 1.8, opacity: 0 }}
-                  transition={{ duration: 0.7, repeat: Infinity }}
-                  style={{
-                    position: 'absolute',
-                    inset: '-4px',
-                    border: `2px solid ${ach.color}`,
-                    borderRadius: '2px',
-                    pointerEvents: 'none'
-                  }}
-                />
-              )}
-            </motion.div>
+              <svg width="180" height="180" viewBox="0 0 100 100" style={{ animation: 'spin 12s linear infinite' }}>
+                <circle cx="50" cy="50" r="45" stroke="#FFFFFF" strokeWidth="1" fill="none" strokeDasharray="4 4" />
+                <circle cx="50" cy="50" r="28" stroke="#FFFFFF" strokeWidth="1" fill="none" />
+                <line x1="50" y1="0" x2="50" y2="100" stroke="#FFFFFF" strokeWidth="1" />
+                <line x1="0" y1="50" x2="100" y2="50" stroke="#FFFFFF" strokeWidth="1" />
+              </svg>
+            </div>
+          </>
+        )}
 
-            <div style={{ flex: 1 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2px' }}>
-                <span style={{
-                  fontSize: '8px',
-                  fontFamily: 'var(--font-body)',
-                  color: isLocked ? 'var(--gray)' : ach.color,
-                  letterSpacing: '1px'
-                }}>
-                  {ach.tier} • {ach.category.replace('_', ' ')}
-                </span>
+        {/* ════ ABSOLUTE LAYER 1: SCRAMBLED MATRIX PREVIEW ════ */}
+        {!isLocked && (
+          <div
+            className="scrambled-layer absolute inset-0 p-6 flex flex-col justify-between"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              padding: '20px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              opacity: isHovered ? 0 : 0.85,
+              transition: 'opacity 0.2s ease',
+              pointerEvents: 'none',
+              overflow: 'hidden',
+              fontFamily: 'var(--font-body, "JetBrains Mono", monospace)',
+              fontSize: '11px',
+              color: '#888888',
+              lineHeight: '1.4'
+            }}
+          >
+            <div>
+              <div style={{ fontSize: '9px', letterSpacing: '1px', color: '#888888', marginBottom: '8px' }}>
+                // TARGET_ACQUIRING :: {ach.rank}
               </div>
-              <h3 className="bebas" style={{
-                fontSize: '16px',
-                margin: 0,
-                color: isLocked ? 'var(--gray)' : 'var(--white)',
-                lineHeight: 1.2
-              }}>
-                {ach.title}
-              </h3>
+              <div style={{ wordBreak: 'break-all', color: '#666666' }}>
+                {`[#0X99] !@#$%^&* 010101 <>[]{}/\\|X ${ach.id.toUpperCase()}`}
+              </div>
+              <div style={{ marginTop: '14px', color: '#888888', fontSize: '10px' }}>
+                &gt; HOVER TO LOCK TARGET RETICLE...
+              </div>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid #1A1A1A', paddingTop: '8px', color: '#888888' }}>
+              <span>[ +{ach.xp.toLocaleString()} XP ]</span>
+              <span>{ach.date}</span>
             </div>
           </div>
+        )}
 
-          {/* Description */}
-          <p style={{
-            fontSize: '10px',
-            color: isLocked ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.6)',
-            lineHeight: '1.5',
-            marginTop: '12px',
-            fontFamily: 'var(--font-body)'
-          }}>
-            {ach.description}
-          </p>
-
-          {/* Footer stats */}
-          <div style={{
+        {/* ════ ABSOLUTE LAYER 2: DECODED REAL CONTENT ════ */}
+        <div
+          className="decoded-layer absolute inset-0 p-6 flex flex-col justify-between"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            padding: '20px',
             display: 'flex',
+            flexDirection: 'column',
             justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: '14px',
-            paddingTop: '10px',
-            borderTop: '1px solid rgba(255,255,255,0.06)'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{
-                fontSize: '10px',
-                fontFamily: 'var(--font-body)',
-                color: isLocked ? 'var(--gray)' : 'var(--gold)',
-                fontWeight: 'bold'
-              }}>
+            opacity: isHovered || isLocked ? 1 : 0.1,
+            transition: 'opacity 0.2s ease',
+            overflow: 'hidden',
+            zIndex: 6
+          }}
+        >
+          {/* Header & Title */}
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+              <span
+                style={{
+                  fontSize: '9px',
+                  fontFamily: 'var(--font-body, "JetBrains Mono", monospace)',
+                  color: '#888888',
+                  letterSpacing: '1px',
+                  fontWeight: 600
+                }}
+              >
+                {ach.rank} • {ach.category}
+              </span>
+              <span
+                style={{
+                  fontSize: '10px',
+                  fontFamily: 'var(--font-body, "JetBrains Mono", monospace)',
+                  color: isHovered ? '#FFFFFF' : '#888888',
+                  border: isHovered ? '1px solid #FFFFFF' : '1px solid #333333',
+                  padding: '2px 6px',
+                  borderRadius: '0px',
+                  backgroundColor: '#0A0A0A',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                {isHovered ? '[ 🎯 TARGET LOCKED ]' : ach.iconTag}
+              </span>
+            </div>
+
+            <h3
+              style={{
+                fontSize: '14px',
+                margin: 0,
+                fontFamily: 'var(--font-display, "Space Grotesk", sans-serif)',
+                fontWeight: 700,
+                color: '#FFFFFF',
+                lineHeight: 1.3,
+                letterSpacing: '0.3px',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis'
+              }}
+            >
+              {decodedTitle}
+            </h3>
+
+            <p
+              style={{
+                fontSize: '11px',
+                color: '#888888',
+                lineHeight: '1.5',
+                marginTop: '8px',
+                fontFamily: 'var(--font-body, "JetBrains Mono", monospace)'
+              }}
+            >
+              {decodedDesc}
+            </p>
+          </div>
+
+          {/* Footer Stats */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              borderTop: '1px solid #1A1A1A',
+              paddingTop: '8px'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span
+                style={{
+                  fontSize: '10px',
+                  fontFamily: 'var(--font-body, "JetBrains Mono", monospace)',
+                  color: '#FFFFFF',
+                  fontWeight: 700
+                }}
+              >
                 +{ach.xp.toLocaleString()} XP
               </span>
-              <span style={{ fontSize: '8px', color: 'var(--gray)', fontFamily: 'var(--font-body)' }}>
+              <span style={{ fontSize: '9px', color: '#888888', fontFamily: 'var(--font-body, "JetBrains Mono", monospace)' }}>
                 {ach.date}
               </span>
             </div>
-            <span style={{
-              fontSize: '10px',
-              letterSpacing: '2px',
-              color: isLocked ? 'var(--gray)' : ach.color,
-              filter: isLocked ? 'none' : `drop-shadow(0 0 4px ${ach.color})`
-            }}>
-              {tierLabel[ach.tier]}
+            <span
+              style={{
+                fontSize: '9.5px',
+                fontFamily: 'var(--font-body, "JetBrains Mono", monospace)',
+                color: isHovered ? '#FFFFFF' : '#888888',
+                letterSpacing: '1px'
+              }}
+            >
+              {isHovered ? '[ LOCK_ENGAGED ]' : '[ SYSTEM_VERIFIED ]'}
             </span>
           </div>
         </div>
 
-        {/* Spark burst overlay */}
-        {sparkFlashed && !isLocked && (
-          <div style={{ position: 'absolute', inset: 0, zIndex: 12, pointerEvents: 'none' }}>
-            <svg viewBox="0 0 100 100" style={{ width: '100%', height: '100%' }}>
-              <path d="M10 20 L40 40 L20 60 L90 80" stroke="#FFE500" strokeWidth="6" fill="none" strokeLinecap="round" style={{ animation: 'draw-greetings-spark 0.3s steps(2) forwards' }} />
-            </svg>
-          </div>
-        )}
-
-        {/* Locked padlock overlay */}
+        {/* Locked Padlock Overlay */}
         {isLocked && (
           <div
             style={{
@@ -428,35 +466,40 @@ const AchievementRevealCard: React.FC<{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: 'rgba(0,0,0,0.5)',
-              pointerEvents: 'none'
+              backgroundColor: 'rgba(0,0,0,0.8)',
+              pointerEvents: 'none',
+              zIndex: 20
             }}
           >
-            <span className="bangers" style={{ fontSize: '14px', color: 'var(--gray)', letterSpacing: '3px' }}>
-              🔒 LOCKED
+            <span
+              style={{
+                fontSize: '11px',
+                fontFamily: 'var(--font-body, "JetBrains Mono", monospace)',
+                color: '#888888',
+                letterSpacing: '2px',
+                border: '1px solid #333333',
+                padding: '4px 12px',
+                borderRadius: '0px',
+                backgroundColor: '#0A0A0A'
+              }}
+            >
+              [ CLASSIFIED_LOCKED ]
             </span>
           </div>
         )}
-      </TiltCard>
+      </div>
     </div>
   );
 };
 
+// ════════ MAIN ACHIEVEMENTS COMPONENT ════════
 const Achievements: React.FC = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isMouseOverGrid, setIsMouseOverGrid] = useState(false);
-  const gridRef = useRef<HTMLDivElement>(null);
 
   const totalXP = achievementsData.filter(a => a.unlocked).reduce((sum, a) => sum + a.xp, 0);
   const unlockedCount = achievementsData.filter(a => a.unlocked).length;
   const totalCount = achievementsData.length;
   const selectedAch = achievementsData.find(a => a.id === selectedId) || null;
-
-  // Track coordinates relative to grid container boundary
-  const handleMouseMove = (e: React.MouseEvent) => {
-    setMousePos({ x: e.clientX, y: e.clientY });
-  };
 
   return (
     <section
@@ -466,56 +509,60 @@ const Achievements: React.FC = () => {
         padding: '60px 40px',
         position: 'relative',
         zIndex: 5,
-        maxWidth: '1000px',
+        maxWidth: '1080px',
         margin: '0 auto',
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: '#000000'
       }}
       className="achievements-section-container"
     >
-      <div className="manga-watermark" style={{ top: '15%', left: '5%', opacity: 0.02, fontSize: '10vw' }}>
-        TROPHIES
-      </div>
-
       {/* Header */}
-      <div style={{ marginBottom: '40px' }}>
-        <GlitchText
-          as="h2"
-          text="[ FEATS OF STRENGTH ]"
-          className="bebas"
-          style={{ fontSize: '48px', color: 'var(--white)', margin: 0, display: 'block' }}
-          interval={5500}
-          duration={450}
-        />
-        <p style={{ color: 'var(--gray)', fontSize: '12px', marginBottom: '20px' }}>
-          CHAPTER ACHIEVEMENTS // 5+ HACKATHONS · 2 RESEARCH PRIZES · 1 INTL PUBLICATION
+      <div style={{ marginBottom: '36px' }}>
+        <h2
+          style={{
+            fontSize: '32px',
+            fontFamily: 'var(--font-display, "Space Grotesk", sans-serif)',
+            fontWeight: 800,
+            color: '#FFFFFF',
+            margin: '0 0 6px 0',
+            letterSpacing: '0.5px'
+          }}
+        >
+          // FEATS & ACHIEVEMENTS
+        </h2>
+        <p style={{ color: '#888888', fontSize: '11px', fontFamily: 'var(--font-body, "JetBrains Mono", monospace)', marginBottom: '20px' }}>
+          SYSTEM LOG // RESEARCH PAPERS · HACKATHON TROPHIES · INTERNATIONAL PUBLICATIONS
         </p>
 
-        {/* XP Bar */}
+        {/* Neural Monolith XP Progress Bar */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
           <div style={{ flex: 1, minWidth: '200px' }}>
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              marginBottom: '6px',
-              fontSize: '9px',
-              fontFamily: 'var(--font-body)',
-              color: 'var(--gray)'
-            }}>
-              <span>TOTAL XP ACCUMULATED</span>
-              <span style={{ color: 'var(--gold)' }}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                marginBottom: '6px',
+                fontSize: '9.5px',
+                fontFamily: 'var(--font-body, "JetBrains Mono", monospace)',
+                color: '#888888'
+              }}
+            >
+              <span>ACCUMULATED SYSTEM XP</span>
+              <span style={{ color: '#FFFFFF', fontWeight: 700 }}>
                 <AnimatedCounter target={totalXP} duration={1500} /> XP
               </span>
             </div>
-            <div style={{
-              height: '6px',
-              backgroundColor: 'rgba(255,255,255,0.06)',
-              borderRadius: '0',
-              overflow: 'hidden',
-              border: '1px solid rgba(255,255,255,0.08)'
-            }}>
+            <div
+              style={{
+                height: '4px',
+                backgroundColor: '#1A1A1A',
+                borderRadius: '0px',
+                overflow: 'hidden'
+              }}
+            >
               <motion.div
                 initial={{ width: '0%' }}
                 whileInView={{ width: '88%' }}
@@ -523,53 +570,44 @@ const Achievements: React.FC = () => {
                 transition={{ duration: 1.5, ease: [0.33, 1, 0.68, 1] }}
                 style={{
                   height: '100%',
-                  background: tierGradient.LEGENDARY
+                  backgroundColor: '#FFFFFF'
                 }}
               />
             </div>
           </div>
 
-          <div style={{
-            padding: '6px 14px',
-            border: '1px solid rgba(255,214,10,0.3)',
-            backgroundColor: 'rgba(255,214,10,0.05)',
-            fontSize: '10px',
-            fontFamily: 'var(--font-body)',
-            color: 'var(--gold)',
-            letterSpacing: '1px'
-          }}>
-            {unlockedCount}/{totalCount} UNLOCKED
+          <div
+            style={{
+              padding: '5px 12px',
+              border: '1px solid #1A1A1A',
+              backgroundColor: '#0A0A0A',
+              fontSize: '10px',
+              fontFamily: 'var(--font-body, "JetBrains Mono", monospace)',
+              color: '#FFFFFF',
+              letterSpacing: '0.5px'
+            }}
+          >
+            [ {unlockedCount} / {totalCount} UNLOCKED ]
           </div>
         </div>
       </div>
 
-      {/* Grid container tracking proximity */}
-      <div 
-        ref={gridRef}
-        className="achievements-grid"
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsMouseOverGrid(true)}
-        onMouseLeave={() => setIsMouseOverGrid(false)}
-      >
+      {/* Grid Container */}
+      <div className="achievements-grid">
         {achievementsData.map((ach, idx) => (
           <motion.div
             key={ach.id}
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.3, delay: idx * 0.05 }}
+            transition={{ duration: 0.3, delay: idx * 0.04 }}
           >
-            <AchievementRevealCard 
-              ach={ach} 
-              mousePos={mousePos} 
-              isMouseOverGrid={isMouseOverGrid} 
-              onSelect={setSelectedId}
-            />
+            <AchievementRevealCard ach={ach} onSelect={setSelectedId} />
           </motion.div>
         ))}
       </div>
 
-      {/* Achievement Detail Modal */}
+      {/* Detail Modal */}
       <AnimatePresence>
         {selectedAch && (
           <motion.div
@@ -580,7 +618,7 @@ const Achievements: React.FC = () => {
             style={{
               position: 'fixed',
               inset: 0,
-              backgroundColor: 'rgba(13, 13, 15, 0.85)',
+              backgroundColor: 'rgba(0, 0, 0, 0.9)',
               backdropFilter: 'blur(8px)',
               zIndex: 3000,
               display: 'flex',
@@ -590,87 +628,91 @@ const Achievements: React.FC = () => {
             }}
           >
             <motion.div
-              initial={{ scale: 0.85, y: 30 }}
+              initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.85, y: 30 }}
-              transition={{ type: 'spring', damping: 22, stiffness: 200 }}
+              exit={{ scale: 0.9, y: 20 }}
+              transition={{ duration: 0.2 }}
               onClick={e => e.stopPropagation()}
-              className="manga-panel"
               style={{
                 width: '100%',
                 maxWidth: '480px',
-                backgroundColor: 'var(--ink)',
-                border: `3px solid ${selectedAch.color}`,
+                backgroundColor: '#0A0A0A',
+                border: '1px solid #FFFFFF',
+                borderRadius: '0px',
                 overflow: 'hidden',
-                padding: 0
+                padding: 0,
+                position: 'relative'
               }}
             >
-              {/* Animated top bar */}
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.5 }}
-                style={{
-                  height: '4px',
-                  background: tierGradient[selectedAch.tier],
-                  transformOrigin: 'left'
-                }}
-              />
-
-              <div style={{ padding: '32px' }}>
-                {/* Close */}
+              <div style={{ padding: '28px' }}>
                 <button
-                  className="bangers cursor-target"
                   onClick={() => setSelectedId(null)}
                   style={{
                     position: 'absolute',
-                    top: '12px',
-                    right: '12px',
-                    backgroundColor: 'var(--red)',
-                    color: 'var(--white)',
-                    border: '2px solid var(--black)',
-                    padding: '2px 10px',
-                    fontSize: '12px'
+                    top: '14px',
+                    right: '14px',
+                    backgroundColor: '#0A0A0A',
+                    color: '#FFFFFF',
+                    border: '1px solid #333333',
+                    padding: '3px 8px',
+                    fontSize: '11px',
+                    fontFamily: 'var(--font-body, "JetBrains Mono", monospace)',
+                    cursor: 'pointer'
                   }}
                 >
-                  ✕
+                  [ X ]
                 </button>
 
-                {/* Icon large display */}
-                <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-                  <motion.div
-                    animate={{ scale: [1, 1.08, 1], rotate: [0, -5, 5, 0] }}
-                    transition={{ duration: 1.2, repeat: Infinity, repeatDelay: 1.5 }}
-                    style={{ fontSize: '56px', lineHeight: 1 }}
+                <div style={{ marginBottom: '16px' }}>
+                  <span
+                    style={{
+                      fontSize: '10px',
+                      fontFamily: 'var(--font-body, "JetBrains Mono", monospace)',
+                      color: '#888888',
+                      letterSpacing: '1px'
+                    }}
                   >
-                    {selectedAch.icon}
-                  </motion.div>
-                  <div style={{ marginTop: '8px', fontSize: '12px', color: selectedAch.color, letterSpacing: '3px', fontFamily: 'var(--font-body)' }}>
-                    {selectedAch.tier}
-                  </div>
-                  <div style={{ fontSize: '12px', color: selectedAch.color, letterSpacing: '3px' }}>
-                    {tierLabel[selectedAch.tier]}
-                  </div>
+                    {selectedAch.rank} • {selectedAch.category}
+                  </span>
+                  <h3
+                    style={{
+                      fontSize: '20px',
+                      fontFamily: 'var(--font-display, "Space Grotesk", sans-serif)',
+                      color: '#FFFFFF',
+                      fontWeight: 700,
+                      margin: '6px 0 0 0'
+                    }}
+                  >
+                    {selectedAch.title}
+                  </h3>
                 </div>
 
-                <h3 className="bebas" style={{ fontSize: '28px', color: 'var(--white)', textAlign: 'center', margin: '0 0 16px 0' }}>
-                  {selectedAch.title}
-                </h3>
-
-                <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.75)', lineHeight: '1.7', textAlign: 'center', fontFamily: 'var(--font-body)', marginBottom: '24px' }}>
+                <p
+                  style={{
+                    fontSize: '12px',
+                    color: '#888888',
+                    lineHeight: '1.6',
+                    fontFamily: 'var(--font-body, "JetBrains Mono", monospace)',
+                    marginBottom: '24px'
+                  }}
+                >
                   {selectedAch.description}
                 </p>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px dashed rgba(255,255,255,0.1)', paddingTop: '16px' }}>
-                  <span style={{ fontSize: '11px', color: 'var(--gold)', fontFamily: 'var(--font-body)' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    borderTop: '1px solid #1A1A1A',
+                    paddingTop: '14px',
+                    fontSize: '11px',
+                    fontFamily: 'var(--font-body, "JetBrains Mono", monospace)'
+                  }}
+                >
+                  <span style={{ color: '#FFFFFF', fontWeight: 700 }}>
                     +{selectedAch.xp.toLocaleString()} XP
                   </span>
-                  <span style={{ fontSize: '11px', color: 'var(--gray)', fontFamily: 'var(--font-body)' }}>
-                    {selectedAch.date}
-                  </span>
-                  <span style={{ fontSize: '11px', color: selectedAch.color, fontFamily: 'var(--font-body)' }}>
-                    {selectedAch.category}
-                  </span>
+                  <span style={{ color: '#888888' }}>{selectedAch.date}</span>
                 </div>
               </div>
             </motion.div>
@@ -682,12 +724,13 @@ const Achievements: React.FC = () => {
         {`
           .achievements-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 16px;
           }
 
-          .ach-panel-card {
-            transition: transform 0.12s var(--ease-enter), border-color 0.12s var(--ease-enter), box-shadow 0.12s var(--ease-enter) !important;
+          @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
           }
 
           @media (max-width: 768px) {

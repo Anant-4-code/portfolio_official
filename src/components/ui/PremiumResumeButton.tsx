@@ -7,10 +7,6 @@ export default function PremiumResumeButton({ resumeUrl = "/img/resume.pdf" }) {
       rel="noopener noreferrer"
       className="mecha-sticker-pill-btn group cursor-target"
     >
-      {/* Background Pill Core (Angled block that surges left-to-right) */}
-      <span className="sticker-pill-element" />
-
-      {/* Content Container holding Text Label & Decorative Target Accents */}
       <span className="btn-inner-content">
         <span className="hardware-bracket-left">[</span>
         <span className="main-text-string">RESUME</span>
@@ -18,111 +14,47 @@ export default function PremiumResumeButton({ resumeUrl = "/img/resume.pdf" }) {
         <span className="hardware-bracket-right">]</span>
       </span>
 
-      {/* Absolute Stacking Layer Stylesheet Override */}
       <style>{`
         .mecha-sticker-pill-btn {
           position: relative;
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          padding: 0.7rem 2.4rem;
-          font-family: 'Courier New', Courier, monospace;
-          font-size: 14px;
-          font-weight: 900;
-          letter-spacing: 2.5px;
-          color: #FFE500; /* Signature Cyber Yellow Base */
+          padding: 12px 22px;
+          font-family: var(--font-body), monospace;
+          font-size: 10px;
+          letter-spacing: 2px;
+          color: #888888;
           text-decoration: none;
           text-transform: uppercase;
           background: transparent;
-          border: 1px solid rgba(255, 229, 0, 0.8);
-          overflow: hidden;
-          
-          /* Hardcoded Aggressive Mecha Geometric Corner Slash Cutout */
-          clip-path: polygon(0 0, 92% 0, 100% 35%, 100% 100%, 8% 100%, 0 65%);
-          
-          transition: border-color 0.15s steps(2), box-shadow 0.2s ease;
+          border: 1px solid #333333;
+          border-radius: 0;
+          transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
           user-select: none;
           cursor: pointer;
         }
 
-        /* THE ANGLING STICKER PILL SLIDER LAYER */
-        .mecha-sticker-pill-btn::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -20%; /* Hidden off-canvas bound to compensate for the skew slope */
-          width: 0%;
-          height: 100%;
-          background-color: #FFE500; /* Solid yellow block fill */
-          transform: skewX(-20deg); /* Aggressive technical slant */
-          transform-origin: left center;
-          z-index: 1;
-          
-          /* High-acceleration mechanical deceleration curve */
-          transition: width 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        /* Container forcing typography over the moving background pill */
         .btn-inner-content {
           position: relative;
-          z-index: 10; /* Locked securely on top plane */
+          z-index: 10;
           display: flex;
           align-items: center;
           gap: 4px;
-          transition: color 0.1s ease-out;
         }
 
-        /* Dynamic HUD accent micro-elements */
         .hardware-bracket-left, .hardware-bracket-right {
-          opacity: 0.4;
-          transition: opacity 0.15s ease;
+          opacity: 0.6;
         }
         .download-arrow-icon {
-          font-size: 12px;
+          font-size: 11px;
           margin-left: 2px;
         }
 
-        /* INTERACTIVE HOVER MATRIX STATES */
-
-        /* 1. Surge the Angled Pill background across the framework */
-        .mecha-sticker-pill-btn:hover::before {
-          width: 140%; /* Fully populates the canvas area */
-        }
-
-        /* 2. Instant Text Inversion to Deep Matte Black */
-        .mecha-sticker-pill-btn:hover .btn-inner-content {
-          color: #0F0F0F; /* Ensures high contrast against hot yellow */
-        }
-        
-        .mecha-sticker-pill-btn:hover .hardware-bracket-left,
-        .mecha-sticker-pill-btn:hover .hardware-bracket-right {
-          opacity: 1;
-        }
-
-        /* 3. Inject High-Energy Terminal Hardware Glitch Flicker Strike */
         .mecha-sticker-pill-btn:hover {
+          color: #FFFFFF;
           border-color: #FFFFFF;
-          box-shadow: 0 0 16px rgba(255, 229, 0, 0.6);
-          animation: hardwareGlitchStrike 0.24s steps(3) infinite alternate;
-        }
-
-        /* Custom Keyframe configuration recreating the original screen flash glitch */
-        @keyframes hardwareGlitchStrike {
-          0% { 
-            opacity: 0.8;
-            background-color: rgba(255, 229, 0, 0.08);
-            transform: scale(1);
-          }
-          50% { 
-            opacity: 1;
-            background-color: transparent;
-            transform: scale(1.02); /* Structural micro-expansion thump */
-          }
-          100% { 
-            opacity: 0.9;
-            background-color: rgba(255, 229, 0, 0.15);
-            transform: scale(1);
-          }
+          background-color: rgba(255, 255, 255, 0.05);
         }
       `}</style>
     </a>

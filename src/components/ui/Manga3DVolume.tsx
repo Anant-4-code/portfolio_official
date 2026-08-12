@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import './Manga3DVolume.css';
 
 interface Manga3DVolumeProps {
@@ -8,200 +8,268 @@ interface Manga3DVolumeProps {
 }
 
 export const Manga3DVolume: React.FC<Manga3DVolumeProps> = ({ isOpen, onToggle, onNavigate }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const cardContainerRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const [showSpeedLines, setShowSpeedLines] = useState(false);
-  const [showSfx, setShowSfx] = useState(false);
-  
+  const [glarePos, setGlarePos] = useState({ x: 50, y: 50, opacity: 0 });
+  const [isFlipping, setIsFlipping] = useState(false);
+  const [showGlitch, setShowGlitch] = useState(false);
+
+  /* Check reduced motion preference */
   const isReducedMotion = useMemo(() => {
     if (typeof window === 'undefined') return false;
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }, []);
 
-  // Handle snappy flip effect events (Speed lines & SFX burst)
+  /* Handle flip animation side-effects: scan-line sweep & mid-flip chromatic glitch */
   useEffect(() => {
-    if (isOpen && !isReducedMotion) {
-      setShowSpeedLines(true);
-      setShowSfx(true);
-      const timer = setTimeout(() => {
-        setShowSpeedLines(false);
-        setShowSfx(false);
-      }, 700);
-      return () => clearTimeout(timer);
-    }
+    if (isReducedMotion) return;
+
+    setIsFlipping(true);
+    const glitchTimer = setTimeout(() => {
+      setShowGlitch(true);
+      setTimeout(() => setShowGlitch(false), 120);
+    }, 220);
+
+    const endTimer = setTimeout(() => {
+      setIsFlipping(false);
+    }, 550);
+
+    return () => {
+      clearTimeout(glitchTimer);
+      clearTimeout(endTimer);
+    };
   }, [isOpen, isReducedMotion]);
 
-  // Cursor reactive tilt effect
-  useEffect(() => {
-    if (isOpen || isReducedMotion) {
+  /* 3D Magnetic Tilt & Glare Sheen logic (desktop idle state) */
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (isOpen || isReducedMotion || !cardContainerRef.current) {
       setTilt({ x: 0, y: 0 });
+      setGlarePos(prev => ({ ...prev, opacity: 0 }));
       return;
     }
 
-    const handleMouseMove = (e: MouseEvent) => {
-      const container = containerRef.current;
-      if (!container) return;
+    const rect = cardContainerRef.current.getBoundingClientRect();
+    const cX = rect.left + rect.width / 2;
+    const cY = rect.top + rect.height / 2;
 
-      const rect = container.getBoundingClientRect();
-      const cX = rect.left + rect.width / 2;
-      const cY = rect.top + rect.height / 2;
+    const mouseX = e.clientX - cX;
+    const mouseY = e.clientY - cY;
 
-      // Distance from center as ratio (-1 to 1)
-      const distX = (e.clientX - cX) / (window.innerWidth / 2);
-      const distY = (e.clientY - cY) / (window.innerHeight / 2);
+    // Max magnetic tilt angle ~10 deg
+    const rotateY = (mouseX / (rect.width / 2)) * 10;
+    const rotateX = -(mouseY / (rect.height / 2)) * 10;
 
-      // Max tilt angle offsets
-      setTilt({
-        x: distY * -6, // Tilt up/down
-        y: distX * 8   // Tilt left/right
-      });
-    };
+    // Glare position calculation (0% to 100%)
+    const glareX = ((e.clientX - rect.left) / rect.width) * 100;
+    const glareY = ((e.clientY - rect.top) / rect.height) * 100;
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    setTilt({ x: rotateX, y: rotateY });
+    setGlarePos({ x: glareX, y: glareY, opacity: 0.18 });
   }, [isOpen, isReducedMotion]);
 
+  const handleMouseLeave = useCallback(() => {
+    setTilt({ x: 0, y: 0 });
+    setGlarePos(prev => ({ ...prev, opacity: 0 }));
+  }, []);
+
+  /* Keyboard interaction handler */
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onToggle();
+    }
+  };
+
   return (
-    <div 
-      ref={containerRef}
-      className={`manga-3d-scene ${isOpen ? 'open' : ''} ${isReducedMotion ? 'reduced-motion' : ''}`}
-      onClick={(e) => {
-        // Prevent click from bubbling if clicking inner components or links
-        const target = e.target as HTMLElement;
-        if (target.closest('.hud-nav-btn')) return;
-        onToggle();
-      }}
-    >
-      {/* Background ambient glow */}
-      <div className={`manga-glow-pulse ${isOpen ? 'active' : ''}`} />
-
-      {/* 3D BOOK BODY OBJECT */}
-      <div 
-        className="manga-book-container"
-        style={{
-          transform: !isOpen && !isReducedMotion
-            ? `rotateY(${12 + tilt.y}deg) rotateX(${4 + tilt.x}deg)`
-            : isOpen ? 'rotateY(-10deg) rotateX(0deg)' : 'none'
+    <div className="character-card-outer-wrapper">
+      <div
+        ref={cardContainerRef}
+        className={`character-card-container ${isOpen ? 'is-flipped' : ''} ${isFlipping ? 'is-animating' : ''} ${showGlitch ? 'glitch-active' : ''} ${isReducedMotion ? 'reduced-motion' : ''}`}
+        role="button"
+        tabIndex={0}
+        aria-label={isOpen ? "Character Dossier File — Click to return to photo cover" : "Manga Character Profile Card — Click to flip and scan dossier"}
+        aria-expanded={isOpen}
+        onClick={(e) => {
+          // If user clicked inside an explicit nav button on back face, let that action handle it
+          const target = e.target as HTMLElement;
+          if (target.closest('.dossier-nav-btn') || target.closest('.dossier-close-btn')) return;
+          onToggle();
         }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        onKeyDown={handleKeyDown}
       >
-        {/* SVG Filters for paper grain & halftone dots */}
-        <svg style={{ position: 'absolute', width: 0, height: 0 }}>
-          <defs>
-            <filter id="manga-paper-noise">
-              <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" result="noise" />
-              <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.05 0" />
-              <feComposite operator="in" in2="SourceGraphic" />
-            </filter>
-          </defs>
-        </svg>
+        {/* Ambient glow pulsing behind the card */}
+        <div className={`card-ambient-glow ${isOpen ? 'active-cyan' : 'idle-yellow'}`} />
 
-        {/* FACE 1: COVER HINGE WRAPPER (This flips open) */}
-        <div className="manga-cover-hinge">
-          {/* Main Cover Front Side */}
-          <div className="manga-cover-front">
+        {/* FLIP CARD INNER WRAPPER (Preserves 3D perspective context) */}
+        <div
+          className="character-card-flipper"
+          style={{
+            transform: !isOpen && !isReducedMotion
+              ? `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`
+              : isOpen
+              ? 'rotateY(180deg)'
+              : 'rotateY(0deg)'
+          }}
+        >
+          {/* ════════ FRONT FACE: MANGA COVER PHOTO CARD ════════ */}
+          <div className="card-face card-face-front">
             {/* Base Image Container */}
-            <div className="manga-cover-photo-container">
-              <img 
-                src="/img/orignal.jpg" 
-                alt="Anant Rai Cover" 
-                className="manga-cover-photo"
+            <div className="manga-photo-wrapper">
+              <img
+                src="/img/orignal.jpg"
+                alt="Anant Rai - Manga Cover Character Card"
+                className="manga-photo-img"
               />
-              {/* Halftone dot map overlay */}
-              <div className="manga-halftone-pattern" />
-              {/* Traced silhouette ink outline layer */}
-              <div className="manga-ink-outline" />
-              {/* Paper grain/noise filter overlay */}
-              <div className="manga-paper-grain" />
+              {/* Non-Destructive Pixel Glitch Slices (#FFF700 Lemon-Yellow & #00FFCC Cyan) */}
+              <img
+                src="/img/orignal.jpg"
+                alt=""
+                className="manga-photo-glitch slice-yellow"
+                aria-hidden="true"
+              />
+              <img
+                src="/img/orignal.jpg"
+                alt=""
+                className="manga-photo-glitch slice-cyan"
+                aria-hidden="true"
+              />
+              <div className="manga-halftone-overlay" />
+              <div className="manga-paper-texture" />
+              <div className="manga-ink-vignette" />
             </div>
 
-            {/* Title Logotype */}
-            <div className="manga-title-block">
-              <h1 className="bangers manga-title-text">ANANT RAI</h1>
-              <div className="bebas manga-title-sub">AI/ML ENGINEER & DEV // 第1巻 覚醒</div>
-            </div>
+            {/* Dynamic Glare Reflection Sheen Overlay */}
+            <div
+              className="card-glare-overlay"
+              style={{
+                background: `radial-gradient(circle 280px at ${glarePos.x}% ${glarePos.y}%, rgba(255, 255, 255, ${glarePos.opacity}) 0%, transparent 80%)`
+              }}
+            />
 
-            {/* Volume Badge Sticker */}
-            <div className="manga-volume-sticker bangers">
+            {/* VOL.01 Sticker Badge */}
+            <div className="manga-badge-vol bangers">
               VOL. 01
             </div>
 
-            {/* Speech Bubble */}
-            <div className="manga-cover-speech bangers">
+            {/* READY TO SCAN Speech Bubble */}
+            <div className="manga-speech-bubble bangers">
+              <span className="speech-pulse-dot" />
               READY TO SCAN!
-              <div className="speech-arrow" />
+              <div className="speech-arrow-tip" />
             </div>
 
-            {/* Angled Obi Wrap Band */}
-            <div className="manga-obi-band">
-              <div className="manga-obi-content">
-                <div className="bebas obi-label-sm">RPD GROUP // DEPLOYMENT COMPILER</div>
-                <div className="bangers obi-label-lg">AUTOMATION ENGINE STATUS: OPTIMAL</div>
+            {/* Mobile Touch Affordance (TAP TO SCAN) */}
+            <div className="mobile-tap-affordance bangers">
+              <span className="tap-scan-icon">✦</span> TAP TO SCAN
+            </div>
+
+            {/* Title Logotype */}
+            <div className="manga-header-text">
+              <h2 className="bangers manga-main-name">ANANT RAI</h2>
+              <p className="bebas manga-sub-title">AI/ML ENGINEER & DEV // 第1巻 覚醒</p>
+            </div>
+
+            {/* Slanted Obi Wrap Band */}
+            <div className="manga-obi-wrapper">
+              <div className="manga-obi-inner">
+                <div className="bebas obi-top-line">RPD GROUP // DEPLOYMENT COMPILER</div>
+                <div className="bangers obi-main-line">AUTOMATION ENGINE STATUS: OPTIMAL</div>
               </div>
             </div>
           </div>
-          
-          {/* Back side of the cover (Blank paper texture visible during flip) */}
-          <div className="manga-cover-back" />
-        </div>
 
-        {/* FACE 2: SPINE FACE (Visible thin sliver on the left side) */}
-        <div className="manga-spine-face" />
-
-        {/* FACE 3: PAGE-EDGE FACE (Visible thin sliver on the right side) */}
-        <div className="manga-page-edges-face" />
-
-        {/* UNDERNEATH: THE DETAIL HUD REVEAL PANEL */}
-        <div className="manga-reveal-hud">
-          {/* Panel header */}
-          <div className="hud-panel-header">
-            <span className="bangers text-cyan">// DATA FILE LOADED</span>
-            <span className="monospace text-gray-xs">AR-DB v2.1</span>
-          </div>
-
-          {/* Biometrics List */}
-          <div className="hud-biometrics-list">
-            {[
-              { label: 'SUBJECT', val: 'ANANT RAI' },
-              { label: 'COGNITIVE ROLE', val: 'AI/ML ENG · FULL-STACK' },
-              { label: 'GRID SECTOR', val: 'NASHIK · GMT+5:30' },
-              { label: 'CURRENT LAB', val: 'RPD GROUP — AI OPS' },
-              { label: 'SYSTEM CORES', val: '5+ HACKATHONS COMPLETED' },
-              { label: 'ACADEMICS', val: 'B.Sc CS (SGPA 9.73)' },
-              { label: 'PUBLICATIONS', val: '2 PAPERS (1 INTL)' },
-              { label: 'STATUS ENGINE', val: '● ACTIVE COMPILER', valColor: '#3DFFA0' }
-            ].map(row => (
-              <div key={row.label} className="hud-biometric-row">
-                <span className="hud-bio-label">{row.label}</span>
-                <span className="hud-bio-val" style={{ color: row.valColor || 'rgba(255,255,255,0.95)' }}>{row.val}</span>
+          {/* ════════ BACK FACE: DATA FILE DOSSIER PANEL ════════ */}
+          <div className="card-face card-face-back">
+            {/* Header Strip */}
+            <div className="dossier-header-bar">
+              <div className="dossier-title-tag bangers">
+                <span className="cyan-glitch-dot" />
+                // DATA FILE LOADED
               </div>
-            ))}
-          </div>
+              <div className="dossier-db-code monospace">AR-DB v2.1</div>
+              {/* Corner Close Affordance Button */}
+              <button
+                type="button"
+                className="dossier-close-btn monospace"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onToggle();
+                }}
+                aria-label="Close Dossier File"
+              >
+                [ × CLOSE FILE ]
+              </button>
+            </div>
 
-          {/* Quick Nav Options */}
-          <div className="hud-nav-row">
-            <button 
-              className="hud-nav-btn bebas" 
-              onClick={() => onNavigate && onNavigate('projects')}
-            >
-              PROJECT ARCHIVE
-            </button>
-            <button 
-              className="hud-nav-btn status-green bebas" 
-              onClick={() => onNavigate && onNavigate('contact')}
-            >
-              CONTACT PILOT
-            </button>
+            {/* Classified Stamp Background Watermark */}
+            <div className="dossier-classified-watermark bangers" aria-hidden="true">
+              CLASSIFIED
+            </div>
+
+            {/* Stat Rows Grid */}
+            <div className="dossier-stat-grid">
+              {[
+                { label: 'SUBJECT', val: 'ANANT RAI', color: '#FFFFFF' },
+                { label: 'COGNITIVE ROLE', val: 'AI/ML ENG · FULL-STACK', color: '#888888' },
+                { label: 'GRID SECTOR', val: 'NASHIK · GMT+5:30', color: '#888888' },
+                { label: 'CURRENT LAB', val: 'RPD GROUP — AI OPS', color: '#FFFFFF' },
+                { label: 'SYSTEM CORES', val: '5+ HACKATHONS COMPLETED', color: '#888888' },
+                { label: 'ACADEMICS', val: 'B.Sc CS (SGPA 9.73)', color: '#FFFFFF' },
+                { label: 'PUBLICATIONS', val: '2 PAPERS (1 INTL)', color: '#888888' },
+                {
+                  label: 'STATUS ENGINE',
+                  val: '● ACTIVE COMPILER',
+                  color: '#3DFFA0',
+                  isStatus: true
+                }
+              ].map((row) => (
+                <div key={row.label} className="dossier-stat-row">
+                  <span className="dossier-stat-label monospace">{row.label}</span>
+                  <span className="dossier-stat-value monospace" style={{ color: row.color }}>
+                    {row.isStatus && <span className="status-live-dot" />}
+                    {row.val}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Bottom CTA Action Row */}
+            <div className="dossier-action-row">
+              <button
+                type="button"
+                className="dossier-nav-btn archive-btn bebas"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (onNavigate) onNavigate('projects');
+                  else document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                PROJECT ARCHIVE
+              </button>
+              <button
+                type="button"
+                className="dossier-nav-btn contact-btn bebas"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (onNavigate) onNavigate('contact');
+                  else document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                CONTACT PILOT
+              </button>
+            </div>
           </div>
         </div>
+
+        {/* ════════ SCAN-LINE SWEEP ANIMATION OVERLAY ════════ */}
+        {isFlipping && !isReducedMotion && (
+          <div className="card-scanline-sweep" aria-hidden="true" />
+        )}
       </div>
-
-      {/* SNAP FX LAYERS (Speed Lines & ZAP text) */}
-      {showSpeedLines && (
-        <div className="manga-snap-speedlines" />
-      )}
-      {showSfx && (
-        <div className="manga-snap-sfx bangers">バリバリ</div>
-      )}
     </div>
   );
 };
+
+export default Manga3DVolume;

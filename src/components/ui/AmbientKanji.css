@@ -1,0 +1,126 @@
+/* Authentic Japanese Neon Signboard Flicker (Per-Character, Multi-Color) */
+
+.ambient-kanji-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* Neon Sign Word Container */
+.neon-sign {
+  position: absolute;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  user-select: none;
+  pointer-events: none;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Base Per-Character Tube Styling */
+.neon-char {
+  display: inline-block;
+  font-family: var(--font-jp, sans-serif);
+  font-size: var(--char-size, 1.15rem);
+  letter-spacing: var(--char-spacing, 0.4rem);
+  color: rgba(255, 255, 255, 0.15); /* idle dim plasma state, never fully 0 */
+  will-change: opacity, filter, color;
+  animation-timing-function: steps(1, end);
+  animation-iteration-count: infinite;
+  animation-delay: var(--delay, 0s);
+  animation-duration: var(--duration, 5s);
+  /* Layered bloom filter definitions */
+  --bloom-mid: drop-shadow(0 0 3px var(--glow-core, #7CFCEA))
+               drop-shadow(0 0 8px var(--glow-mid, #00FFCC))
+               drop-shadow(0 0 16px var(--glow-far, #00D9B8));
+  --bloom-full: drop-shadow(0 0 4px var(--glow-core, #7CFCEA))
+                drop-shadow(0 0 10px var(--glow-mid, #00FFCC))
+                drop-shadow(0 0 24px var(--glow-far, #00D9B8))
+                drop-shadow(0 0 40px var(--glow-far, #00D9B8));
+}
+
+/* Color Palette Variants (Warm + Cool Mix) */
+.neon-char[data-color="cyan"] {
+  --glow-core: #7CFCEA;
+  --glow-mid: #00FFCC;
+  --glow-far: #00D9B8;
+}
+
+.neon-char[data-color="pink"] {
+  --glow-core: #FFD1EC;
+  --glow-mid: #FF5FBF;
+  --glow-far: #E0399E;
+}
+
+.neon-char[data-color="amber"] {
+  --glow-core: #FFEBB8;
+  --glow-mid: #FFB300;
+  --glow-far: #E08900;
+}
+
+.neon-char[data-color="white"] {
+  --glow-core: #FFFFFF;
+  --glow-mid: #E8F4FF;
+  --glow-far: #B8D9FF;
+}
+
+/* Default Idle Ambient Breathing Pulse */
+@keyframes idleBreath {
+  0%, 100% { opacity: 0.12; }
+  50%      { opacity: 0.22; }
+}
+
+/* FLICKER KEYFRAMES — "BUZZ-THEN-STABILIZE" PATTERN */
+
+/* LIT Variant — rapid stutters, then holds bright for a long stretch */
+@keyframes neonFlickerLit {
+  0%   { opacity: 0.15; filter: none; color: rgba(255, 255, 255, 0.15); }
+  3%   { opacity: 0.9;  filter: var(--bloom-mid); color: var(--glow-core); }
+  5%   { opacity: 0.15; filter: none; }
+  7%   { opacity: 1;    filter: var(--bloom-full); color: var(--glow-core); }
+  9%   { opacity: 0.2;  filter: none; }
+  11%  { opacity: 0.85; filter: var(--bloom-mid); color: var(--glow-core); }
+  13%  { opacity: 1;    filter: var(--bloom-full); color: var(--glow-core); }
+  /* stabilized fully lit stretch */
+  60%  { opacity: 1;    filter: var(--bloom-full); color: var(--glow-core); }
+  62%  { opacity: 0.3;  filter: none; } /* small stutter before cycle reset */
+  64%  { opacity: 1;    filter: var(--bloom-full); color: var(--glow-core); }
+  100% { opacity: 0.15; filter: none; color: rgba(255, 255, 255, 0.15); }
+}
+
+/* DIM Variant — buzzes briefly, then stays dim for remainder */
+@keyframes neonFlickerDim {
+  0%   { opacity: 0.15; filter: none; color: rgba(255, 255, 255, 0.15); }
+  2%   { opacity: 0.7;  filter: var(--bloom-mid); color: var(--glow-mid); }
+  4%   { opacity: 0.15; filter: none; }
+  6%   { opacity: 0.5;  filter: var(--bloom-mid); color: var(--glow-mid); }
+  8%   { opacity: 0.15; filter: none; }
+  100% { opacity: 0.15; filter: none; color: rgba(255, 255, 255, 0.15); }
+}
+
+/* Animation Bindings */
+.neon-char.ending-lit {
+  animation:
+    neonFlickerLit var(--duration, 5s) steps(1, end) infinite var(--delay, 0s),
+    idleBreath 3.5s ease-in-out infinite;
+}
+
+.neon-char.ending-dim {
+  animation:
+    neonFlickerDim var(--duration, 5s) steps(1, end) infinite var(--delay, 0s),
+    idleBreath 3.5s ease-in-out infinite;
+}
+
+/* Reduced Motion Accessibility Guardrail */
+@media (prefers-reduced-motion: reduce) {
+  .neon-char {
+    animation: none !important;
+    opacity: 0.18 !important;
+    filter: none !important;
+    color: rgba(255, 255, 255, 0.18) !important;
+  }
+}
